@@ -1,0 +1,56 @@
+<div align="center" class="container">
+    <h2>Register</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm.value)">
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>username</mat-label>
+                <input matInput placeholder="username" formControlName="name" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                <mat-error *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <mat-error *ngIf="f.name.errors.required">username is required</mat-error>
+                    <mat-error *ngIf="f.name.errors.errors">username must be characters
+                    </mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>emailId</mat-label>
+                <input matInput placeholder="emailId" formControlName="emailId" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" />
+                <mat-error *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+                    <mat-error *ngIf="f.emailId.errors.required">emailId is required</mat-error>
+                    <mat-error *ngIf="f.emailId.errors">eg:abc@xyz.com</mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>mobilenumber</mat-label>
+                <input matInput placeholder="mobileNumber" formControlName="mobileNumber" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.mobileNumber.errors }">
+                <mat-error *ngIf="submitted && f.mobileNumber.errors" class="invalid-feedback">
+                    <mat-error *ngIf="f.mobileNumber.errors.required">mobilenumber is required</mat-error>
+                    <mat-error *ngIf="f.mobileNumber.errors">mobilenumber should be of 10 digits</mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>password</mat-label>
+                <input matInput placeholder="password" formControlName="password" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                <mat-error *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <mat-error *ngIf="f.password.errors.required">Password is required</mat-error>
+                    <mat-error *ngIf="f.password.errors.minlength">Password must be at least 6 characters </mat-error>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary" class="button">Register</button>
+            <img *ngIf="loading"
+                src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+            <a [routerLink]="['/login']" class="btn btn-link" class="cancelbtn">Cancel</a>
+        </div>
+    </form>
+</div>
