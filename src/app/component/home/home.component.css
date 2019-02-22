@@ -1,49 +1,50 @@
-.example-fill-remaining-space {
-    /* This fills the remaining space, by using flexbox. 
-       Every toolbar row uses a flexbox row layout. */
-    flex: 1 1 auto;
+.example-events {
+  width: 300px;
+  height: 200px;
+  overflow: auto;
+  border: 1px solid #555;
+}
+.mat-sidenav, .mat-sidenav-content {
+  padding: 24px;
+}
+.icon{
+  background-image:url("src/assets/images/googlekeep.png"); 
+  background-repeat: no-repeat; 
+  background-position: 0px 0px;
+  }
+  textarea:focus, input:focus{
+      outline: none;
   }
 
-
-  .companyName{
-    font-size: 150%;
+  /* input {
+      border: none;
+      background:transparent;
+  }  */
+input[type=search] {
+width: 100%;
+padding: 12px 20px;
+margin: 8px 0;
+box-sizing: border-box;
+border: none;
+-webkit-transition: 0.5s;
+transition: 0.05s;
+outline: none;
 }
 
-.mat-toolbar{
-  height: 7vh;
+input[type=search]:focus {
+border: 1px solid #555;
+right: 0;
+  top: 5px;
+/* border-bottom-left-radius: 8%;
+border-top-left-radius: 8%;
+border-top-right-radius: 8%;
+border-bottom-right-radius: 8%; */
+border-radius: 25px;
 }
 
-div {
-    overflow: inherit;
+.button.button-icon.input-button {
+  position: absolute;
+  right: 0;
+  top: 5px;
+  color: #bbb;
 }
-
-.mat-sidenav-container{
-  background-color: white;
-  min-height: 93vh !important;
-}
-
-a{
-    text-decoration: none;
-    font-size: 110%;
-    white-space: normal;
-}
-
-button{
-    font-size: 110%;
-    min-width: min-content;
-}
-
-.example-icon {
-    padding: 0 14px;
-  }
-  
-  .example-spacer {
-    flex: 1 1 auto;
-  }
-
-  .mat-sidenav-content{
-      font-size: 200%;
-      text-align: center;
-  }
-  
-  

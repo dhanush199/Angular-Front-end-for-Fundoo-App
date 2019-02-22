@@ -35,6 +35,6 @@ export class LoginComponent implements OnInit {
 
         }
         this.Userservice.login(user)
-        this.router.navigate(['/home']);
+       
     }
 }

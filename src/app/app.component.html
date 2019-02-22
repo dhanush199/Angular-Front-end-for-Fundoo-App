@@ -1,9 +1,14 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+<script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <div fxLayout="row" fxLayoutAlign=" stretch">
     <mat-toolbar class="fixed-header" fxFlex="100%;" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
 
 
-        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" color="primary">
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" color="primary"
+            id="show-option" title="menu">
             <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
         </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <img src="./assets/images/keep-512.png" width="5%" height="">Keep&nbsp;&nbsp;&nbsp;&nbsp;
@@ -12,43 +17,43 @@
         </a>
 
         <input type="search" style="width:400px;" href="#" placeholder="Search..." ng-model="search" />
-        <!-- <button ng-if="search.length"
-        class="input-button button button-icon ion-android-close"
-        ng-click="clearSearch()">xyz
-</button> -->
 
-        <!-- <form>
-        <input matInput type="search" style="text-indent:5px;"  placeholder="Search" />
-    </form>&nbsp;&nbsp;&nbsp;&nbsp; -->
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <a style="padding-right:5%" href="#">
+        <a style="padding-right:5%" href="#" id="show-option" title="refresh">
             <mat-icon>refresh</mat-icon>
         </a>
-        <a style="padding-right:5%" href="#">
+        <a style="padding-right:5%" href="#" id="show-option" title="List view">
             <mat-icon>list view</mat-icon>
         </a>
 
-        <a style="padding-right:5%" href="#">
+        <a href="#" style="padding-right:5%" id="show-option" title="settings">
             <mat-icon>settings</mat-icon>
         </a>
 
-
-        <!-- <input type="text" id="txtsearch" onclick="changeborder()" /> -->
-
+        <a style="padding-right:5%" href="#" id="show-option" title="user">
+            <i class="fa fa-user-o"></i>
+        </a>
+        <a style="padding-right:5%" href="#" id="show-option" title="sleep">
+            <i class="fa fa-bed"></i>
+        </a>
+        <a style="padding-right:5%" href="#" id="show-option" title="notification">
+            <mat-icon>notifications</mat-icon>
+        </a>
 
     </mat-toolbar>
 </div>
-  
-    <mat-divider></mat-divider>
-    <mat-sidenav-container class="WhateverYourNavIs">
-        <mat-sidenav #drawer mode="side" opened role="navigation">
-            <mat-nav-list>
-                <a mat-list-item routerLink='/first'>First Component</a>
-                <a mat-list-item routerLink='/second'>Second Component</a>
-            </mat-nav-list>
-        </mat-sidenav>
-        <mat-sidenav-content>
-            <app-home></app-home>
-        </mat-sidenav-content>
-    </mat-sidenav-container>
-   
+
+<mat-divider></mat-divider>
+<mat-sidenav-container class="WhateverYourNavIs">
+    <mat-sidenav #drawer mode="side" opened role="navigation">
+        <mat-nav-list>
+            <a mat-list-item routerLink='/first'>First Component</a>
+            <a mat-list-item routerLink='/second'>Second Component</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <app-home></app-home>
+    </mat-sidenav-content>
+</mat-sidenav-container>
+ -->
+<router-outlet></router-outlet>

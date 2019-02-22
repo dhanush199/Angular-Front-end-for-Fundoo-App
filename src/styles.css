@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { 
+  background-color: aliceblue;
+   height: 100%;
+  margin:0;
+ }
+
 .text-blue-violet{
     color: aliceblue;
 }
@@ -6,11 +12,7 @@ p.double {border-style: double;}
 p.dotted {border-style: dotted;}
 
 
-html, body { 
-  background-color: aliceblue;
-   height: 100%;
-  margin:0;
- }
+
 
 .button {
   background-color: #4CAF50;

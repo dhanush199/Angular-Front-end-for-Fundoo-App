@@ -12,13 +12,14 @@ import {AppMaterialModule} from './app.material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserComponent } from 'src/app/component/user/user.component';
 import {enableProdMode} from '@angular/core';
+import { NotelistComponent } from 'src/app/component/notelist/notelist.component'
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent,UserComponent,
+    HomeComponent,UserComponent, NotelistComponent,
 
   ],
   imports: [
@@ -31,6 +32,7 @@ import {enableProdMode} from '@angular/core';
     AppMaterialModule,
     BrowserAnimationsModule
   ],
+ 
   exports: [
     AppMaterialModule
   ],

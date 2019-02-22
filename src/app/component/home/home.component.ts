@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -7,5 +9,9 @@ import { Component, OnInit } from '@angular/core';
   
 })
 export class HomeComponent {
+ 
+  
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
+
+
 }
