@@ -20,7 +20,6 @@ export class NoteService {
       if (response.status == 200) {
         console.log("logged in");
         localStorage.setItem('Token', response.headers.get('token'));
-        this.router.navigate(['/notelist']);
       }
       else {
         console.log(response.body.headers);

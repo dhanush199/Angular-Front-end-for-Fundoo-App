@@ -2,46 +2,42 @@ import { Injectable } from '@angular/core';
 import { HttputilService } from 'src/app/httputil.service';
 import { environment } from 'src/environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
-import {LoggerService} from 'src/app/logger.service'
+import { LoggerService } from 'src/app/logger.service'
+
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
 
-  constructor(private logger:LoggerService,private route: ActivatedRoute,private router: Router,private httpUtil: HttputilService) { }
+  constructor( private logger: LoggerService, private route: ActivatedRoute, private router: Router, private httpUtil: HttputilService) { }
 
   login(user) {
     this.httpUtil.postService(environment.base_url + '/loginuser', user).subscribe(response => {
       console.log(response);
-      if (response.status == 200) {
-        console.log("logged in");
-        localStorage.setItem('Token', response.headers.get('token'));
-        this.router.navigate(['/home']);
-        
-      }
-      else {
-        console.log(response.body.headers);
-      }
-    });
+      localStorage.setItem('Token', response.headers.get('token'));
+      this.router.navigate(['/home']);
+    }, (error) => console.log(error));
   }
 
   register(user) {
-    this.httpUtil.postService(environment.base_url+'/registeruser', user).subscribe(response => {
-      console.log(response);
-      if (response.status == 200) {
-        console.log(response.body.header);
-        this.logger.log("Successfully Registered");
-        console.log("we are here")
-        localStorage.setItem('Authorization', response.body.headers);
-      }
-      else {
-        this.logger.error("Please enter the valid details")
-        console.log("f**k off")
+    this.httpUtil.postService(environment.base_url + '/registeruser', user).subscribe(response => {
+      this.logger.log("Successfully Registered");
+      localStorage.setItem('token', response.body.headers);
+    }, (error) => console.log(error));
 
-        console.log(response.body.headers);
-      }
-    })
+  }
+
+  forgotPassword(user) {
+    return this.httpUtil.postService(environment.base_url + '/forgotpassword', user);
+  }
+
+  resetPassword(user) {
+    const token = localStorage.getItem("token");
+    // if (token) {
+    //   const cloned = this.req.clone({
+    //     headers: this.req.headers.set("token", token)
+    //   });
+    return this.httpUtil.postService('/resetpassword', user);
   }
 }
-

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatButtonToggleModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatButtonToggleModule, MatExpansionModule } from '@angular/material';
 import {MatDialogModule} from '@angular/material/dialog'; 
 import {MatCardModule} from '@angular/material/card'; 
 import {MatIconModule} from '@angular/material/icon'; 
@@ -14,6 +14,7 @@ import {MatNativeDateModule, MatSidenavModule, MatListModule} from '@angular/mat
 import {MatDividerModule} from '@angular/material';
 import { MatMenuModule} from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
 @NgModule({
   declarations: [],
   imports: [MatNativeDateModule, MatSidenavModule, MatListModule,
@@ -25,17 +26,17 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatOptionModule,
     MatDialogModule,BrowserModule,MatButtonToggleModule,
     MatSelectModule,MatIconModule,
-    MatCardModule, MatMenuModule,FlexLayoutModule
+    MatCardModule, MatMenuModule,FlexLayoutModule,MatExpansionModule
   ],
   exports: [MatNativeDateModule, MatSidenavModule, MatListModule,FlexLayoutModule,
     MatFormFieldModule,HttpClientInMemoryWebApiModule,MatToolbarModule,
-    MatInputModule,HttpClientModule,MatSliderModule,
+    MatInputModule,MatSliderModule,
     MatDialogModule,MatIconModule,BrowserAnimationsModule,
-    MatFormFieldModule,HttpClientModule,MatDividerModule,MatButtonToggleModule,
+    MatFormFieldModule,MatDividerModule,MatButtonToggleModule,
     MatOptionModule,MatDividerModule,
     MatFormFieldModule,HttpClientModule,MatDividerModule,
     MatSelectModule,BrowserModule,MatMenuModule,MatInputModule,
-    MatCardModule
+    MatCardModule,MatExpansionModule
   ],  
 })
 export class AppMaterialModule { }
