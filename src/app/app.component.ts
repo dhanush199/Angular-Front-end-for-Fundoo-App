@@ -14,7 +14,6 @@ export class AppComponent {
   events: string[] = [];
   opened: boolean = true;
 
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
 
    changeborder() {
     document.getElementById("txtsearch").style.borderColor = "black";

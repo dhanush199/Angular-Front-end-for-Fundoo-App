@@ -6,7 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { UserService } from '../user/user.service';
 
 @Component({
-    templateUrl: 'login.component.html',
+    selector: 'app-login',
+    templateUrl: 'login.component.html'
+
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
@@ -16,7 +18,6 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     hide = true;
     myresponse: any;
-    // Url to fetch the employee records from the spring application.
     constructor(private route: ActivatedRoute, private Userservice: UserService, private formBuilder: FormBuilder, private router: Router, private _http: HttpClient) { }
     public ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -30,10 +31,9 @@ export class LoginComponent implements OnInit {
     public onSubmit(user) {
         this.submitted = true;
         console.log(this.loginForm.value)
-
         if (this.loginForm.invalid) {
             return;
         }
-        this.Userservice.login(user)	
+        this.Userservice.login(user)
     }
 }

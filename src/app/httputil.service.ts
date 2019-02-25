@@ -8,28 +8,28 @@ export class HttputilService {
 
   constructor(private http : HttpClient) {}
 
-  postService(url,object){
+  post(url,object){
 
     return this.http.post<any>(url,object,{observe : 'response'});
   }
 
-  putService(url,object,header){
+  put(url,object,header){
     return this.http.put<any>(url,object,header);
   }
 
-  getService(url,header){
+  get(url,header){
     return this.http.get<any>(url,header);
   }
 
-  deleteService(url,header){
+  delete(url,header){
     return this.http.delete<any>(url,header);
   }
 
-  postServiceWithParam(url,params){
+  postWithParam(url,params){
     return this.http.post<any>(url,null,params);
   }
 
-  deleteServiceWithParams(url,params){
+  deleteWithParams(url,params){
     return this.http.delete(url,params);
   }
 }

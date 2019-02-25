@@ -15,7 +15,7 @@ export class NoteService {
   }
   token='';
   getAll(token): Observable<any> {
-    this.httpUtil.postService(this.NOTE_API + '/retrievenote', token).subscribe(response => {
+    this.httpUtil.post(this.NOTE_API + '/retrievenote', token).subscribe(response => {
       console.log(response);
       if (response.status == 200) {
         console.log("logged in");
