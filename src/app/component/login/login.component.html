@@ -1,7 +1,9 @@
 <mat-card>
+        <mat-card-header id="loginName">
+                Sign in
+       </mat-card-header>
     <div align="center" class="container">
         <img src="./assets/images/keep-512.png" height=15% width=15%>
-        <h2>LOGIN</h2>
         <form [formGroup]="loginForm" (ngSubmit)="onSubmit(loginForm.value)">
             <div class="form-group">
                 <mat-form-field appearance="outline">
@@ -26,6 +28,7 @@
                     </mat-error>
                 </mat-form-field>
             </div>
+            <mat-card-actions>
             <div class="form-group">
                 <button [disabled]="loading" class="btn btn-primary">Login</button> &nbsp; &nbsp;
                 <img *ngIf="loading"
@@ -36,6 +39,7 @@
                 <a [routerLink]="['/forgot-password']" class="btn btn-link">forgot Password?</a>
                 <!-- <a [routerLink]="['/reset-password',12]">Resert</a> -->
             </div>
+        </mat-card-actions>
         </form>
     </div>
 </mat-card>

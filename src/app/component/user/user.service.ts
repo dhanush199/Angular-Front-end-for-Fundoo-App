@@ -14,15 +14,14 @@ export class UserService {
   login(user) {
     this.httpUtil.post(environment.base_url + '/loginuser', user).subscribe(response => {
       console.log(response);
-      localStorage.setItem('Token', response.headers.get('token'));
+      localStorage.setItem('token', response.headers.get('token'));
+      //response.headers.get('token')
       this.router.navigate(['/home']);
     }, (error) => console.log(error));
   }
 
   register(user) {
     this.httpUtil.post(environment.base_url + '/registeruser', user).subscribe(response => {
-
-      localStorage.setItem('token', response.body.headers);
     }, (error) => console.log(error));
 
   }

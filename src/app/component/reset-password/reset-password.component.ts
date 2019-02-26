@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { UserService } from '../user/user.service';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-reset-password',
@@ -10,21 +10,56 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 })
 export class ResetPasswordComponent implements OnInit {
   resetPasswordForm: FormGroup;
-  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private router: Router, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router, private userService: UserService) {
   }
-  debugger=true;
-  public id = this.route.snapshot.params.id;
+  public id = this.activatedRoute.snapshot.params.id;
+
 
   ngOnInit() {
-  this.resetPasswordForm = this.formBuilder.group({
-    password: ['', Validators.required]
-  });
-  };
-  onSubmit(user) {
-    console.log(this.resetPasswordForm.value)
-    this.userService.resetPassword(user, this.id).subscribe(response => {
-    }, (error) => console.log(error));
   }
+
+  password = new FormControl('', [Validators.required, Validators.minLength(6)]); //Password validation
+  repeatPassword = new FormControl('', [Validators.required, Validators.minLength(6)]); //repeat passwo
+
+  /**
+   * @description Getting password error message
+   */
+  getPasswordErrorMessage() {
+    return this.password.hasError('required') ? "Can't be empty" :
+      this.password.hasError('minlength') ? 'Minimum 6 characters' : 
+        '';
+  }
+
+  /**
+   * @description Getting confirm password error message
+   */
+  getPasswordMatch() {
+      return this.repeatPassword.hasError('required') ? "'Can't be empty" :
+        this.repeatPassword.hasError('minlength') ? 'Minimum 6 characters' :
+         '';
+  }
+  /**
+   * @description Checking if the entered password and repeat password is same or not then calling api 
+   * @param password 
+   * @param repeatPassword 
+   */
+  confirmPassword (password, repeatPassword) {
+    console.log(password == repeatPassword);
+    var tokenObject = {};
+    if(password == repeatPassword){
+      this.activatedRoute.params.subscribe((params: Params) => {
+        var token = params['token'];
+        console.log(token);
+        tokenObject = {
+          "token":token,
+          "password":password
+        }
+      });
+      this.userService.resetPassword(tokenObject, 'reset').subscribe((data:any) => {
+        console.log(data);
+        this.router.navigate(['']);
+      })
+    }
+  }
+
 }
-
-

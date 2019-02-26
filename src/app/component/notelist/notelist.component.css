@@ -1,0 +1,146 @@
+.takeNotes {
+    width: 600px;
+    height: 46px;
+    /* position: absolute;
+    top: 0;
+    bottom: 0; */
+    left: 0;
+    right: 0;
+    margin: auto;
+    padding: 2px;
+    /* margin-top: 30px; */
+  }
+  
+  .card-grid{
+      width: 320px;
+  }
+  
+  .card-list{
+      width: 100%;
+  }
+  
+  .notesTitle {
+    border: none;
+    padding: 0;
+  }
+  
+  .icons {
+    float: right;
+    width: 40px;
+    height: 40px;
+    opacity: 0.5;
+    margin-top: -23px;
+  }
+  
+  .inputTitle {
+    width: 80%;
+    border: none;
+    outline: none;
+    margin-top: 5px;
+    font-size: 15px;
+    padding-top: 9px;
+    margin-left: 20px;
+    
+  }
+  
+  .hiddentakeNotes {
+    width: 580px;
+    /* height: 133px; */
+    position: relative;
+    /* top: 0;
+    bottom: 0; */
+    left: 0;
+    right: 0;
+    margin: auto;
+    /* margin-top: -50px; */
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .pinIcon {
+      float: right;
+      opacity: 0.5;
+  }
+  /* .hiddentakeNotes {
+      width: 80%;
+      border: none;
+      outline: none;
+      margin-top: 5px;
+      font-size: 15px;
+      padding-top: 9px;
+      margin-left: 20px;
+      /* margin-top: 0px; */
+  
+  
+  .inputTitleNote {
+      border: none;
+      outline: none;
+      width: 80%;
+      font-size: 16px;
+      font-weight: 600;
+  }
+  
+  .hiddenDiv {
+      padding: 10px;
+  }
+  
+  .inputNote {
+      border: none;
+      outline: none;
+      padding-left: 10px;
+      padding-top: 10px;
+      font-size: 14px;
+  }
+  
+  .iconsDiv {
+      padding-left: 10px;
+      padding-top: 16px;
+      height: 46px;
+  }
+  
+  .iconsLastDiv {
+      /* height: 24px;
+      width: 24px; */
+  }
+  
+  .innerIconDiv {
+      height: 24px;
+      width: 24px;
+      padding: 5px;
+      padding-right: 14px;
+      opacity: 0.5;
+  }
+  
+  .closeButton {
+      float: right;
+  }
+  
+  div[contenteditable=true]:empty::before {
+      content: attr(placeholder);
+      opacity: 0.5;;
+      }
+  
+  .noteCards {
+      /* width: 800px; */
+      margin-top: 30px;
+      margin-left: 17%;
+      margin-right: 40px;
+      /* padding-left: 200px; */
+      /* padding-right: 200px; */
+      /* width: 900px; */
+  }
+  
+  .noteCardsSmall {
+      margin-top: 30px;
+      margin-left: 0;
+      margin-right: 0;
+  }
+  
+  .written {
+      margin-left: 240px;
+      margin-bottom: -40px;
+      margin-top: 20px;
+      opacity: 0.6;
+      font-family: 'Roboto',arial,sans-serif;
+      font-size: 12px;
+  }

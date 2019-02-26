@@ -1,30 +1,49 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from 'src/app/core/services/note/note.service';
-import { User } from '../user/user';
+import { DataService } from 'src/app/core/services/DataService/data.service';
+import { Note } from 'src/app/core/model/note';
+import { HttpClient } from 'selenium-webdriver/http';
+import { HttputilService } from 'src/app/httputil.service';
 
 @Component({
   selector: 'app-notelist',
-  template: `
-  <h1>{{title}}</h1>
-  <h2>My favorite hero is: {{myHero.name}}</h2>
-  <p>Heroes:</p>
-  <ul>
-    <li *ngFor="let hero of heroes">
-      {{ hero.name }}
-      </li>
-  </ul>
-  <p *ngIf="heroes.length > 3">There are many heroes!</p>
-`
+  templateUrl: 'notelist.component.html'
+
 })
 export class NotelistComponent implements OnInit {
 
-    constructor(private noteService: NoteService ,private user:User) { }
+  @Input() view: boolean;
 
-    ngOnInit() {
+  pinnedNotes = [];
+  private products: [];
+  enterExpression = true;
+  expression = false;
+  value;
+  pinned = false;
+  raw_data;
+  // public products  = [];   // private data: DataService
+  constructor(private service: NoteService) { }
+  ngOnInit() {
+    this.readAll();
 
-   this.noteService.getAll(this.user);
-
-    }
   }
+
+  // childStatusChanged(finished: boolean) {
+  //   if (finished) {
+  //     this.readAll();
+  //   }
+  // }
+  /////////////////////////////////////////
+  readAll() {
+    // this.pinnedNotes = [];
+    // this.pinned = false;
+    //(data: any[])
+    this.service.getAll().subscribe((data: any) => {
+      console.log(data);
+      this.products = data;
+      console.log(this.products)
+    }, (error) => console.log(error));
+  }
+}
 
 

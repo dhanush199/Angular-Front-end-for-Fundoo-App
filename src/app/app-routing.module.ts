@@ -6,9 +6,11 @@ import { RegisterComponent } from './component/register/register.component';
 import { NotelistComponent } from './component/notelist/notelist.component';
 import { ForgotPasswordComponent } from 'src/app/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
+import { AuthGuardService as AuthGuard } from './core/services/AuthServices/auth-guard.service';
 
 export const appRoutes: Routes = [
-  {path:'reset-password/:id', component:ResetPasswordComponent},
+  { path: '', component: LoginComponent },
+  {path:'reset-password/:token', component:ResetPasswordComponent},
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
   { path: 'register', component: RegisterComponent },

@@ -16,7 +16,14 @@ import { ForgotPasswordComponent } from 'src/app/component/forgot-password/forgo
 import { ResetPasswordComponent } from 'src/app/component/reset-password/reset-password.component';
 import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { JwtModule } from '@auth0/angular-jwt';
+import { UserService } from './component/user/user.service';
 // import { HttpRequest } from 'src/app/component/forgot-password/forgot-password.component'
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
 
 @NgModule({
   declarations: [
@@ -27,6 +34,7 @@ import { CommonModule } from '@angular/common';
     NotelistComponent, ForgotPasswordComponent, ResetPasswordComponent
 
   ],
+ 
   imports: [
     CommonModule,
     BrowserModule,
@@ -35,13 +43,22 @@ import { CommonModule } from '@angular/common';
     MatFormFieldModule,
     FormsModule,
     AppMaterialModule,
-    BrowserAnimationsModule
-  ],
+    BrowserAnimationsModule,JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ['localhost:3080'],
+        blacklistedRoutes: ['localhost:3080/auth/']
+      }
+    })
+],
+
  
   exports: [
     AppMaterialModule
   ],
-  providers: [],
+  providers: [UserService
+    
+  ],
   
   bootstrap: [AppComponent]
 })

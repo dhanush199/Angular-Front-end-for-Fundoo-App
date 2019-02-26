@@ -1,0 +1,41 @@
+<!-- <div style="text-align:left;width:500px;">
+        <h1>
+            Notes are
+        </h1>
+        <table>
+        <table *ngIf="notes">
+         ADD HEADERS 
+            <tr>
+                <th>ID</th>
+                    <th>Name of Bird</th>
+                        <th>Type of Bird</th>
+            </tr> 
+    
+      BIND ARRAY TO TABLE 
+          <tr *ngFor="let talks of note">
+                 <td>{{notes.ID}}</td> 
+                    <td>{{notes.title}}</td>
+                        <td>{{notes.discription}}</td> 
+          </tr>
+        </table>
+    </div>   -->
+ 
+ <!-- <div fxLayout="row" fxLayoutAlign="space-evenly center" style="width:500px" fxFlex="60">
+    <ul>
+        <li *ngFor="let notes of notes">
+            {{notes.title}}, {{notes.discription}}
+        </li>
+    </ul>
+</div>  -->
+
+<ul>
+    <li *ngFor="let products of products" >
+      <br>
+      <mat-card>
+      -- title: {{products.title}}
+      <br>
+      -- discription: {{products.discription}}
+    </mat-card>
+    <br>
+    </li>
+  </ul> 

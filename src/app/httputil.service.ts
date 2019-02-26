@@ -9,9 +9,9 @@ export class HttputilService {
   constructor(private http : HttpClient) {}
 
   post(url,object){
-
     return this.http.post<any>(url,object,{observe : 'response'});
   }
+  
 
   put(url,object,header){
     return this.http.put<any>(url,object,header);
@@ -26,9 +26,11 @@ export class HttputilService {
   }
 
   postWithParam(url,params){
-    return this.http.post<any>(url,null,params);
+    return this.http.post<any>(url,params);
   }
-
+  // postWithHeader(url,header){
+  //   return this.http.post<any>(url,header);
+  // }
   deleteWithParams(url,params){
     return this.http.delete(url,params);
   }

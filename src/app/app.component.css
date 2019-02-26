@@ -1,162 +1,146 @@
-.navbar{
-    display: flex;
+.takeNotes {
+  width: 600px;
+  height: 46px;
+  /* position: absolute;
+  top: 0;
+  bottom: 0; */
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 2px;
+  /* margin-top: 30px; */
 }
 
-#input{
-    width: 91%;
-    height: 75%;
-    border: hidden;
-    display: flex;
-    outline: none
-
-}
-#text{
-    margin-left: 20px
+.card-grid{
+    width: 320px;
 }
 
-#searchbox{
-    margin-left: 30px;
+.card-list{
     width: 100%;
-    height: 74%;
 }
-#refresh{
-    /* margin-left: 5% */
-    margin-right: 18px;
-    margin-left: 80px;
-}
-#viewstream{
-    /* margin-left:2% */
-    margin-right: 45px
-}
-#apps{
-    /* margin-left: 4% */
-    margin-right: 24px
-}
-#notification{
-    /* margin-left: 3% */
-    margin-right: 15px
-}
-#accountcircle{
-    /* margin-left: 5% */
-    margin-right: 0px
-}
-#insidenave{
-    width: 250px;
-}
-#button{
-    border-style: none;
-    width: 100%;
-    font-family: sans-serif;
-    height: 56px;
-    padding: 5px
-}
-#imgNotes{
-    margin-right: 42px;
-    margin-left: -116px;
 
-}
-#imgRem{
-    margin-right: 34px;
-    margin-left: -90px;
-}
-#imglab{
-  margin-right: 18px;
-  margin-left: -89px;
-}
-#imgArc{
-    margin-right: 42px;
-    margin-left: -116px;
-}
-#imgtrace{
-    margin-right: 42px;
-    margin-left: -126px;
-}
-#imgSet{
-    margin-right: 42px;
-    margin-left: -116px;
-}
-#imgfeed{
-    margin-right: 30px;
-    margin-left: -78px;
-
-}
-#imghelp{
-    margin-right: 42px;
-    margin-left: -134px;
-}
-#imgdn{
-    margin-right: 31px;
-    margin-left: -74px;
-
-}
-#imgkb{
-    margin-right: 26px;
-    margin-left: -50px;
-}
-#editbutton{
-  margin-left: 104px;
+.notesTitle {
   border: none;
+  padding: 0;
 }
 
-#line{
-
-    height: -5px;
-    border: lightgray 1px solid;
+.icons {
+  float: right;
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+  margin-top: -23px;
 }
-.example-container {
-    width: 100%;
-    height: 90%;
-    /* border: 1px solid rgba(0, 0, 0, 0.5); */
-  }
 
-  .example-sidenav-content {
-    display: flex;
-    height: 100%;
-    align-items: center;
-    justify-content: center;
-  }
+.inputTitle {
+  width: 80%;
+  border: none;
+  outline: none;
+  margin-top: 5px;
+  font-size: 15px;
+  padding-top: 9px;
+  margin-left: 20px;
+  
+}
 
-  .example-sidenav {
-    padding: 20px;
-  }
-.logoutcard{
-    width: 15%;
-    margin-left: 81%;
-    text-align: center;
-    margin-bottom: -128px;
-    z-index: 8;
+.hiddentakeNotes {
+  width: 580px;
+  /* height: 133px; */
+  position: relative;
+  /* top: 0;
+  bottom: 0; */
+  left: 0;
+  right: 0;
+  margin: auto;
+  /* margin-top: -50px; */
+  padding: 5px;
+  margin-bottom: 5px;
 }
-/* .logoutcard{
-    margin-top: 100px
-} */
-.labelsbutton{
-    border-style: none;
-    /* width: 100%;
-    font-family: sans-serif;
-    height: 56px;
-    padding: 5px */
-}
-.txtt{
-    white-space: nowrap;
-    text-overflow:ellipsis;
-    overflow: hidden !important;
-}
-.buttonn{
 
+.pinIcon {
+    float: right;
+    opacity: 0.5;
+}
+/* .hiddentakeNotes {
+    width: 80%;
     border: none;
-    width: 250px;
-    /* margin-right: 31px; */
-    /* margin-left: -34px; */
-    
-}
-.labelbutton{
-    width: 250px;
+    outline: none;
+    margin-top: 5px;
+    font-size: 15px;
+    padding-top: 9px;
+    margin-left: 20px;
+    /* margin-top: 0px; */
+
+
+.inputTitleNote {
     border: none;
+    outline: none;
+    width: 80%;
+    font-size: 16px;
+    font-weight: 600;
 }
-.txtt{
-    margin-top: -2px;
+
+.hiddenDiv {
+    padding: 10px;
 }
- input {
-      border: none;
-      background:transparent;
-  } 
+
+.inputNote {
+    border: none;
+    outline: none;
+    padding-left: 10px;
+    padding-top: 10px;
+    font-size: 14px;
+}
+
+.iconsDiv {
+    padding-left: 10px;
+    padding-top: 16px;
+    height: 46px;
+}
+
+.iconsLastDiv {
+    /* height: 24px;
+    width: 24px; */
+}
+
+.innerIconDiv {
+    height: 24px;
+    width: 24px;
+    padding: 5px;
+    padding-right: 14px;
+    opacity: 0.5;
+}
+
+.closeButton {
+    float: right;
+}
+
+div[contenteditable=true]:empty::before {
+    content: attr(placeholder);
+    opacity: 0.5;;
+    }
+
+.noteCards {
+    /* width: 800px; */
+    margin-top: 30px;
+    margin-left: 17%;
+    margin-right: 40px;
+    /* padding-left: 200px; */
+    /* padding-right: 200px; */
+    /* width: 900px; */
+}
+
+.noteCardsSmall {
+    margin-top: 30px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.written {
+    margin-left: 240px;
+    margin-bottom: -40px;
+    margin-top: 20px;
+    opacity: 0.6;
+    font-family: 'Roboto',arial,sans-serif;
+    font-size: 12px;
+}

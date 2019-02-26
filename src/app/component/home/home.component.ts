@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { NoteService } from 'src/app/core/services/note/note.service';
+import { DataService } from 'src/app/core/services/DataService/data.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,15 +10,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
   
 })
-export class HomeComponent implements OnInit{
- 
-  constructor() { }
- public ngOnInit(){
+export class HomeComponent {
+  panelOpenState = false;
 
- }
-  
-  shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
-  onSumit(){
-  
+  constructor(private router:Router){}
+ 
+  logout(){
+    localStorage.removeItem('token')
+    this.router.navigate(['/login']);
   }
 }

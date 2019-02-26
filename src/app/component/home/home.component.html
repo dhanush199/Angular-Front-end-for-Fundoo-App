@@ -77,11 +77,20 @@
             <mat-menu #menu="matMenu" class="morecard">
                 <button mat-button (click)="logout()">Sign out</button>
             </mat-menu>
+            
         </mat-toolbar-row>
+        
     </mat-toolbar>
+   
 </div>
+
 <br>
-<mat-divider></mat-divider>
+
+<mat-divider>
+        
+</mat-divider>
+
+
 
 <!-- side navigation bar -->
 <mat-sidenav-container class="example-container">
@@ -129,7 +138,42 @@
                 </button><br>
         </mat-nav-list>
     </mat-sidenav>
+    
     <mat-sidenav-content>
-        <!-- <app-login></app-login> -->
+        <mat-card>
+            <mat-accordion>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Title
+                        </mat-panel-title>
+                        <mat-panel-description>
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                  
+                      <mat-form-field>
+                        <input matInput placeholder="Take a note">
+                      </mat-form-field>
+                  
+                    </mat-expansion-panel>
+                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                         (closed)="panelOpenState = false">
+                      <mat-expansion-panel-header>
+                        <mat-panel-title>
+                          Self aware panel
+                        </mat-panel-title>
+                        <mat-panel-description>
+                          Currently I am {{panelOpenState ? 'open' : 'closed'}}
+                        </mat-panel-description>
+                      </mat-expansion-panel-header>
+                      <p>I'm visible because I am open</p>
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </mat-card>
+                  <br>
+                  <br>
+            <mat-card>
+                <app-notelist>
+                </app-notelist></mat-card>
     </mat-sidenav-content>
 </mat-sidenav-container>
