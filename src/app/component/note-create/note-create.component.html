@@ -1,0 +1,30 @@
+<mat-card>
+<form [formGroup]="createNoteForm" (ngSubmit)="onSubmit(createNoteForm.value)">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="form-group">
+            <input matInput placeholder="Title" formControlName="title" class="form-control">
+          </div>
+        </mat-panel-title>
+        <mat-panel-description>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-form-field>
+        <div class="form-group">
+          <input matInput placeholder="Take a note..." formControlName="discription" class="form-control">
+        </div>
+      </mat-form-field>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <mat-card-actions>
+      <div class="form-group">
+          <button [disabled]="loading" class="btn btn-primary">save</button> &nbsp; &nbsp;
+          <br>
+          <br>
+          <!-- <a [routerLink]="['/reset-password',12]">Resert</a> -->
+      </div>
+  </mat-card-actions>
+</form>
+</mat-card>

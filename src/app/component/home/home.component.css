@@ -160,3 +160,13 @@ input {
     border: none;
     background:transparent;
 } 
+
+mat-expansion-panel {
+  width: 60%;
+  box-shadow:50% 50%;
+}
+
+mat-card {
+  width: 50%;
+  height: 50%;
+}

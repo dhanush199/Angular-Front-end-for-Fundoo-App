@@ -15,31 +15,80 @@ export class NoteService {
 
   getAll(): Observable<any> {
     var token = localStorage.getItem('token')
-     var httpheaders = {
-      headers:new HttpHeaders({
+    var httpheaders = {
+      headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
         'token': token
       })
     };
-    return this.httpUtil.get(this.API + '/retrievenote',httpheaders )
+    return this.httpUtil.get(this.API + '/retrievenote', httpheaders)
 
   }
-
-  get(id: string) {
-    return this.http.get(this.API + '/' + id);
-  }
-
-  save(note: any): Observable<any> {
-    let result: Observable<Object>;
-    if (note['href']) {
-      result = this.http.put(note.href, note);
-    } else {
-      result = this.http.post(this.API, note);
+  update(id,title, discription) {
+    var Usertoken = localStorage.getItem('token')
+    var note = {
+      "title": title,
+      "discription": discription,
     }
-    return result;
+    console.log(id)
+    var httpheaders = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        //application/x-www-form-urlencoded
+        'token': Usertoken
+      })
+    };
+    this.httpUtil.put(this.API + '/editnote/'+Usertoken,note,{
+      params: {
+        noteId: id,
+        token:localStorage.getItem('token'),
+      },
+      observe: 'response'
+    }).subscribe(response => {
+      console.log(response);
+    }, (error) => console.log(error));
+  }
+//   public getHeader():  any {
+//     var token = localStorage.getItem('token')
+//     var httpheaders = {
+//       headers: new HttpHeaders({
+//         'Content-Type': 'application/x-www-form-urlencoded',
+//         'token': token
+//       })
+//     };  
+//     return httpheaders;
+// }
+
+  save(note) {
+    var token = localStorage.getItem('token')
+    var httpheaders = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        //application/x-www-form-urlencoded
+        'token': token
+      })
+    };
+    this.httpUtil.postWithBody(this.API + '/createnote', note, httpheaders).subscribe(response => {
+      console.log(response);
+    }, (error) => console.log(error));
   }
 
-  remove(href: string) {
-    return this.http.delete(href);
+  delete(title) {
+    var token = localStorage.getItem('token')
+    var httpheaders = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        //application/x-www-form-urlencoded
+        'token': token
+      })
+    };
+    this.httpUtil.deleteWithParams(this.API + '/delete/' + token, {
+      params: {
+        title: title
+      },
+      observe: 'response'
+    }).subscribe(response => {
+      console.log(response);
+    }, (error) => console.log(error));
   }
 }

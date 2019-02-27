@@ -18,6 +18,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UserService } from './component/user/user.service';
+import { NoteCreateComponent } from 'src/app/component/note-create/note-create.component';
 // import { HttpRequest } from 'src/app/component/forgot-password/forgot-password.component'
 
 export function tokenGetter() {
@@ -31,7 +32,7 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     HomeComponent,UserComponent, 
-    NotelistComponent, ForgotPasswordComponent, ResetPasswordComponent
+    NotelistComponent, ForgotPasswordComponent, ResetPasswordComponent, NoteCreateComponent
 
   ],
  

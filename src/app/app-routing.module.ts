@@ -12,7 +12,7 @@ export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
   {path:'reset-password/:token', component:ResetPasswordComponent},
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
+  { path: 'home', component: HomeComponent,canActivate:[AuthGuard] },
   { path: 'register', component: RegisterComponent },
   {path: 'notelist',component: NotelistComponent},
   {path:'forgot-password' ,component:ForgotPasswordComponent},

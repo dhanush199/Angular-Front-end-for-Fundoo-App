@@ -136,11 +136,7 @@
       margin-right: 0;
   }
   
-  .written {
-      margin-left: 240px;
-      margin-bottom: -40px;
-      margin-top: 20px;
-      opacity: 0.6;
-      font-family: 'Roboto',arial,sans-serif;
-      font-size: 12px;
+  mat-expansion-panel {
+    width: 60%;
+    box-shadow:50% 50%;
   }

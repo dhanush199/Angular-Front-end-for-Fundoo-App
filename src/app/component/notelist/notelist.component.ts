@@ -1,49 +1,48 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from 'src/app/core/services/note/note.service';
-import { DataService } from 'src/app/core/services/DataService/data.service';
-import { Note } from 'src/app/core/model/note';
-import { HttpClient } from 'selenium-webdriver/http';
-import { HttputilService } from 'src/app/httputil.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-notelist',
   templateUrl: 'notelist.component.html'
-
 })
 export class NotelistComponent implements OnInit {
-
   @Input() view: boolean;
-
-  pinnedNotes = [];
+  noteForm: FormGroup;
+  panelOpenState: boolean = false;
   private products: [];
-  enterExpression = true;
-  expression = false;
-  value;
-  pinned = false;
-  raw_data;
-  // public products  = [];   // private data: DataService
+  submitted = false;
   constructor(private service: NoteService) { }
+
   ngOnInit() {
     this.readAll();
-
+   // this.delete1('Himalaya')
   }
-
-  // childStatusChanged(finished: boolean) {
-  //   if (finished) {
-  //     this.readAll();
-  //   }
-  // }
-  /////////////////////////////////////////
+  discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
+  title = new FormControl('', [Validators.required, Validators.minLength(1)]); 
   readAll() {
-    // this.pinnedNotes = [];
-    // this.pinned = false;
-    //(data: any[])
     this.service.getAll().subscribe((data: any) => {
       console.log(data);
       this.products = data;
       console.log(this.products)
     }, (error) => console.log(error));
   }
+
+  togglePanel() {
+    this.panelOpenState = !this.panelOpenState;
+  }
+  update(id,title, discription) {
+    console.log(id,title,discription);
+    this.service.update(id,title,discription)
+  }
+
+  delete(title) {
+    this.service.delete(title)
+  }
+  getErrorMessage() {
+    return this.discription.hasError('required') ?
+      'You must enter a value' : this.discription.hasError('discription') ? 'Not a valid discription' : '';
+}
 }
 
 
