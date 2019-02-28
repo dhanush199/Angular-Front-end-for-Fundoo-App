@@ -7,6 +7,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { DataService } from './core/services/DataService/data.service';
 import { NoteService } from './core/services/note/note.service';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

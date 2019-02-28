@@ -10,7 +10,7 @@ import { AuthGuardService as AuthGuard } from './core/services/AuthServices/auth
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
-  {path:'reset-password/:token', component:ResetPasswordComponent},
+  {path:'reset-password/:id', component:ResetPasswordComponent},
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent,canActivate:[AuthGuard] },
   { path: 'register', component: RegisterComponent },

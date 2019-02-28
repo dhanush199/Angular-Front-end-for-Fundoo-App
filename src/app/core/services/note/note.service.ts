@@ -8,6 +8,8 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
 })
 export class NoteService {
   notes = [];
+  titl:null
+    discriptio:null
   public API = '//localhost:8081/user';
 
   constructor(private http: HttpClient, private router: Router, private httpUtil: HttputilService) {
@@ -24,40 +26,17 @@ export class NoteService {
     return this.httpUtil.get(this.API + '/retrievenote', httpheaders)
 
   }
-  update(id,title, discription) {
-    var Usertoken = localStorage.getItem('token')
-    var note = {
-      "title": title,
-      "discription": discription,
-    }
-    console.log(id)
+ 
+  public getHeader():  any {
+    var token = localStorage.getItem('token')
     var httpheaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        //application/x-www-form-urlencoded
-        'token': Usertoken
+        'token': token
       })
-    };
-    this.httpUtil.put(this.API + '/editnote/'+Usertoken,note,{
-      params: {
-        noteId: id,
-        token:localStorage.getItem('token'),
-      },
-      observe: 'response'
-    }).subscribe(response => {
-      console.log(response);
-    }, (error) => console.log(error));
-  }
-//   public getHeader():  any {
-//     var token = localStorage.getItem('token')
-//     var httpheaders = {
-//       headers: new HttpHeaders({
-//         'Content-Type': 'application/x-www-form-urlencoded',
-//         'token': token
-//       })
-//     };  
-//     return httpheaders;
-// }
+    };  
+    return httpheaders;
+}
 
   save(note) {
     var token = localStorage.getItem('token')
@@ -73,7 +52,7 @@ export class NoteService {
     }, (error) => console.log(error));
   }
 
-  delete(title) {
+  delete(id) {
     var token = localStorage.getItem('token')
     var httpheaders = {
       headers: new HttpHeaders({
@@ -84,10 +63,23 @@ export class NoteService {
     };
     this.httpUtil.deleteWithParams(this.API + '/delete/' + token, {
       params: {
-        title: title
+        noteId: id
       },
       observe: 'response'
     }).subscribe(response => {
+      console.log(response);
+    }, (error) => console.log(error));
+  }
+  
+  updateNote(note,noteId) {
+    this.httpUtil.put(this.API + '/editnote/',note,{
+      params: {
+        noteId: noteId,
+        token:localStorage.getItem('token'),
+      },
+      observe: 'response'
+    }
+    ).subscribe(response => {
       console.log(response);
     }, (error) => console.log(error));
   }

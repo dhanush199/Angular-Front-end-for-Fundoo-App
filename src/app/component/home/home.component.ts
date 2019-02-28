@@ -8,15 +8,17 @@ import { Router } from '@angular/router';
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
-  
+
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
   panelOpenState = false;
 
-  constructor(private router:Router){}
- 
-  logout(){
+  constructor(private router: Router) { }
+  ngOnInit() {
+  }
+  logout() {
     localStorage.removeItem('token')
     this.router.navigate(['/login']);
   }
+ 
 }

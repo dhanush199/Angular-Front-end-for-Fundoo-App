@@ -10,13 +10,17 @@ import { NoteService } from 'src/app/core/services/note/note.service';
 export class NoteCreateComponent implements OnInit {
   createNoteForm: FormGroup;
   submitted = false;
+  panelOpenState = false;
+  temp:any
   constructor(private NoteService: NoteService, private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.createNoteForm = this.formBuilder.group({
-      title: ['', Validators.required],
-      discription: ['', Validators.required]
+      title: [''],
+      discription: ['']
+      //, Validators.required
     });
+
   };
   get f() { return this.createNoteForm.controls; }
   public onSubmit(note) {
@@ -25,6 +29,16 @@ export class NoteCreateComponent implements OnInit {
     if (this.createNoteForm.invalid) {
       return;
     }
-    this.NoteService.save(note);
+    this.temp=!note.discription;   
+     this.NoteService.save(note);
   }
+
+  // panelOpen(title, discription) {
+  //   var note = {
+  //     "title": title,
+  //     "discription": discription
+  //   }
+  //   console.log(note)
+  //   this.NoteService.save(note);
+  // }
 }
