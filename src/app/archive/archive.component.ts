@@ -1,10 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NoteService } from 'src/app/core/services/note/note.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Inject } from '@angular/core';
-import { UpdateNoteComponent } from 'src/app/update-notes/update-notes.component';
+import { NoteService } from '../core/services/note/note.service';
+import { UpdateNoteComponent } from '../update-notes/update-notes.component';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 
 export interface DialogData {
   noteName: string;
@@ -12,23 +11,23 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'app-notelist',
-  templateUrl: 'notelist.component.html'
+  selector: 'app-archive',
+  templateUrl: './archive.component.html',
+  styleUrls: ['./archive.component.css']
 })
-export class NotelistComponent implements OnInit {
+export class ArchiveComponent implements OnInit {
   @Input() view: boolean;
   noteForm: FormGroup;
   panelOpenState: boolean = false;
   private products: [];
   submitted = false;
-  constructor(private router: Router, private service: NoteService, private dialog: MatDialog ) { }
+  constructor(private router: Router, private service: NoteService, private dialog: MatDialog) { }
 
   ngOnInit() {
     this.readAll();
     // this.delete1('Himalaya')
   }
-  discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
-  title = new FormControl('', [Validators.required, Validators.minLength(1)]);
+
 
   readAll() {
     this.service.getAll().subscribe((products: any) => {
@@ -74,5 +73,3 @@ export class NotelistComponent implements OnInit {
     }
   }
 }
-
-

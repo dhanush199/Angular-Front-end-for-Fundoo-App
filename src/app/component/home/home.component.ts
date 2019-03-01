@@ -13,12 +13,20 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   panelOpenState = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private noteService: NoteService) { }
   ngOnInit() {
   }
   logout() {
     localStorage.removeItem('token')
     this.router.navigate(['/login']);
   }
- 
+  archive() {
+this.router.navigate(['archive'])
+    this.noteService.getAll().subscribe((products: any) => {
+      console.log(products);
+      console.log(products.Archive);
+    }, (error) => console.log(error));
+  }
+
 }
+

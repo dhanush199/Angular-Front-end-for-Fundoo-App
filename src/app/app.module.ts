@@ -20,6 +20,8 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { UserService } from './component/user/user.service';
 import { NoteCreateComponent } from 'src/app/component/note-create/note-create.component';
 import { UpdateNoteComponent } from 'src/app/update-notes/update-notes.component';
+import { ArchiveComponent } from './archive/archive.component';
+import { DataService } from './core/services/DataService/data.service';
 // import { HttpRequest } from 'src/app/component/forgot-password/forgot-password.component'
 
 export function tokenGetter() {
@@ -33,7 +35,7 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     HomeComponent, UserComponent,
-    NotelistComponent, ForgotPasswordComponent, ResetPasswordComponent, NoteCreateComponent, UpdateNoteComponent
+    NotelistComponent, ForgotPasswordComponent, ResetPasswordComponent, NoteCreateComponent, UpdateNoteComponent, ArchiveComponent
 
   ],
 
@@ -59,7 +61,7 @@ export function tokenGetter() {
     AppMaterialModule
   ],
   entryComponents: [UpdateNoteComponent],
-  providers: [UserService
+  providers: [UserService,DataService
 
   ],
 

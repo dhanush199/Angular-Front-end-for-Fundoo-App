@@ -1,14 +1,10 @@
 .takeNotes {
   width: 600px;
   height: 46px;
-  /* position: absolute;
-  top: 0;
-  bottom: 0; */
   left: 0;
   right: 0;
   margin: auto;
   padding: 2px;
-  /* margin-top: 30px; */
 }
 
 .card-grid{
@@ -98,10 +94,7 @@
     height: 46px;
 }
 
-.iconsLastDiv {
-    /* height: 24px;
-    width: 24px; */
-}
+
 
 .innerIconDiv {
     height: 24px;

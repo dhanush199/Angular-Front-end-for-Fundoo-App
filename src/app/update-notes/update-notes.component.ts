@@ -15,8 +15,9 @@ export class UpdateNoteComponent {
     public dialogRef: MatDialogRef<UpdateNoteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,private service: NoteService) {}
 
-  onNoClick(): void {
+  onNoClick(note,id): void {
     this.dialogRef.close();
+    this.service.updateNote(note,id)
   }
   updateNote(note,id) {
     console.log(note);

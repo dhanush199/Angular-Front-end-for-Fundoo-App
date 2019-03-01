@@ -1,7 +1,7 @@
 <mat-card class="card">
     <mat-accordion  *ngFor="let products of products" >
-        <mat-expansion-panel  *ngIf="!products.archive" >
-            <mat-expansion-panel-header (click)=openDialog(products)  >
+        <mat-expansion-panel  *ngIf="products.archive" >
+            <mat-expansion-panel-header (click)=openDialog(products)>
                 <mat-panel-title>
                     <div class="container">
                         <mat-form-field >

@@ -7,6 +7,7 @@ import { NotelistComponent } from './component/notelist/notelist.component';
 import { ForgotPasswordComponent } from 'src/app/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { AuthGuardService as AuthGuard } from './core/services/AuthServices/auth-guard.service';
+import { ArchiveComponent } from './archive/archive.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -16,6 +17,7 @@ export const appRoutes: Routes = [
   { path: 'register', component: RegisterComponent },
   {path: 'notelist',component: NotelistComponent},
   {path:'forgot-password' ,component:ForgotPasswordComponent},
+  {path:'archive' ,component:ArchiveComponent},
   { path: '**', redirectTo:'login' }
 ];
 @NgModule({

@@ -1,5 +1,5 @@
 export class Note{
 
-    constructor(public discription : string, public title : string){}
+    constructor(public discription : string, public title : string,public isArchive : boolean){}
 
 }
