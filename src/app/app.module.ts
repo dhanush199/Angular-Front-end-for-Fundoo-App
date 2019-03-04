@@ -5,7 +5,6 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { ReactiveFormsModule, FormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { HomeComponent } from './component/home/home.component';
-import { FlexLayoutModule } from "@angular/flex-layout";
 import { RegisterComponent } from './component/register/register.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AppMaterialModule } from './app.material.module';
@@ -14,20 +13,18 @@ import { UserComponent } from 'src/app/component/user/user.component';
 import { NotelistComponent } from 'src/app/component/notelist/notelist.component';
 import { ForgotPasswordComponent } from 'src/app/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from 'src/app/component/reset-password/reset-password.component';
-import { RouterModule, Routes } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { JwtModule } from '@auth0/angular-jwt';
 import { UserService } from './component/user/user.service';
 import { NoteCreateComponent } from 'src/app/component/note-create/note-create.component';
-import { UpdateNoteComponent } from 'src/app/update-notes/update-notes.component';
-import { ArchiveComponent } from './archive/archive.component';
-import { DataService } from './core/services/DataService/data.service';
+import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
+import { ArchiveComponent } from 'src/app/component/archive/archive.component';
+import { ThrashComponent } from 'src/app/component/trash/thrash.component';
 // import { HttpRequest } from 'src/app/component/forgot-password/forgot-password.component'
 
 export function tokenGetter() {
   return localStorage.getItem('token');
 }
-
 
 @NgModule({
   declarations: [
@@ -35,7 +32,13 @@ export function tokenGetter() {
     LoginComponent,
     RegisterComponent,
     HomeComponent, UserComponent,
-    NotelistComponent, ForgotPasswordComponent, ResetPasswordComponent, NoteCreateComponent, UpdateNoteComponent, ArchiveComponent
+    NotelistComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    NoteCreateComponent,
+    UpdateNoteComponent,
+    ArchiveComponent,
+    ThrashComponent
 
   ],
 
@@ -61,10 +64,7 @@ export function tokenGetter() {
     AppMaterialModule
   ],
   entryComponents: [UpdateNoteComponent],
-  providers: [UserService,DataService
-
-  ],
-
+  providers: [UserService, HomeComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

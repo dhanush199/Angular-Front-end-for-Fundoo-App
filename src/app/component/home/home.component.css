@@ -20,24 +20,19 @@
   height: 74%;
 }
 #refresh{
-  /* margin-left: 5% */
   margin-right: 18px;
   margin-left: 80px;
 }
 #viewstream{
-  /* margin-left:2% */
   margin-right: 45px
 }
 #apps{
-  /* margin-left: 4% */
   margin-right: 24px
 }
 #notification{
-  /* margin-left: 3% */
   margin-right: 15px
 }
 #accountcircle{
-  /* margin-left: 5% */
   margin-right: 0px
 }
 #insidenave{
@@ -106,7 +101,6 @@ border: none;
 .example-container {
   width: 100%;
   height: 90%;
-  /* border: 1px solid rgba(0, 0, 0, 0.5); */
 }
 
 .example-sidenav-content {
@@ -126,15 +120,13 @@ border: none;
   margin-bottom: -128px;
   z-index: 8;
 }
-/* .logoutcard{
-  margin-top: 100px
-} */
+
 .labelsbutton{
-  border-style: none;
-  /* width: 100%;
+  border-style: none; 
+   width: 100%;
   font-family: sans-serif;
   height: 56px;
-  padding: 5px */
+  padding: 5px 
 }
 .txtt{
   white-space: nowrap;
@@ -144,10 +136,7 @@ border: none;
 .buttonn{
 
   border: none;
-  width: 250px;
-  /* margin-right: 31px; */
-  /* margin-left: -34px; */
-  
+  width: 250px;  
 }
 .labelbutton{
   width: 250px;
@@ -158,7 +147,7 @@ border: none;
 }
 input {
     border: none;
-    background:transparent;
+    background:white;
 } 
 
 mat-expansion-panel {

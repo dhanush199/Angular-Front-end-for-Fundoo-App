@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ArchiveComponent } from './archive.component';
+import { ThrashComponent } from './thrash.component';
 
-describe('ArchiveComponent', () => {
-  let component: ArchiveComponent;
-  let fixture: ComponentFixture<ArchiveComponent>;
+describe('ThrashComponent', () => {
+  let component: ThrashComponent;
+  let fixture: ComponentFixture<ThrashComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ArchiveComponent ]
+      declarations: [ ThrashComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ArchiveComponent);
+    fixture = TestBed.createComponent(ThrashComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

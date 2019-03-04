@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { DialogData } from '../component/notelist/notelist.component';
-import { NoteService } from '../core/services/note/note.service';
+import { DialogData } from 'src/app/component/notelist/notelist.component';
+import { NoteService } from 'src/app/core/services/note/note.service';
 
 
 @Component({
@@ -17,10 +17,15 @@ export class UpdateNoteComponent {
 
   onNoClick(note,id): void {
     this.dialogRef.close();
-    this.service.updateNote(note,id)
+    console.log(note);
+   this.service.updateNote(note,id)
+    console.log(note);
+    
+
   }
   updateNote(note,id) {
     console.log(note);
     this.service.updateNote(note,id)
+    console.log(note);
   }
 }

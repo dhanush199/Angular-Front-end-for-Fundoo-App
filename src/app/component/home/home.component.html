@@ -73,22 +73,22 @@
             </mat-menu>
 
             <!-- User -->
-            <button mat-icon-button class="icon-button" id="more" [matMenuTriggerFor]="menu">
+            <button mat-icon-button class="icon-button" id="more" >
                 <i id="accountcircle" class="material-icons">account_circle</i></button>
             <mat-menu #menu="matMenu" class="morecard">
                 <button mat-button (click)="logout()">Sign out</button>
             </mat-menu>
-            
+
         </mat-toolbar-row>
-        
+
     </mat-toolbar>
-   
+
 </div>
 
 <br>
 
 <mat-divider>
-        
+
 </mat-divider>
 
 
@@ -97,7 +97,8 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav #drawer mode="side" opened role="navigation" id="sidenave">
         <mat-nav-list id="insidenave">
-            <button mat-stroked-button id="button" (click)="notes()"><img class="image"><i class="fa fa-sticky-note-o" style="font-size:24px"></i>
+            <button mat-stroked-button id="button" (click)="notes()"><img class="image"><i class="fa fa-sticky-note-o"
+                    style="font-size:24px"></i>
                 Notes</button><br>
             <button mat-stroked-button id="button"><i class="fa fa-bell" style="font-size:20px"></i>
                 Reminders</button><br>
@@ -105,7 +106,8 @@
             <div>
                 <span style="margin-left: 10px">
                     <font face="arial">Label</font>
-                </span> <button mat-stroked-button id="editbutton" type="button"><i class="fa fa-edit" style="font-size:20px"></i>Edit</button>
+                </span> <button mat-stroked-button id="editbutton" type="button"><i class="fa fa-edit"
+                        style="font-size:20px"></i>Edit</button>
             </div>
             <div (updateClick)="refresh($event)">
                 <button mat-stroked-button class="buttonn" (click)="createLabel()">
@@ -114,36 +116,38 @@
                     <div fxLayout=row fxLayoutGap="10%">
                         <button mat-stroked-button class=labelbutton (click)="notesWithList(data)">
                             <div fxFlex="5%"><i class="material-icons">label</i></div>
-                            <div fxFlex="90%" class="txtt">{{data}}</div>
+                            <div fxFlex="90%" class="txtt"></div>
                         </button>
                     </div>
                 </div>
             </div>
             <hr id="line">
-            <button mat-stroked-button id="button" (click)="archive()">
-            <i class="fa fa-archive" style="font-size:20px"></i> Archive</button><br>
-            <button mat-stroked-button id="button" (click)="trashnote()"><img class="image"
-                    id="imgtrace"><i class="fa fa-trash" style="font-size:20px"></i>Trash</button><br>
+            <button  mat-stroked-button id="button" [routerLink]="['/home/archive']">
+                <i class="fa fa-archive" style="font-size:20px" ></i> Archive</button><br>
+            <button mat-stroked-button id="button" (click)="onThrash()"><img class="image" id="imgtrace"><i
+                    class="fa fa-trash" style="font-size:20px"></i>Trash</button><br>
             <hr id="line">
             <button mat-stroked-button id="button">
-                    <i class="fa fa-settings" style="font-size:20px"></i>Settings</button><br>
-                <button mat-stroked-button id="button">
-                       <i class="fa fa-plane" style="font-size:20px"></i> Send
-                    feedback
-                </button><br>
-                <button mat-stroked-button id="button">
-                       <i class="fa fa-question-circle" style="font-size:24px"></i>
-                        Help</button><br>
-                <button mat-stroked-button id="button" href="https://play.google.com/store/apps/details?id=com.google.android.keep&hl=en_IN"><i class="fa fa-download" style="font-size:24px"></i>App
-                    download
-                </button><br>
+                <i class="fa fa-settings" style="font-size:20px"></i>Settings</button><br>
+            <button mat-stroked-button id="button">
+                <i class="fa fa-plane" style="font-size:20px"></i> Send
+                feedback
+            </button><br>
+            <button mat-stroked-button id="button">
+                <i class="fa fa-question-circle" style="font-size:24px"></i>
+                Help</button><br>
+            <button mat-stroked-button id="button"><i
+                    class="fa fa-download" style="font-size:24px"></i>App
+                download
+            </button><br>
         </mat-nav-list>
     </mat-sidenav>
-    
+
     <mat-sidenav-content>
         <br>
         <br>
-            <!-- <mat-accordion>
+        <!-- <router-outlet></router-outlet> -->
+        <!-- <mat-accordion>
                     <mat-expansion-panel>
                       <mat-expansion-panel-header>
                         <mat-panel-title>
@@ -158,11 +162,12 @@
                       </mat-form-field>
                     </mat-expansion-panel>
                   </mat-accordion> -->
-                  <app-note-create></app-note-create>
+         <router-outlet ></router-outlet> 
+
+        <!-- <app-note-create></app-note-create> -->
                 
-                  <br>
-                  <br>
-                <app-notelist>
-                </app-notelist>
+        <br>
+        <br>
+        <!-- <app-notelist>  </app-notelist> -->
     </mat-sidenav-content>
 </mat-sidenav-container>

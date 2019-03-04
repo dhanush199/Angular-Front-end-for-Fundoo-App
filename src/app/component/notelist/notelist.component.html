@@ -1,11 +1,16 @@
+<app-note-create></app-note-create>
+<br>
+<br>
+<br>
 <mat-card class="card">
-    <mat-accordion  *ngFor="let products of products" >
-        <mat-expansion-panel  *ngIf="!products.archive" >
-            <mat-expansion-panel-header (click)=openDialog(products)  >
+    <mat-accordion *ngFor="let products of products">
+        <mat-expansion-panel>
+            <!-- *ngIf="!products.archive" -->
+            <mat-expansion-panel-header (click)=openDialog(products)>
                 <mat-panel-title>
                     <div class="container">
-                        <mat-form-field >
-                            <input matInput placeholder="Title" value={{products.title}} [formControl]="title" >
+                        <mat-form-field>
+                            <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
                         </mat-form-field>
                     </div>
                 </mat-panel-title>
@@ -16,16 +21,18 @@
             <div class="container">
                 <mat-form-field>
                     <input matInput placeholder="Discription" value="{{products.discription}}"
-                        [formControl]="discription" >
-                        <!-- <mat-error *ngIf="discription.invalid">{{getErrorMessage()}}</mat-error> -->
+                        [formControl]="discription">
+                    <!-- <mat-error *ngIf="discription.invalid">{{getErrorMessage()}}</mat-error> -->
                 </mat-form-field>
             </div><br>
             Icons here
             <mat-card-actions>
                 <div id="signButton">
                     <button mat-button (click)="delete(products.id)">delete</button></div>
-                    <div id="signButton">
-                        <button mat-button (click)="Archive(products)">Archive</button></div>
+                <div id="signButton">
+                    <button mat-button (click)="onArchive(products)">Archive</button></div>
+                <div id="signButton">
+                    <button mat-button (click)="onThrash(products)">Trash</button></div>
             </mat-card-actions>
         </mat-expansion-panel>
         <br> <br> <br> <br> <br>

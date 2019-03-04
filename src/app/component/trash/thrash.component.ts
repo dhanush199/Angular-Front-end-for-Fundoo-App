@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NoteService } from '../core/services/note/note.service';
-import { UpdateNoteComponent } from '../update-notes/update-notes.component';
-import { MatDialog } from '@angular/material';
+import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { Router } from '@angular/router';
+import { NoteService } from 'src/app/core/services/note/note.service';
 import { FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { Note } from 'src/app/core/model/note';
 
 export interface DialogData {
   noteName: string;
@@ -11,23 +12,21 @@ export interface DialogData {
 }
 
 @Component({
-  selector: 'app-archive',
-  templateUrl: './archive.component.html',
-  styleUrls: ['./archive.component.css']
+  selector: 'app-thrash',
+  templateUrl: './thrash.component.html',
+  styleUrls: ['./thrash.component.css']
 })
-export class ArchiveComponent implements OnInit {
-  @Input() view: boolean;
+export class ThrashComponent implements OnInit {
+  @Input() products: Note;
   noteForm: FormGroup;
   panelOpenState: boolean = false;
-  private products: [];
   submitted = false;
   constructor(private router: Router, private service: NoteService, private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.readAll();
-    // this.delete1('Himalaya')
+    console.log(this.products)
+this.readAll()
   }
-
 
   readAll() {
     this.service.getAll().subscribe((products: any) => {
@@ -64,11 +63,11 @@ export class ArchiveComponent implements OnInit {
     this.service.updateNote(note, note.id)
   }
 
-  Archive(products) {
-    if (products.Archive)
+  onTrash(products) {
+    if (products.inTrash)
       console.log('already archeived')
     else {
-      products.Archive = 1
+      products.inTrash = 1
       this.service.updateNote(products, products.id)
     }
   }

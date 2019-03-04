@@ -8,11 +8,12 @@ import { NoteService } from 'src/app/core/services/note/note.service';
   styleUrls: ['./note-create.component.css']
 })
 export class NoteCreateComponent implements OnInit {
-  createNoteForm: FormGroup;
-  submitted = false;
-  panelOpenState = false;
-  temp:any
-  constructor(private NoteService: NoteService, private formBuilder: FormBuilder) { }
+  public createNoteForm: FormGroup;
+  public submitted = false;
+  public panelOpenState = false;
+  private temp: any
+  constructor(private noteService: NoteService,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.createNoteForm = this.formBuilder.group({
@@ -23,22 +24,14 @@ export class NoteCreateComponent implements OnInit {
 
   };
   get f() { return this.createNoteForm.controls; }
+
   public onSubmit(note) {
     this.submitted = true;
     console.log(this.createNoteForm.value)
     if (this.createNoteForm.invalid) {
       return;
     }
-    this.temp=!note.discription;   
-     this.NoteService.save(note);
+    this.temp = !note.discription;
+    this.noteService.save(note);
   }
-
-  // panelOpen(title, discription) {
-  //   var note = {
-  //     "title": title,
-  //     "discription": discription
-  //   }
-  //   console.log(note)
-  //   this.NoteService.save(note);
-  // }
 }

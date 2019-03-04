@@ -3,15 +3,17 @@ import { Observable, Subscription } from 'rxjs';
 import { HttputilService } from 'src/app/httputil.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class NoteService {
+  
   notes = [];
-  titl:null
-    discriptio:null
+  titl: null
+  discriptio: null
   public API = '//localhost:8081/user';
-
   constructor(private http: HttpClient, private router: Router, private httpUtil: HttputilService) {
   }
 
@@ -26,17 +28,17 @@ export class NoteService {
     return this.httpUtil.get(this.API + '/retrievenote', httpheaders)
 
   }
- 
-  public getHeader():  any {
+
+  public getHeader(): any {
     var token = localStorage.getItem('token')
     var httpheaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'token': token
       })
-    };  
+    };
     return httpheaders;
-}
+  }
 
   save(note) {
     var token = localStorage.getItem('token')
@@ -70,12 +72,15 @@ export class NoteService {
       console.log(response);
     }, (error) => console.log(error));
   }
-  
-  updateNote(note,noteId) {
-    this.httpUtil.put(this.API + '/editnote/',note,{
+
+  updateNote(note, noteId) {
+    console.log(note)
+    var token = localStorage.getItem('token')
+    console.log(token)
+    this.httpUtil.put(this.API + '/editnote', note, {
       params: {
         noteId: noteId,
-        token:localStorage.getItem('token'),
+        token: token
       },
       observe: 'response'
     }

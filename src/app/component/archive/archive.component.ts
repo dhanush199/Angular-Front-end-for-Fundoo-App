@@ -1,23 +1,23 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NoteService } from 'src/app/core/services/note/note.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Inject } from '@angular/core';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
+import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
+import { FormGroup } from '@angular/forms';
 import { Note } from 'src/app/core/model/note';
-import { DataService } from 'src/app/core/services/DataService/data.service';
 
 export interface DialogData {
-  title: string;
-  discription: string;
+  noteName: string;
+  noteDis: string;
 }
 
 @Component({
-  selector: 'app-note-list',
-  templateUrl: 'notelist.component.html'
+  selector: 'app-archive',
+  templateUrl: './archive.component.html',
+  styleUrls: ['./archive.component.css']
 })
-export class NotelistComponent implements OnInit {
+
+export class ArchiveComponent implements OnInit {
   @Input() products: Note;
   noteForm: FormGroup;
   panelOpenState: boolean = false;
@@ -25,10 +25,17 @@ export class NotelistComponent implements OnInit {
   constructor(private router: Router, private service: NoteService, private dialog: MatDialog) { }
 
   ngOnInit() {
-    this.readAll()
+   this.readAll();
   }
-  discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
-  title = new FormControl('', [Validators.required, Validators.minLength(1)]);
+
+  readAll() {
+    this.service.getAll().subscribe((products: any) => {
+      console.log(products);
+      console.log(products.Archive);
+      this.products = products;
+      console.log(this.products)
+    }, (error) => console.log(error));
+  }
 
   togglePanel() {
     this.panelOpenState = !this.panelOpenState;
@@ -53,30 +60,14 @@ export class NotelistComponent implements OnInit {
   }
 
   onCloseUpdateNote(note) {
+    console.log(note)
     this.service.updateNote(note, note.id)
   }
 
-  onArchive(products) {
-    if (products.Archive)
-      console.log('already archeived')
-    else {
+  onUnArchive(products) {
+
       products.Archive = 1
       this.service.updateNote(products, products.id)
-    }
-  }
-  onTrash(products) {
-    if (products.isTrash)
-      console.log('already archeived')
-    else {
-      products.isTrash = 1
-      this.service.updateNote(products, products.id)
-    }
-  }
-  readAll() {
-    this.service.getAll().subscribe((resp: any) => {
-      this.products=resp
-    }, (error) => console.log(error));
+    
   }
 }
-
-

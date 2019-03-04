@@ -1,33 +1,32 @@
 <mat-card class="card">
-    <mat-accordion  *ngFor="let products of products" >
-        <mat-expansion-panel  *ngIf="products.archive" >
+    <mat-accordion *ngFor="let products of products">
+        <mat-expansion-panel *ngIf="!products.archive">
             <mat-expansion-panel-header (click)=openDialog(products)>
                 <mat-panel-title>
                     <div class="container">
-                        <mat-form-field >
-                            <input matInput placeholder="Title" value={{products.title}} [formControl]="title" >
+                        <mat-form-field>
+                            <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
                         </mat-form-field>
                     </div>
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-panel-description>
             </mat-panel-description>
-            <!-- </mat-expansion-panel-header> -->
             <div class="container">
                 <mat-form-field>
                     <input matInput placeholder="Discription" value="{{products.discription}}"
-                        [formControl]="discription" >
-                        <!-- <mat-error *ngIf="discription.invalid">{{getErrorMessage()}}</mat-error> -->
+                        [formControl]="discription">
                 </mat-form-field>
             </div><br>
             Icons here
             <mat-card-actions>
                 <div id="signButton">
                     <button mat-button (click)="delete(products.id)">delete</button></div>
-                    <div id="signButton">
-                        <button mat-button (click)="Archive(products)">Archive</button></div>
+                <div id="signButton">
+                    <button mat-button (click)="onUnArchive(products)">UnArchive</button></div>
             </mat-card-actions>
         </mat-expansion-panel>
         <br> <br> <br> <br> <br>
     </mat-accordion>
-</mat-card>
+</mat-card> 
+

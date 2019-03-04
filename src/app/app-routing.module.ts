@@ -7,18 +7,26 @@ import { NotelistComponent } from './component/notelist/notelist.component';
 import { ForgotPasswordComponent } from 'src/app/component/forgot-password/forgot-password.component';
 import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { AuthGuardService as AuthGuard } from './core/services/AuthServices/auth-guard.service';
-import { ArchiveComponent } from './archive/archive.component';
+import { ArchiveComponent } from 'src/app/component/archive/archive.component';
+import { ThrashComponent } from 'src/app/component/trash/thrash.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
-  {path:'reset-password/:id', component:ResetPasswordComponent},
+  { path: 'reset-password/:id', component: ResetPasswordComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent,canActivate:[AuthGuard] },
+
+  {
+    path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
+      
+      { path: '', redirectTo: 'login', pathMatch: 'full' },
+      { path: 'notelist', component: NotelistComponent },
+      { path: 'trash', component: ThrashComponent },
+      { path: 'archive', component: ArchiveComponent },
+    ]
+  },
   { path: 'register', component: RegisterComponent },
-  {path: 'notelist',component: NotelistComponent},
-  {path:'forgot-password' ,component:ForgotPasswordComponent},
-  {path:'archive' ,component:ArchiveComponent},
-  { path: '**', redirectTo:'login' }
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: '**', redirectTo: 'login' }
 ];
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],

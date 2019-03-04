@@ -1,5 +1,8 @@
-export class Note{
+export interface Note {
 
-    constructor(public discription : string, public title : string,public isArchive : boolean){}
-
+     discription: string;
+     title: string;
+     isArchive: boolean;
+     isPinned:boolean;
+     inThrash:String;
 }
