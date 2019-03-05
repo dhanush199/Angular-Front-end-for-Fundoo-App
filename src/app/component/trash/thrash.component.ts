@@ -25,7 +25,7 @@ export class ThrashComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.products)
-this.readAll()
+    this.readAll()
   }
 
   readAll() {
@@ -63,12 +63,9 @@ this.readAll()
     this.service.updateNote(note, note.id)
   }
 
-  onTrash(products) {
-    if (products.inTrash)
-      console.log('already archeived')
-    else {
-      products.inTrash = 1
+  onRestore(products) {
+      products.inTrash = false
       this.service.updateNote(products, products.id)
     }
-  }
+  
 }

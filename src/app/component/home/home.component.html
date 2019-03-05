@@ -25,25 +25,24 @@
 
                 </div>
             </div>
-            &nbsp;&nbsp;&nbsp;&nbsp;
+
             <!-- Refresh -->
-            <a mat-icon-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
-                <mat-icon>refresh</mat-icon>
-            </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
+            <div fxLayout="row">
+                <a mat-icon-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
+                    <mat-icon>refresh</mat-icon>
+                </a>
+                <!-- List -->
+                <a mat-icon-button routerLinkActive="active" matTooltip="Lists">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'view_module' : 'view_stream'}}</mat-icon>
+                </a>
+                &nbsp;&nbsp;&nbsp;&nbsp;
 
-
-            <!-- List -->
-            <a mat-icon-button routerLink="#" routerLinkActive="active" matTooltip="Lists">
-                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'view_module' : 'view_stream'}}</mat-icon>
-            </a>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-
-            <!-- Settings -->
-            <button mat-icon-button [matMenuTriggerFor]="settings" matTooltip="Settings">
-                <mat-icon>settings</mat-icon>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
+                <!-- Settings -->
+                <button mat-icon-button [matMenuTriggerFor]="settings" matTooltip="Settings">
+                    <mat-icon>settings</mat-icon>
+                </button>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+            </div>
 
             <mat-menu #settings="matMenu">
                 <button mat-menu-item>
@@ -64,16 +63,15 @@
             </mat-menu>
 
             <!-- notfications -->
-            <button mat-icon-button [matMenuTriggerFor]="notifications" matTooltip="notifications">
-                <mat-icon>notifications_on</mat-icon>
-            </button>
+            <button mat-icon-button [matMenuTriggerFor]="matMenu" matTooltip="matMenu">
+                notifications </button>
             &nbsp;&nbsp;&nbsp;&nbsp;
 
-            <mat-menu #notifications="matMenu">
+            <mat-menu #matMenu="matMenu">
             </mat-menu>
 
             <!-- User -->
-            <button mat-icon-button class="icon-button" id="more" >
+            <button mat-icon-button class="icon-button" id="more">
                 <i id="accountcircle" class="material-icons">account_circle</i></button>
             <mat-menu #menu="matMenu" class="morecard">
                 <button mat-button (click)="logout()">Sign out</button>
@@ -91,10 +89,11 @@
 
 </mat-divider>
 
+<app-side-bar [toggleSidebar]="toggleNav"></app-side-bar>
 
 
 <!-- side navigation bar -->
-<mat-sidenav-container class="example-container">
+<!-- <mat-sidenav-container class="example-container">
     <mat-sidenav #drawer mode="side" opened role="navigation" id="sidenave">
         <mat-nav-list id="insidenave">
             <button mat-stroked-button id="button" (click)="notes()"><img class="image"><i class="fa fa-sticky-note-o"
@@ -142,32 +141,12 @@
             </button><br>
         </mat-nav-list>
     </mat-sidenav>
-
     <mat-sidenav-content>
         <br>
         <br>
-        <!-- <router-outlet></router-outlet> -->
-        <!-- <mat-accordion>
-                    <mat-expansion-panel>
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
-                            <input matInput placeholder="Title">
-                        </mat-panel-title>
-                        <mat-panel-description>
-                        </mat-panel-description>
-                      </mat-expansion-panel-header>
-                  
-                      <mat-form-field>
-                        <input matInput placeholder="Take a note...">
-                      </mat-form-field>
-                    </mat-expansion-panel>
-                  </mat-accordion> -->
          <router-outlet ></router-outlet> 
-
-        <!-- <app-note-create></app-note-create> -->
-                
+         <app-note-create></app-note-create> 
         <br>
         <br>
-        <!-- <app-notelist>  </app-notelist> -->
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> -->

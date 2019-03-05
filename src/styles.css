@@ -20,15 +20,15 @@ p.dotted {border-style: dotted;}
 */
 
 .button {
-  background-color: #4CAF50;
+  background-color: whitesmoke;
   border: none;
-  color: aliceblue;
-  padding: 15px 32px;
-  text-align: center;
+  color: black;
+  padding: 1px 1px;
+  text-align: right;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 4px 2px;
+  margin: 0px 0px;
   cursor: pointer;
 } 
 

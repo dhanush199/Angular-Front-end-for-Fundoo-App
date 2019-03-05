@@ -1,8 +1,8 @@
 <h3> In trash notes are</h3>
 <mat-card class="card">
   <mat-accordion *ngFor="let products of products">
-    <mat-expansion-panel >
-        <!-- *ngIf=products.inThrash -->
+    <mat-expansion-panel *ngIf="products.inTrash">
+      <!-- *ngIf=products.inThrash -->
       <mat-expansion-panel-header (click)=openDialog(products)>
         <mat-panel-title>
           <div class="container">
@@ -19,12 +19,9 @@
           <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
         </mat-form-field>
       </div><br>
-      Icons here
       <mat-card-actions>
         <div id="signButton">
-          <button mat-button (click)="delete(products.id)">delete</button></div>
-        <div id="signButton">
-          <button mat-button (click)="Archive(products)">Archive</button></div>
+          <button mat-button (click)=onRestore(products)>restore</button></div>
       </mat-card-actions>
     </mat-expansion-panel>
     <br> <br> <br> <br> <br>

@@ -22,18 +22,39 @@
                 <mat-form-field>
                     <input matInput placeholder="Discription" value="{{products.discription}}"
                         [formControl]="discription">
-                    <!-- <mat-error *ngIf="discription.invalid">{{getErrorMessage()}}</mat-error> -->
                 </mat-form-field>
             </div><br>
-            Icons here
-            <mat-card-actions>
-                <div id="signButton">
-                    <button mat-button (click)="delete(products.id)">delete</button></div>
-                <div id="signButton">
-                    <button mat-button (click)="onArchive(products)">Archive</button></div>
-                <div id="signButton">
-                    <button mat-button (click)="onThrash(products)">Trash</button></div>
-            </mat-card-actions>
+            <!-- Icons Here -->
+
+            <!-- <md-button> 
+                    <md-icon></md-icon>
+                    <md-tooltip></md-tooltip>
+                 </md-button> -->
+
+            <div fxLayout="row">
+                <!-- <button class="button" (click)="delete(products)" mat-icon-button [matMenuTriggerFor]="delete"
+                    matTooltip="delete"> 
+                    <mat-icon>delete</mat-icon>
+                </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
+
+                <button class="button"  (click)=onTrash(products) mat-icon-button [matMenuTriggerFor]="Archive"
+                    matTooltip="archive">
+                    <mat-icon>archive</mat-icon>
+                </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button mat-icon-button [matMenuTriggerFor]="more" matTooltip="more">
+                        <mat-icon>more</mat-icon>
+                    </button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+        
+                    <mat-menu #more="matMenu">
+                        <button mat-menu-item (click)=onTrash(products)> 
+                            <span>delete</span>
+                        </button>
+                        <button mat-menu-item>
+                            <span>add label</span>
+                        </button>
+                    </mat-menu>
+            </div>
         </mat-expansion-panel>
         <br> <br> <br> <br> <br>
     </mat-accordion>

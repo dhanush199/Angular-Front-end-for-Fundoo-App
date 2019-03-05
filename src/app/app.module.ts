@@ -20,6 +20,7 @@ import { NoteCreateComponent } from 'src/app/component/note-create/note-create.c
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { ArchiveComponent } from 'src/app/component/archive/archive.component';
 import { ThrashComponent } from 'src/app/component/trash/thrash.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
 // import { HttpRequest } from 'src/app/component/forgot-password/forgot-password.component'
 
 export function tokenGetter() {
@@ -38,7 +39,8 @@ export function tokenGetter() {
     NoteCreateComponent,
     UpdateNoteComponent,
     ArchiveComponent,
-    ThrashComponent
+    ThrashComponent,
+    SideBarComponent
 
   ],
 

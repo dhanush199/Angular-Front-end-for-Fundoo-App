@@ -47,8 +47,8 @@ export class ArchiveComponent implements OnInit {
   openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
-      data:
-        { title: note.title, discription: note.discription, id: note.id }
+      data:note
+       
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -65,9 +65,7 @@ export class ArchiveComponent implements OnInit {
   }
 
   onUnArchive(products) {
-
-      products.Archive = 1
+      products.Archive = false
       this.service.updateNote(products, products.id)
-    
   }
 }

@@ -20,12 +20,13 @@ export class UpdateNoteComponent {
     console.log(note);
    this.service.updateNote(note,id)
     console.log(note);
-    
-
   }
+
   updateNote(note,id) {
     console.log(note);
     this.service.updateNote(note,id)
     console.log(note);
+    this.dialogRef.close();
+
   }
 }

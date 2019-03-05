@@ -20,6 +20,7 @@ export interface DialogData {
 export class NotelistComponent implements OnInit {
   @Input() products: Note;
   noteForm: FormGroup;
+  notes: Note
   panelOpenState: boolean = false;
   submitted = false;
   constructor(private router: Router, private service: NoteService, private dialog: MatDialog) { }
@@ -33,50 +34,43 @@ export class NotelistComponent implements OnInit {
   togglePanel() {
     this.panelOpenState = !this.panelOpenState;
   }
-
-  delete(id) {
-    this.service.delete(id)
-  }
   openDialog(note): void {
+
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
-      data:
-        { title: note.title, discription: note.discription, id: note.id }
+      data: note
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       console.log(result)
-      this.onCloseUpdateNote(note)
+      this.service.updateNote(note, note.id)
 
     });
   }
 
   onCloseUpdateNote(note) {
+    console.log(note)
     this.service.updateNote(note, note.id)
+
   }
 
   onArchive(products) {
-    if (products.Archive)
-      console.log('already archeived')
-    else {
-      products.Archive = 1
+    console.log(products)
+      products.Archive = true
       this.service.updateNote(products, products.id)
-    }
   }
+
   onTrash(products) {
-    if (products.isTrash)
-      console.log('already archeived')
-    else {
-      products.isTrash = 1
+      products.inTrash = 1
       this.service.updateNote(products, products.id)
     }
-  }
+  
   readAll() {
     this.service.getAll().subscribe((resp: any) => {
-      this.products=resp
+      this.products = resp
+      console.log(resp)
     }, (error) => console.log(error));
   }
+
 }
 
 

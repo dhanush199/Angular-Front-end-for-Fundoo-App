@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Note } from 'src/app/core/model/note';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
 import { DataService } from 'src/app/core/services/DataService/data.service';
+import { Subject, Observable, observable } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -13,33 +14,39 @@ import { DataService } from 'src/app/core/services/DataService/data.service';
 
 export class HomeComponent implements OnInit {
   panelOpenState = false;
-  note:Note;
-  dynamicdata:Note;
+  note: Note;
+  dynamicdata: Note;
   constructor(private router: Router, private noteService: NoteService) { }
 
   ngOnInit() {
-    this.readAll()
+    
   }
-  
+
+  public toggleNav: Subject<any> = new Subject();
+
+  public toggle() {
+    this.toggleNav.next();
+  }
+
   logout() {
     localStorage.removeItem('token')
     this.router.navigate(['/login']);
   }
 
   onArchive() {
-    this.router.navigate(['home/archive']) ;
+    this.router.navigate(['home/archive']);
   }
 
   onThrash() {
     this.router.navigate(['home/trash'])
   }
-  notes(){
+  notes() {
     this.router.navigate(['home/notelist'])
   }
 
   readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
-      this.dynamicdata=resp
+      this.dynamicdata = resp
     }, (error) => console.log(error));
   }
 }
