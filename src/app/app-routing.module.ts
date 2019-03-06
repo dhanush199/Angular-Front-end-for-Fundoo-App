@@ -9,6 +9,7 @@ import { ResetPasswordComponent } from './component/reset-password/reset-passwor
 import { AuthGuardService as AuthGuard } from './core/services/AuthServices/auth-guard.service';
 import { ArchiveComponent } from 'src/app/component/archive/archive.component';
 import { ThrashComponent } from 'src/app/component/trash/thrash.component';
+import { EditLabelComponent } from './edit-label/edit-label.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -22,6 +23,7 @@ export const appRoutes: Routes = [
       { path: 'notelist', component: NotelistComponent },
       { path: 'trash', component: ThrashComponent },
       { path: 'archive', component: ArchiveComponent },
+      { path: 'edit-label', component: EditLabelComponent }
     ]
   },
   { path: 'register', component: RegisterComponent },

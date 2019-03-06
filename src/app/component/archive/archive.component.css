@@ -1,0 +1,19 @@
+.bottomButtons{
+    border-bottom-color: white;
+}
+
+.outerLayout{
+    align-items: center;
+    padding-left: 30px;
+    padding-top: 15px;
+    border-top-color: black;
+}
+
+.Button{
+    border-color: transparent;
+    background-color: white;
+
+}
+.icons{
+    color:lightslategrey
+}

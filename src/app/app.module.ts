@@ -21,7 +21,12 @@ import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes
 import { ArchiveComponent } from 'src/app/component/archive/archive.component';
 import { ThrashComponent } from 'src/app/component/trash/thrash.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
-// import { HttpRequest } from 'src/app/component/forgot-password/forgot-password.component'
+import { PinnedNotesComponent } from 'src/app/component/pinned-notes/pinned-notes.component';
+import { GridViewComponent } from './grid-view/grid-view.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import { EditLabelComponent } from './edit-label/edit-label.component';
+import { MatDialogBoxComponent } from './mat-dialog-box/mat-dialog-box.component';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -40,7 +45,11 @@ export function tokenGetter() {
     UpdateNoteComponent,
     ArchiveComponent,
     ThrashComponent,
-    SideBarComponent
+    SideBarComponent,
+    PinnedNotesComponent,
+    GridViewComponent,
+    EditLabelComponent,
+    MatDialogBoxComponent
 
   ],
 
@@ -49,6 +58,7 @@ export function tokenGetter() {
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
+    MatGridListModule,
     MatFormFieldModule,
     FormsModule,
     AppMaterialModule,
@@ -66,7 +76,9 @@ export function tokenGetter() {
     AppMaterialModule
   ],
   entryComponents: [UpdateNoteComponent],
-  providers: [UserService, HomeComponent],
+  providers: [UserService, HomeComponent,
+    { provide: MatDialogRef, useValue: {} },
+    { provide: MAT_DIALOG_DATA, useValue: [] },],
   bootstrap: [AppComponent]
 })
 export class AppModule {

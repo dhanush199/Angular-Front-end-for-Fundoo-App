@@ -14,19 +14,19 @@
         </span> <button mat-stroked-button id="editbutton" type="button"><i class="fa fa-edit"
             style="font-size:20px"></i>Edit</button>
       </div>
-      <div (updateClick)="refresh($event)">
-        <button mat-stroked-button id="button" (click)="createLabel()"><i class="fa fa-pencil"
-            style="font-size:20px"></i>
-          Create label</button><br>
-        <div *ngFor="let data of labelNameList">
-          <div fxLayout=row fxLayoutGap="10%">
-            <button mat-stroked-button class=labelbutton (click)="notesWithList(data)">
-              <div fxFlex="5%"><i class="material-icons">label</i></div>
-              <div fxFlex="90%" class="txtt"></div>
-            </button>
-          </div>
-        </div>
+      <div *ngFor="let labels of labels">
+        <button mat-stroked-button id="button"><i class="fa fa-pencil" style="font-size:20px"></i>
+          {{labels.labelName}}</button><br>
+        <mat-divider></mat-divider>
       </div>
+
+      <div fxLayout=row fxLayoutGap="10%">
+        <button id="button" (click)=openDialog(labels) mat-stroked-button class=labelbutton>
+         Edit Label
+         <!-- <i class="material-icons"></i> -->
+        </button>
+      </div>
+
       <hr id="line">
       <button mat-stroked-button id="button" [routerLink]="['/home/archive']">
         <i class="fa fa-archive" style="font-size:20px"></i> Archive</button><br>
@@ -36,8 +36,8 @@
 
       <br>
 
-      Privacy · Terms <br>
-      Open-source licenses
+      &nbsp; &nbsp;&nbsp; Privacy · Terms <br>
+      &nbsp;&nbsp;&nbsp; Open-source licenses
 
     </mat-nav-list>
   </mat-sidenav>

@@ -1,13 +1,13 @@
-<h3>Archeived Notes are</h3>
+<!-- <h3>Archeived Notes are</h3>
 
 <mat-card class="card">
     <mat-accordion *ngFor="let products of products">
-        <mat-expansion-panel *ngIf="products.archive">
+        <mat-expansion-panel *ngIf="products.archive && !products.inThrash">
             <mat-expansion-panel-header (click)=openDialog(products)>
                 <mat-panel-title>
                     <div class="container">
                         <mat-form-field>
-                            <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
+                            <input matInput placeholder="Title" value={{products.title}} [formControl]="title" >
                         </mat-form-field>
                     </div>
                 </mat-panel-title>
@@ -33,4 +33,60 @@
         </mat-expansion-panel>
         <br> <br> <br> <br> <br>
     </mat-accordion>
-</mat-card>
+</mat-card> -->
+
+
+<div>
+        <div class="outerLayout" *ngFor="let products of products">
+          <mat-card class="outerLayout" style="background-color: wheat" style="width: 570px;" *ngIf="products.archive && !products.inThrash">
+                <i class="far fa-heart" (click)="changeColor(products)" id="{{products.title}}" 
+                style="color: black; background-color: white ; float:right" ></i> 
+            <mat-card-header >
+              <mat-card-title></mat-card-title>
+            </mat-card-header>
+            <mat-card-content (click)=openDialog(products)>
+              <div class="container">
+                <mat-form-field>
+                  <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
+                </mat-form-field>
+              </div>
+              <div class="container">
+                <mat-form-field>
+                  <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
+                </mat-form-field>
+              </div>
+            </mat-card-content>
+
+            <div class="bottomButtons">
+                    <button mat-icon-button matTooltip="Remind me" class="Button">
+                      <mat-icon class="icons">add_alert</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Collaborator" class="Button">
+                      <mat-icon class="icons">person_add</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Change color" class="Button">
+                      <mat-icon class="icons">palette</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="Add image" class="Button">
+                      <mat-icon class="icons">image</mat-icon>
+                    </button>
+                    <button mat-icon-button (click)=sendToArchive(note) matTooltip="Archive" class="Button">
+                      <mat-icon class="icons" (click)=onUnArchive(products)>archive</mat-icon>
+                    </button>
+            
+                    <button mat-icon-button [matMenuTriggerFor]="more" matTooltip="more" class="Button">
+                      <mat-icon class="icons">more_vert</mat-icon>
+                    </button>
+                    <mat-menu #more="matMenu" class="morecard">
+                      <button mat-button (click)= onTrash(products)>Delete Note</button>
+                    </mat-menu>
+                    <button mat-icon-button matTooltip="undo" class="Button" >
+                      <mat-icon class="icons">undo</mat-icon>
+                    </button>
+                    <button mat-icon-button matTooltip="redo" class="Button">
+                      <mat-icon class="icons">redo</mat-icon>
+                    </button>
+                  </div>
+          </mat-card>
+        </div>
+      </div>

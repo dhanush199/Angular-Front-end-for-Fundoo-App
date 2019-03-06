@@ -1,36 +1,32 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
+import { UpdateNoteComponent } from '../update-notes/update-notes.component';
 import { Router } from '@angular/router';
-import { NoteService } from 'src/app/core/services/note/note.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
 import { Note } from 'src/app/core/model/note';
-
-export interface DialogData {
-  noteName: string;
-  noteDis: string;
-}
+import { NoteService } from 'src/app/core/services/note/note.service';
+import { MatDialog } from '@angular/material';
 
 @Component({
-  selector: 'app-thrash',
-  templateUrl: './thrash.component.html',
-  styleUrls: ['./thrash.component.css']
+  selector: 'app-pinned-notes',
+  templateUrl: './pinned-notes.component.html',
+  styleUrls: ['./pinned-notes.component.css']
 })
-export class ThrashComponent implements OnInit {
+export class PinnedNotesComponent implements OnInit {
   @Input() products: Note;
-  i = false
-  trashForm: FormGroup;
+  i = true
+  pinnedForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
   constructor(private router: Router, private service: NoteService, private dialog: MatDialog) { }
 
   ngOnInit() {
     console.log(this.products)
-    this.readAll()
+    //this.readAll()
   }
+
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
-  
+
   readAll() {
     this.service.getAll().subscribe((products: any) => {
       console.log(products);
@@ -71,14 +67,18 @@ export class ThrashComponent implements OnInit {
     this.service.updateNote(products, products.id)
   }
 
-  // changeColor(products) {
-  //   var icon = document.getElementById(products.title);
-  //   console.log(products)
-  //   this.i = !this.i
-  //   if (this.i)
-  //     icon.style.background = "black"
-  //   else
-  //     icon.style.background = "white"
-  // }
-
+  changeColor(products) {
+    var icon = document.getElementById(products.title);
+    console.log(products)
+    if (this.i){
+      icon.style.background = "black"
+      products.pinned=true
+    }
+    else{
+      products.pinned=false
+      icon.style.background = "white"
+    }
+    this.i = !this.i
+      this.service.updateNote(products, products.id)
+  }
 }

@@ -15,11 +15,14 @@ export interface DialogData {
 
 @Component({
   selector: 'app-note-list',
-  templateUrl: 'notelist.component.html'
+  templateUrl: 'notelist.component.html',
+  styleUrls: ['./notelist.component.css']
+
 })
 export class NotelistComponent implements OnInit {
   @Input() products: Note;
   noteForm: FormGroup;
+  i=true
   notes: Note
   panelOpenState: boolean = false;
   submitted = false;
@@ -34,8 +37,8 @@ export class NotelistComponent implements OnInit {
   togglePanel() {
     this.panelOpenState = !this.panelOpenState;
   }
+  
   openDialog(note): void {
-
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
       data: note
@@ -55,7 +58,7 @@ export class NotelistComponent implements OnInit {
 
   onArchive(products) {
     console.log(products)
-      products.Archive = true
+      products.archive = true
       this.service.updateNote(products, products.id)
   }
 
@@ -69,6 +72,21 @@ export class NotelistComponent implements OnInit {
       this.products = resp
       console.log(resp)
     }, (error) => console.log(error));
+  }
+
+  changeColor(products) {
+    var icon = document.getElementById(products.title);
+    console.log(products)
+    this.i = !this.i
+    if (this.i){
+      icon.style.background = "black"
+      products.pinned=true
+    }
+    else{
+      products.pinned=false
+      icon.style.background = "white"
+    }
+      this.service.updateNote(products, products.id)
   }
 
 }

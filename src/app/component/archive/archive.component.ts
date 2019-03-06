@@ -3,8 +3,9 @@ import { NoteService } from 'src/app/core/services/note/note.service';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { MatDialog } from '@angular/material';
 import { Router } from '@angular/router';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Note } from 'src/app/core/model/note';
+
 
 export interface DialogData {
   noteName: string;
@@ -19,6 +20,7 @@ export interface DialogData {
 
 export class ArchiveComponent implements OnInit {
   @Input() products: Note;
+  i=true
   noteForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
@@ -27,6 +29,10 @@ export class ArchiveComponent implements OnInit {
   ngOnInit() {
    this.readAll();
   }
+
+  discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
+  title = new FormControl('', [Validators.required, Validators.minLength(1)]);
+
 
   readAll() {
     this.service.getAll().subscribe((products: any) => {
@@ -65,7 +71,21 @@ export class ArchiveComponent implements OnInit {
   }
 
   onUnArchive(products) {
-      products.Archive = false
+      products.archive = false
+      this.service.updateNote(products, products.id)
+  }
+  changeColor(products) {
+    var icon = document.getElementById(products.title);
+    console.log(products)
+    this.i = !this.i
+    if (this.i){
+      icon.style.background = "black"
+      products.pinned=true
+    }
+    else{
+      products.pinned=false
+      icon.style.background = "white"
+    }
       this.service.updateNote(products, products.id)
   }
 }

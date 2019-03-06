@@ -1,6 +1,14 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { LabelService } from '../label.service';
+import { MatDialog } from '@angular/material';
+import { Label } from '../label';
+import { EditLabelComponent } from '../edit-label/edit-label.component';
+
+export interface DialogData {
+  labelName: string;
+}
 
 @Component({
   selector: 'app-side-bar',
@@ -9,8 +17,11 @@ import {  Router } from '@angular/router';
 })
 export class SideBarComponent implements OnInit {
   @ViewChild('drawer') public drawer;
-  @Input() public toggleSidebar:Subject<any>;;
-  constructor(private router:Router) { }
+  labels:[]
+  label:Label
+  @Input() products: Label;
+  @Input() public toggleSidebar: Subject<any>;;
+  constructor(public dialog: MatDialog,private router: Router, private labelservice: LabelService) { }
 
   ngOnInit() {
     this.toggleSidebar.subscribe(event => {
@@ -18,13 +29,27 @@ export class SideBarComponent implements OnInit {
         this.drawer.toggle();
       }
     });
+    this.labelservice.getLabels().subscribe((resp: any) => {
+      this.labels = resp
+      console.log(resp)
+    }, (error) => console.log(error));
   }
-  notes(){
-    this.router.navigate(['home'])
+  notes() {
+    this.router.navigate(['home/notelist'])
   }
+  openDialog(label): void {
+    const dialogRef = this.dialog.open(EditLabelComponent, {
+      width: '550px',
+      data: label
+    });
+    console.log(dialogRef)
 
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(label)
+    });
+  }
 }
 
 
 
- 
+
