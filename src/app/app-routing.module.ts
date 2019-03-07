@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './component/login/login.component';
 import { HomeComponent } from './component/home/home.component';
-import { RegisterComponent } from './component/register/register.component';
 import { NotelistComponent } from './component/notelist/notelist.component';
-import { ForgotPasswordComponent } from 'src/app/component/forgot-password/forgot-password.component';
-import { ResetPasswordComponent } from './component/reset-password/reset-password.component';
 import { AuthGuardService as AuthGuard } from './core/services/AuthServices/auth-guard.service';
 import { ArchiveComponent } from 'src/app/component/archive/archive.component';
 import { ThrashComponent } from 'src/app/component/trash/thrash.component';
-import { EditLabelComponent } from './edit-label/edit-label.component';
+import { RegisterComponent } from './component/user-components/register/register.component';
+import { ResetPasswordComponent } from './component/user-components/reset-password/reset-password.component';
+import { ForgotPasswordComponent } from './component/user-components/forgot-password/forgot-password.component';
+import { LoginComponent } from './component/user-components/login/login.component';
+import { EditLabelComponent } from './component/edit-label/edit-label.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },

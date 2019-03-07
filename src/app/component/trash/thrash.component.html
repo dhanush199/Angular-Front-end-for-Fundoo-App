@@ -1,12 +1,12 @@
-
-  <div class="outerLayout" *ngFor="let products of products">
-    <mat-card class="outerLayout" style="background-color: wheat" style="width: 570px;" *ngIf=products.inTrash>
-        <!-- <i class="far fa-heart" (click)="changeColor(products)" id="{{products.title}}" 
-        style="color: black; background-color: white" ></i>  -->
+<i>Trash notes are</i>
+  <div class="outerLayout" *ngFor="let products of products| noteFilter :'trash'">
+    <mat-card class="outerLayout">
       <mat-card-header >
         <mat-card-title></mat-card-title>
       </mat-card-header>
       <mat-card-content (click)=openDialog(products)>
+        
+
         <div class="container">
           <mat-form-field>
             <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
@@ -20,6 +20,7 @@
       </mat-card-content>
       <mat-card-actions>
         <div id="signButton">
+            
           <button mat-button (click)=onRestore(products)><mat-icon class="icons">undo</mat-icon>
             restore</button></div>
       </mat-card-actions>

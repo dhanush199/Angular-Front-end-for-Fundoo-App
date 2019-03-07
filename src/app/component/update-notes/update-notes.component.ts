@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { DialogData } from 'src/app/component/notelist/notelist.component';
-import { NoteService } from 'src/app/core/services/note/note.service';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 
 @Component({

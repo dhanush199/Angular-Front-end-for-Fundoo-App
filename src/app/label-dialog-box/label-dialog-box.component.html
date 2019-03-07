@@ -1,0 +1,14 @@
+
+<div fxLayout="row" class="division" *ngFor="let label of labels">
+
+    <button (click)=deletLabel(data) class="labelButtons" mat-button style="float:right">
+      <img class="labelButtons" src="./assets/images/crossMark.svg" />
+    </button>
+  
+    <input matInput [(ngModel)]="label.labelName" [value]=label.labelName placeholder="labelName">
+  
+    <button (click)=onAddLabel(label) class="labelButtons" mat-button style="float:right">
+     add 
+    </button>
+    <br>
+  </div>

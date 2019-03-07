@@ -4,9 +4,11 @@
 
 .outerLayout{
     align-items: center;
-    padding-left: 30px;
-    padding-top: 15px;
-    border-top-color: black;
+    padding-left: 120px;
+    padding-top: 0px;
+    padding-bottom: 30px;
+    width: 570px; 
+    background-color: white;
 }
 
 .Button{

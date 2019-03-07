@@ -1,8 +1,9 @@
 .outerLayout{
     align-items: center;
-    padding-left: 30px;
+    padding-left: 120px;
     padding-top: 15px;
-   
+    padding-bottom: 80px;
+    width: 570px; 
 }
 
 .Button{

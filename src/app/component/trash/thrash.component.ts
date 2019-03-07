@@ -1,10 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { Router } from '@angular/router';
-import { NoteService } from 'src/app/core/services/note/note.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import { Note } from 'src/app/core/model/note';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 export interface DialogData {
   noteName: string;
@@ -18,7 +18,7 @@ export interface DialogData {
 })
 export class ThrashComponent implements OnInit {
   @Input() products: Note;
-  i = false
+  pinnedColor = false
   trashForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
@@ -30,7 +30,7 @@ export class ThrashComponent implements OnInit {
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
-  
+
   readAll() {
     this.service.getAll().subscribe((products: any) => {
       console.log(products);
@@ -47,6 +47,7 @@ export class ThrashComponent implements OnInit {
   delete(id) {
     this.service.delete(id)
   }
+
   openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
@@ -58,7 +59,6 @@ export class ThrashComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result)
       this.onCloseUpdateNote(note)
-
     });
   }
 
@@ -70,15 +70,5 @@ export class ThrashComponent implements OnInit {
     products.inTrash = false
     this.service.updateNote(products, products.id)
   }
-
-  // changeColor(products) {
-  //   var icon = document.getElementById(products.title);
-  //   console.log(products)
-  //   this.i = !this.i
-  //   if (this.i)
-  //     icon.style.background = "black"
-  //   else
-  //     icon.style.background = "white"
-  // }
 
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest } from '@angular/common/http';
 
-
 @Injectable({
   providedIn: 'root'
 })
+
 export class HttputilService {
 
   constructor(private http : HttpClient) {}
@@ -12,6 +12,7 @@ export class HttputilService {
   post(url,object){
     return this.http.post<any>(url,object,{observe : 'response'});
   }
+  
   postWithBody(url,object,header){
     return this.http.post<any>(url,object,header);
   }

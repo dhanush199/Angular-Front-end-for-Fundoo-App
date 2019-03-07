@@ -1,12 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { MatSidenav, MatDialog } from '@angular/material';
-import { Router } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { DataService } from './core/services/DataService/data.service';
-import { NoteService } from './core/services/note/note.service';
-
 
 @Component({
   selector: 'app-root',

@@ -1,16 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { NoteService } from 'src/app/core/services/note/note.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Inject } from '@angular/core';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { Router } from '@angular/router';
 import { Note } from 'src/app/core/model/note';
-import { DataService } from 'src/app/core/services/DataService/data.service';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
+
+// export interface DialogData {
+//   title: string;
+//   discription: string;
+// }
 
 export interface DialogData {
-  title: string;
-  discription: string;
+  labelName: string;
 }
 
 @Component({
@@ -22,11 +25,13 @@ export interface DialogData {
 export class NotelistComponent implements OnInit {
   @Input() products: Note;
   noteForm: FormGroup;
-  i=true
+  togle = true
   notes: Note
   panelOpenState: boolean = false;
   submitted = false;
-  constructor(private router: Router, private service: NoteService, private dialog: MatDialog) { }
+  constructor(private router: Router, private service: NoteService, public dialog: MatDialog,
+    public dialogRef: MatDialogRef<NotelistComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   ngOnInit() {
     this.readAll()
@@ -37,7 +42,7 @@ export class NotelistComponent implements OnInit {
   togglePanel() {
     this.panelOpenState = !this.panelOpenState;
   }
-  
+
   openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
@@ -46,27 +51,25 @@ export class NotelistComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result)
       this.service.updateNote(note, note.id)
-
     });
   }
 
   onCloseUpdateNote(note) {
     console.log(note)
     this.service.updateNote(note, note.id)
-
   }
 
   onArchive(products) {
     console.log(products)
-      products.archive = true
-      this.service.updateNote(products, products.id)
+    products.archive = true
+    this.service.updateNote(products, products.id)
   }
 
   onTrash(products) {
-      products.inTrash = 1
-      this.service.updateNote(products, products.id)
-    }
-  
+    products.inTrash = 1
+    this.service.updateNote(products, products.id)
+  }
+
   readAll() {
     this.service.getAll().subscribe((resp: any) => {
       this.products = resp
@@ -77,18 +80,18 @@ export class NotelistComponent implements OnInit {
   changeColor(products) {
     var icon = document.getElementById(products.title);
     console.log(products)
-    this.i = !this.i
-    if (this.i){
+    this.togle = !this.togle
+    if (this.togle) {
       icon.style.background = "black"
-      products.pinned=true
+      products.pinned = true
     }
-    else{
-      products.pinned=false
+    else {
+      products.pinned = false
       icon.style.background = "white"
     }
-      this.service.updateNote(products, products.id)
+    this.service.updateNote(products, products.id)
   }
-
+ 
 }
 
 

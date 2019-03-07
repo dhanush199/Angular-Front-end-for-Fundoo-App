@@ -3,8 +3,8 @@ import { UpdateNoteComponent } from '../update-notes/update-notes.component';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Note } from 'src/app/core/model/note';
-import { NoteService } from 'src/app/core/services/note/note.service';
 import { MatDialog } from '@angular/material';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 @Component({
   selector: 'app-pinned-notes',
@@ -13,7 +13,7 @@ import { MatDialog } from '@angular/material';
 })
 export class PinnedNotesComponent implements OnInit {
   @Input() products: Note;
-  i = true
+  togle = true
   pinnedForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
@@ -21,20 +21,10 @@ export class PinnedNotesComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.products)
-    //this.readAll()
   }
 
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
-
-  readAll() {
-    this.service.getAll().subscribe((products: any) => {
-      console.log(products);
-      console.log(products.Archive);
-      this.products = products;
-      console.log(this.products)
-    }, (error) => console.log(error));
-  }
 
   togglePanel() {
     this.panelOpenState = !this.panelOpenState;
@@ -70,7 +60,7 @@ export class PinnedNotesComponent implements OnInit {
   changeColor(products) {
     var icon = document.getElementById(products.title);
     console.log(products)
-    if (this.i){
+    if (this.togle){
       icon.style.background = "black"
       products.pinned=true
     }
@@ -78,7 +68,17 @@ export class PinnedNotesComponent implements OnInit {
       products.pinned=false
       icon.style.background = "white"
     }
-    this.i = !this.i
+    this.togle = !this.togle
       this.service.updateNote(products, products.id)
+  }
+
+  onTrash(note){
+    note.inTrash=true
+    this.service.updateNote(note, note.id)
+
+  }
+  onArchive(products){
+    products.archive=true
+    this.service.updateNote(products, products.id);
   }
 }

@@ -1,92 +1,68 @@
-<!-- <h3>Archeived Notes are</h3>
-
-<mat-card class="card">
-    <mat-accordion *ngFor="let products of products">
-        <mat-expansion-panel *ngIf="products.archive && !products.inThrash">
-            <mat-expansion-panel-header (click)=openDialog(products)>
-                <mat-panel-title>
-                    <div class="container">
-                        <mat-form-field>
-                            <input matInput placeholder="Title" value={{products.title}} [formControl]="title" >
-                        </mat-form-field>
-                    </div>
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <mat-panel-description>
-            </mat-panel-description>
-            <div class="container">
-                <mat-form-field>
-                    <input matInput placeholder="Discription" value="{{products.discription}}"
-                        [formControl]="discription">
-                </mat-form-field>
-            </div><br>
-            Icons here
-            <div fxLayout="row">
-                <button class="button" (click)=onUnArchive(products) mat-icon-button 
-                    matTooltip="archive">
-                    <mat-icon>archive</mat-icon>
-                </button> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                <button mat-icon-button  matTooltip="more">
-                    <mat-icon>more</mat-icon>
-                </button>
-            </div>
-        </mat-expansion-panel>
-        <br> <br> <br> <br> <br>
-    </mat-accordion>
-</mat-card> -->
+ <i>Archeived Notes are</i>
 
 
 <div>
-        <div class="outerLayout" *ngFor="let products of products">
-          <mat-card class="outerLayout" style="background-color: wheat" style="width: 570px;" *ngIf="products.archive && !products.inThrash">
-                <i class="far fa-heart" (click)="changeColor(products)" id="{{products.title}}" 
-                style="color: black; background-color: white ; float:right" ></i> 
-            <mat-card-header >
-              <mat-card-title></mat-card-title>
-            </mat-card-header>
-            <mat-card-content (click)=openDialog(products)>
-              <div class="container">
-                <mat-form-field>
-                  <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
-                </mat-form-field>
-              </div>
-              <div class="container">
-                <mat-form-field>
-                  <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
-                </mat-form-field>
-              </div>
-            </mat-card-content>
+  <div class="outerLayout" *ngFor="let products of products | noteFilter : 'archive'">
+    <mat-card class="outerLayout" style="background-color: wheat" style="width: 570px;"
+      *ngIf="products.archive && !products.inThrash">
+      <i class="far fa-heart" (click)="changeColor(products)" id="{{products.title}}"
+        style="color: black; background-color: white ; float:right"></i>
 
-            <div class="bottomButtons">
-                    <button mat-icon-button matTooltip="Remind me" class="Button">
-                      <mat-icon class="icons">add_alert</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Collaborator" class="Button">
-                      <mat-icon class="icons">person_add</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Change color" class="Button">
-                      <mat-icon class="icons">palette</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="Add image" class="Button">
-                      <mat-icon class="icons">image</mat-icon>
-                    </button>
-                    <button mat-icon-button (click)=sendToArchive(note) matTooltip="Archive" class="Button">
-                      <mat-icon class="icons" (click)=onUnArchive(products)>archive</mat-icon>
-                    </button>
-            
-                    <button mat-icon-button [matMenuTriggerFor]="more" matTooltip="more" class="Button">
-                      <mat-icon class="icons">more_vert</mat-icon>
-                    </button>
-                    <mat-menu #more="matMenu" class="morecard">
-                      <button mat-button (click)= onTrash(products)>Delete Note</button>
-                    </mat-menu>
-                    <button mat-icon-button matTooltip="undo" class="Button" >
-                      <mat-icon class="icons">undo</mat-icon>
-                    </button>
-                    <button mat-icon-button matTooltip="redo" class="Button">
-                      <mat-icon class="icons">redo</mat-icon>
-                    </button>
-                  </div>
-          </mat-card>
+        <!-- <mat-icon class="icons" (click)=onchangeColor(products) 
+        [ngStyle]="{'background-color':pinnedColor === false ? 'white' : 'black' }"> 
+          add_alert</mat-icon> -->
+
+
+      <mat-card-header>
+        <mat-card-title></mat-card-title>
+      </mat-card-header>
+      <mat-card-content (click)=openDialog(products)>
+        <div class="container">
+          <mat-form-field>
+            <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
+          </mat-form-field>
         </div>
+        <div class="container">
+          <mat-form-field>
+            <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <div class="bottomButtons">
+        <button mat-icon-button matTooltip="Remind me" class="Button">
+          <mat-icon class="icons">add_alert</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Collaborator" class="Button">
+          <mat-icon class="icons">person_add</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Change color" class="Button">
+          <mat-icon class="icons">palette</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="Add image" class="Button">
+          <mat-icon class="icons">image</mat-icon>
+        </button>
+        <button mat-icon-button (click)=sendToArchive(note) matTooltip="Archive" class="Button">
+          <mat-icon class="icons" (click)=onUnArchive(products)>archive</mat-icon>
+        </button>
+
+        <button mat-icon-button [matMenuTriggerFor]="more" matTooltip="more" class="Button">
+          <mat-icon class="icons">more_vert</mat-icon>
+        </button>
+        <mat-menu #more="matMenu" class="morecard">
+          <div fxLayout="columns">
+            <button mat-button class="morecard" (click)=onTrash(products)>Delete Note</button>
+            <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
+          </div>
+        </mat-menu>
+
+        <button mat-icon-button matTooltip="undo" class="Button">
+          <mat-icon class="icons">undo</mat-icon>
+        </button>
+        <button mat-icon-button matTooltip="redo" class="Button">
+          <mat-icon class="icons">redo</mat-icon>
+        </button>
       </div>
+    </mat-card>
+  </div>
+</div>

@@ -1,8 +1,9 @@
 .outerLayout{
     align-items: center;
-    padding-left: 30px;
+    padding-left: 120px;
     padding-top: 15px;
-   
+    background-color: "wheat" ; 
+    width: 570px;
 }
 
 .Button{
@@ -17,4 +18,10 @@
 
 .icons{
     color:lightslategrey
+}
+
+.far-fa-heart{
+    color: black; 
+    background-color: black ;
+     float:right;
 }

@@ -1,10 +1,9 @@
 import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { NoteService } from 'src/app/core/services/note/note.service';
 import { Router } from '@angular/router';
 import { Note } from 'src/app/core/model/note';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { DataService } from 'src/app/core/services/DataService/data.service';
 import { Subject, Observable, observable } from 'rxjs';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 @Component({
   selector: 'app-home',
