@@ -5,7 +5,7 @@
   <div class="outerLayout" *ngFor="let products of products | noteFilter : 'archive'">
     <mat-card class="matCard" style="background-color: wheat" style="width: 570px;"
       *ngIf="products.archive && !products.inThrash">
-      <i class="far fa-heart" (click)="changeColor(products)" id="{{products.title}}"
+      <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
         style="color: black; background-color: white ; float:right"></i>
 
         <!-- <mat-icon class="icons" (click)=onchangeColor(products) 
@@ -27,6 +27,15 @@
             <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
           </mat-form-field>
         </div>
+
+        <mat-chip-list #chipList class="chipList">
+            <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
+              (removed)="removeLabel(label,products)">
+              {{label.labelName}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+          
       </mat-card-content>
 
       <div class="bottomButtons">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -1,18 +1,22 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav #drawer mode="side" opened role="navigation" id="sidenave">
-    <mat-nav-list id="insidenave">
-      <button mat-stroked-button id="button" (click)="notes()"><img class="image"><i class="fa fa-sticky-note-o"
-          style="font-size:24px"></i>
-        Notes</button><br>
-      <button mat-stroked-button id="button"><i class="fa fa-bell" style="font-size:20px"></i>
-        Reminders</button><br>
-      <hr id="line">
-      <mat-divider></mat-divider>
-      <div>
+<mat-sidenav-container  class="example-container">
+    <mat-sidenav  #drawer mode="side" opened role="navigation">
+      <mat-nav-list *ngIf=!def>
+        
+        <button mat-menu-item  (click)="notes()" >
+          <mat-icon>notes</mat-icon>
+          <span>Notes</span>
+        </button>
+       
+        <button mat-menu-item>
+          <mat-icon>notifications</mat-icon>
+          <span>Remainder</span>
+        </button>
+        <mat-divider></mat-divider><br>
+     <div>
         <span style="margin-left: 10px">
           <font face="arial">Label</font>
-        </span> <button mat-stroked-button id="editbutton" type="button"><i class="fa fa-edit"
-            style="font-size:20px"></i>Edit</button>
+        </span> <button mat-stroked-button id="editbutton" type="button">
+          <i class="fa fa-edit" style="font-size:20px"></i>Edit</button>
       </div>
       <div *ngFor="let labels of labels">
         <button mat-stroked-button id="button"><i class="fa fa-pencil" style="font-size:20px"></i>
@@ -22,8 +26,9 @@
 
       <div fxLayout=row fxLayoutGap="10%">
         <button id="button" (click)=openDialog(labels) mat-stroked-button class=labelbutton>
-         Edit Label
-         <!-- <i class="material-icons"></i> -->
+           
+                <i class="fa fa-edit" style="font-size:20px"></i>
+                Edit Label
         </button>
       </div>
 
@@ -38,14 +43,14 @@
 
       &nbsp; &nbsp;&nbsp; Privacy · Terms <br>
       &nbsp;&nbsp;&nbsp; Open-source licenses
-
-    </mat-nav-list>
-  </mat-sidenav>
-  <mat-sidenav-content>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
     <br>
     <br>
     <router-outlet></router-outlet>
     <br>
     <br>
-  </mat-sidenav-content>
-</mat-sidenav-container>
+    </mat-sidenav-content>
+    
+  </mat-sidenav-container>

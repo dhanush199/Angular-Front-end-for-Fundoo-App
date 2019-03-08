@@ -29,7 +29,6 @@
     color:lightslategrey
 }
 
-
 .matCard{
     padding-top: 50px;
     align-items: center;
@@ -37,7 +36,7 @@
     background-color:white;
     width: 400px; 
     border-color: white;
-    height: 170px;
+    height: 200px;
 }
 
 .inputs{

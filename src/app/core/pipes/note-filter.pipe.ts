@@ -16,7 +16,7 @@ export class NoteFilterPipe implements PipeTransform {
     }
     if (valid === 'archive') {
       return notes.filter((item) => {
-        if (!item.inTrash && !item.pinned && item.archive) {
+        if (!item.inTrash && item.archive) {
           return item;
         }
       });

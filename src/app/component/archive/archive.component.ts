@@ -60,6 +60,7 @@ export class ArchiveComponent implements OnInit {
   delete(id) {
     this.service.delete(id)
   }
+  
   openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
@@ -87,7 +88,6 @@ export class ArchiveComponent implements OnInit {
 
   changeColor(products) {
     var icon = document.getElementById(products.title);
-    console.log(products)
     this.i = !this.i
     if (this.i){
       icon.style.background = "black"
@@ -125,9 +125,11 @@ export class ArchiveComponent implements OnInit {
       width: '550px',
       data: products
     });
-    console.log(dialogRef)
     dialogRef.afterClosed().subscribe(result => {
-      console.log(this.label)
     });
+  }
+  removeLabel(label,note){
+    this.labelService.removeLabelNote(label,note).subscribe(resp => {
+    }, (error) => console.log(error));
   }
 }

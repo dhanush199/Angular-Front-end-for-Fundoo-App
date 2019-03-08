@@ -17,15 +17,20 @@ export class UpdateNoteComponent {
 
   onNoClick(note,id): void {
     this.dialogRef.close();
-    console.log(note);
+    // console.log(note);
    this.service.updateNote(note,id)
-    console.log(note);
+    // console.log(note);
   }
 
-  updateNote(note,id) {
-    console.log(note);
+  updateNote(note,id,title,disc) {
+    console.log(title);
+    console.log(disc);
+    note={
+      "title":title,
+      "discription":disc,
+      "noteId":note.id
+    }
     this.service.updateNote(note,id)
-    console.log(note);
     this.dialogRef.close();
 
   }

@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NotelistComponent } from 'src/app/component/notelist/notelist.component';
 import { CommonModule } from '@angular/common';
 import { JwtModule } from '@auth0/angular-jwt';
-import { NoteCreateComponent } from 'src/app/component/note-create/note-create.component';
+import { NoteCreateComponent } from 'src/app/component/create-note/note-create.component';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { ArchiveComponent } from 'src/app/component/archive/archive.component';
 import { ThrashComponent } from 'src/app/component/trash/thrash.component';

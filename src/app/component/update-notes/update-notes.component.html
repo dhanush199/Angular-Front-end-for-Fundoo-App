@@ -1,20 +1,20 @@
 <div>
   <div>
-    <input matInput [(ngModel)]="data.title" [value]=data.title placeholder="Title">
+    <input matInput [(ngModel)]="data.title" [value]=title placeholder="Title">
   </div>
 
   <br>
   <br>
   <div>
 
-    <textarea matInput [(ngModel)]="data.discription" [value]=data.discription placeholder="Discription"></textarea>
+    <textarea matInput [(ngModel)]="data.discription" [value]=disc placeholder="Discription"></textarea>
 
     </div>
 
    
     <br>
     <br>
-    <button mat-button (click)="updateNote(data,data.id)" style="float:right">Close</button>
+    <button mat-button (click)="updateNote(data.id,title,disc)" style="float:right">Close</button>
   </div>
 
 

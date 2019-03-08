@@ -1,94 +1,233 @@
-<div>
-    <mat-toolbar class="navbar">
+<div fxLayout="row" fxLayoutAlign=" stretch">
+
+    <mat-toolbar class="fixed-header" fxFlex="100%;" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
+
         <mat-toolbar-row>
-            <!-- menu -->
-            <button id="menubuttn" type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
-                matTooltip="Menu">
+            <button aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" matTooltip="Menu">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            <!-- Image -->
-            <p fxHide.xs="true"> <span><img src="./assets/images/keep-512.png" style="width:30px;"></span></p>
 
-            <!-- keep -->
-            <p id="text" fxHide.xs="true" fxHide.xs="true">Keep</p>
-
-            <!-- Search -->
-            <div id="searchbox" fxLayout="row" fxLayoutGap="2%">
-                <div fxFlex="0%">
-                    <button mat-icon-button id="buttn"><i id="search" class="material-icons">search</i></button>
-                </div>
-                <div fxFlex="100">
-                    <!-- <input id="input" type="search" placeholder="Search" name="string" (click)="searchtest()"
-                            [(ngModel)]="string"> -->
-                    <input type="search" style="width:400px;" href="#" placeholder="Search..." ng-model="search" />
-
-                </div>
-            </div>
-
-            <!-- Refresh -->
-            <div fxLayout="row">
-                <a mat-icon-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
-                    <mat-icon>refresh</mat-icon>
-                </a>
-                <!-- List -->
-                <a mat-icon-button routerLinkActive="active" matTooltip="Lists">
-                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'view_module' : 'view_stream'}}</mat-icon>
-                </a>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-
-                <!-- Settings -->
-                <button mat-icon-button [matMenuTriggerFor]="settings" matTooltip="Settings">
-                    <mat-icon>settings</mat-icon>
+            <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon>arrow_drop_down</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="navigateNotes()">
+                    <mat-icon>note_add</mat-icon>
+                    <span>Notes</span>
                 </button>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-            </div>
 
-            <mat-menu #settings="matMenu">
                 <button mat-menu-item>
+                    <mat-icon>notifications</mat-icon>
+                    <span>Remainder</span>
+                </button>
+
+                <button mat-menu-item>
+                    <mat-icon>edit</mat-icon>
+                    <span>Edit Labels</span>
+                </button>
+                <button mat-menu-item (click)="navigateArchive()">
+                    <mat-icon>archive</mat-icon>
+                    <span>Archive</span>
+                </button>
+
+                <button mat-menu-item (click)="navigateTrash()">
+                    <mat-icon>Trash</mat-icon>
+                    <span>Trash</span>
+                </button>
+            </mat-menu> -->
+
+            <ng-template #tempTtext>
+
+            </ng-template>
+            <span><img src="./assets/images/keep-512.png" style="width:50px;"></span>
+            &nbsp;&nbsp;
+            <span>
+                <font size="5" face="arial">FundooNote</font>
+            </span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+
+            <div class="slinput" ng-init="">
+                <i class="fa fa-search left-icon"></i>
+                <input type="search" placeholder="Search here" ng-model="searchInputVal" />
+                <i ng-class="{'fa' : true, 'fa-close' : true, 'right-icon' : true, active : (searchInputVal.length > 0)}"
+                    ng-click="searchInputVal = ''"></i>
+            </div>
+           
+            <a mat-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
+                <mat-icon class="topButtons">refresh</mat-icon>
+            </a>
+
+            <mat-icon   class="topButtons" matSuffix (click)="onChangeTheme()" matTooltip="list and grid">
+                {{hide ? 'view_module' : 'view_agenda'}}</mat-icon>
+            &nbsp;
+            &nbsp;
+
+
+
+            <!-- <app-list [viewChanged]="hasThemeChanged"></app-list> -->
+
+
+
+            <button mat-icon-button [matMenuTriggerFor]="sett" matTooltip="settings">
+                <mat-icon  class="topButtons" >settings</mat-icon>
+            </button>
+            <mat-menu  class="topButtons" #sett="matMenu">
+                <button  class="topButtons" mat-menu-item>
+
                     <span>Settings</span>
                 </button>
-                <button mat-menu-item>
-                    <span>Send feedback</span>
+                <button  class="topButtons" mat-menu-item>
+
+                    <span>Send Feedback</span>
                 </button>
-                <button mat-menu-item>
+                <button   class="topButtons" mat-menu-item>
+
+                    <span>Edit Labels</span>
+                </button>
+                <button  class="topButtons" mat-menu-item>
+
                     <span>Help</span>
                 </button>
-                <button mat-menu-item>
+                <button  class="topButtons" mat-menu-item>
+
                     <span>App downloads</span>
                 </button>
-                <button mat-menu-item>
-                    <span>Keyboad Shortcuts</span>
+                <button  class="topButtons" mat-menu-item>
+
+                    <span>Keyboard shortcuts</span>
                 </button>
             </mat-menu>
 
-            <!-- notfications -->
-            <button mat-icon-button [matMenuTriggerFor]="matMenu" matTooltip="matMenu">
-                notifications </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;
 
-            <mat-menu #matMenu="matMenu">
+            <button class="topButtons" mat-icon-button [matMenuTriggerFor]="App" matTooltip="Apps">
+                <mat-icon>apps</mat-icon>
+            </button>
+            <mat-menu #App="matMenu" class="topButtons">
+                <mat-grid-list cols="3">
+                    <mat-grid-tile>
+
+                        <button mat-button [matMenuTriggerFor]="user" matTooltip="Google account">
+                            <mat-icon  class="topButtons" >face</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+
+
+
+                    <mat-grid-tile>
+
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Search">
+                            <mat-icon>Google</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+
+
+                    <mat-grid-tile>
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Maps">
+                            <mat-icon>Maps</mat-icon>
+                        </button>
+
+                    </mat-grid-tile>
+
+
+
+                    <mat-grid-tile>
+
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Youtube">
+                            <mat-icon>Youtube</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+
+
+                    <mat-grid-tile>
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Playstore">
+                            <mat-icon>Play</mat-icon>
+                        </button>
+
+                    </mat-grid-tile>
+
+
+                    <mat-grid-tile>
+
+                        <button mat-button   class="topButtons" [matMenuTriggerFor]="user" matTooltip="Gmail">
+                            <mat-icon>mail</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+
+
+                    <mat-grid-tile>
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Contacts">
+                            <mat-icon>perm_contact_calendar</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+
+
+                    <mat-grid-tile>
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Drive">
+                            <mat-icon>Drive</mat-icon>
+                        </button>
+
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Calender">
+                            <mat-icon>calendar_today</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+
+
+                    <mat-grid-tile>
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google+">
+                            <mat-icon>Google+</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+
+
+                    <mat-grid-tile>
+
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Translate">
+                            <mat-icon>translate</mat-icon>
+                        </button>
+                    </mat-grid-tile>
+
+                    <mat-grid-tile>
+                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Photos">
+                            <mat-icon>photo</mat-icon>
+                        </button>
+
+
+                    </mat-grid-tile>
+                </mat-grid-list>
+
             </mat-menu>
 
-            <!-- User -->
-            <button mat-icon-button class="icon-button" id="more">
-                <i id="accountcircle" class="material-icons">account_circle</i></button>
-            <mat-menu #menu="matMenu" class="morecard">
-                <button mat-button (click)="logout()">Sign out</button>
+
+
+            <button  class="topButtons" mat-button matTooltip="Notifications">
+                <mat-icon>notifications_on</mat-icon>
+            </button>
+
+
+            <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google account">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+            <mat-menu #user="matMenu" class="topButtons">
+                <button  class="topButtons" mat-menu-item>
+                    <mat-icon>logout</mat-icon>
+                    <a mat-button routerLink="/login">
+                        <span>Logout</span>
+                    </a>
+                </button>
             </mat-menu>
+
 
         </mat-toolbar-row>
-
     </mat-toolbar>
-
 </div>
 
-<br>
 
-<mat-divider>
 
-</mat-divider>
+<mat-divider></mat-divider>
 
 <app-side-bar [toggleSidebar]="toggleNav"></app-side-bar>
-
-

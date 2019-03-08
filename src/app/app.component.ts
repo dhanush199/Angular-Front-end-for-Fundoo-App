@@ -8,7 +8,12 @@ import { MatSidenav, MatDialog } from '@angular/material';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  // public hasThemeChanged = false;
+  // name = 'Toggle view';
 
+  // public onChangeTheme() {
+  //  this.hasThemeChanged = !this.hasThemeChanged;
+  // }
 
     @ViewChild(MatSidenav) sidenav: MatSidenav;
     events: string[] = [];

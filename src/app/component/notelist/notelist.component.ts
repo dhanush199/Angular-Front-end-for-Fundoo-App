@@ -6,6 +6,8 @@ import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes
 import { Router } from '@angular/router';
 import { Note } from 'src/app/core/model/note';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
+import { LabelDialogBoxComponent } from 'src/app/label-dialog-box/label-dialog-box.component';
+import { LabelService } from 'src/app/core/services/LabelService/label.service';
 
 // export interface DialogData {
 //   title: string;
@@ -24,12 +26,15 @@ export interface DialogData {
 })
 export class NotelistComponent implements OnInit {
   @Input() products: Note;
+  @Input() public viewChanged = false;
   noteForm: FormGroup;
+  removable=true
   togle = true
   notes: Note
+  label= []
   panelOpenState: boolean = false;
   submitted = false;
-  constructor(private router: Router, private service: NoteService, public dialog: MatDialog,
+  constructor(private router: Router,private labelService:LabelService, private noteService: NoteService, public dialog: MatDialog,
     public dialogRef: MatDialogRef<NotelistComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
@@ -49,49 +54,69 @@ export class NotelistComponent implements OnInit {
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      this.service.updateNote(note, note.id)
+      // console.log(result)
+     // this.noteService.updateNote(note, note.id)
     });
   }
 
   onCloseUpdateNote(note) {
-    console.log(note)
-    this.service.updateNote(note, note.id)
+    // console.log(note)
+    this.noteService.updateNote(note, note.id)
   }
 
   onArchive(products) {
     console.log(products)
     products.archive = true
-    this.service.updateNote(products, products.id)
+    this.noteService.updateNote(products, products.id)
   }
 
   onTrash(products) {
     products.inTrash = 1
-    this.service.updateNote(products, products.id)
+    this.noteService.updateNote(products, products.id)
   }
 
   readAll() {
-    this.service.getAll().subscribe((resp: any) => {
+    this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp
-      console.log(resp)
+  
+      // console.log(resp)
     }, (error) => console.log(error));
   }
 
   changeColor(products) {
     var icon = document.getElementById(products.title);
-    console.log(products)
+    // console.log(products)
     this.togle = !this.togle
     if (this.togle) {
       icon.style.background = "black"
       products.pinned = true
+      console.log(products)
     }
     else {
       products.pinned = false
       icon.style.background = "white"
     }
-    this.service.updateNote(products, products.id)
+    this.noteService.updateNote(products, products.id)
   }
- 
+
+  onClickDialog(products): void {
+    const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
+      width: '550px',
+      data: products
+    });
+    // console.log(dialogRef)
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log(this.label)
+    });
+  }
+
+  removeLabel(label,note){
+    this.labelService.removeLabelNote(label,note).subscribe(resp => {
+      // console.log(resp)
+    }, (error) => console.log(error));
+  }
+  
+  
 }
 
 

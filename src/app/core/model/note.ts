@@ -5,4 +5,6 @@ export interface Note {
      pinned: boolean;
      archive: boolean;
      id:Number;
+     labelList:String[];
+     labelName:String;
 }

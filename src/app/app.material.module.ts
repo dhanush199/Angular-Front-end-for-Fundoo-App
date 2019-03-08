@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatInputModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatButtonToggleModule, MatExpansionModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MatOptionModule, MatSelectModule, MatExpansionModule } from '@angular/material';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -14,6 +14,10 @@ import { MatNativeDateModule, MatSidenavModule, MatListModule } from '@angular/m
 import { MatDividerModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import {MatChipsModule} from '@angular/material/chips';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 
 @NgModule({
@@ -23,6 +27,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatListModule,
     CommonModule, 
     HttpClientInMemoryWebApiModule,
+    MatSlideToggleModule,
+    MatChipsModule,
      MatToolbarModule,
     MatFormFieldModule, 
     HttpClientModule,
@@ -47,6 +53,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     FlexLayoutModule,
     HttpClientInMemoryWebApiModule,
      MatToolbarModule,
+     MatSlideToggleModule,
     MatInputModule, 
     MatSliderModule,
     MatDialogModule, 
@@ -58,6 +65,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     HttpClientModule,
      MatDividerModule,
     MatSelectModule, 
+    MatChipsModule,
     BrowserModule,
      MatMenuModule, 
      MatInputModule,

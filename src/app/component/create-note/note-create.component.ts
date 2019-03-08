@@ -11,7 +11,7 @@ export class NoteCreateComponent implements OnInit {
   public createNoteForm: FormGroup;
   public submitted = false;
   public panelOpenState = false;
-  private temp: any
+   private temp: any
   constructor(private noteService: NoteService,
     private formBuilder: FormBuilder) { }
 
@@ -19,9 +19,8 @@ export class NoteCreateComponent implements OnInit {
     this.createNoteForm = this.formBuilder.group({
       title: [''],
       discription: ['']
-      //, Validators.required
     });
-
+    this.closePanel();
   };
   get f() { return this.createNoteForm.controls; }
 
@@ -34,4 +33,12 @@ export class NoteCreateComponent implements OnInit {
     this.temp = !note.discription;
     this.noteService.save(note);
   }
+  saveNote(title, discription) {
+    console.log(title)
+    console.log(discription)
+  }
+
+  closePanel(){
+  console.log(this.panelOpenState)
+}
 }

@@ -39,16 +39,13 @@ export class PinnedNotesComponent implements OnInit {
       data:
         { title: note.title, discription: note.discription, id: note.id }
     });
-
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result)
       this.onCloseUpdateNote(note)
-
     });
   }
 
   onCloseUpdateNote(note) {
+    console.log(note)
     this.service.updateNote(note, note.id)
   }
 
@@ -75,10 +72,11 @@ export class PinnedNotesComponent implements OnInit {
   onTrash(note){
     note.inTrash=true
     this.service.updateNote(note, note.id)
-
   }
+
   onArchive(products){
     products.archive=true
     this.service.updateNote(products, products.id);
   }
+
 }

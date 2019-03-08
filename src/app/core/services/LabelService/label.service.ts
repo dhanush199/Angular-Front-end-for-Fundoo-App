@@ -53,4 +53,11 @@ export class LabelService {
     var labelId=label.id
     return this.http.put(this.API + '/map-note-label/'+noteId+'/'+labelId,1, header);
   }
+
+  removeLabelNote(label,note){
+    var noteId= note.id
+    var labelId=label.id
+    var header = this.getHeader()
+    return this.http.delete(this.API + '/removenote&label/'+noteId+'/'+labelId, header);
+  }
 }
