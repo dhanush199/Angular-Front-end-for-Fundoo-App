@@ -1,24 +1,25 @@
+<div flex
 <i>pinner notes</i>
 <div class="outerLayout" *ngFor="let products of products | noteFilter : 'pinned'">
-  <mat-card class="outerLayout">
+  <mat-card class="matCard">
     <i class="far fa-heart" (click)="changeColor(products)" id="{{products.title}}"
       style="color: black; background-color: black ; float:right"></i>
     <mat-card-header>
       <mat-card-title></mat-card-title>
     </mat-card-header>
     <mat-card-content (click)=openDialog(products)>
-      <div class="container">
+      <div class="inputs">
         <mat-form-field>
           <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
         </mat-form-field>
       </div>
-      <div class="container">
+      <div class="inputs">
         <mat-form-field>
           <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
         </mat-form-field>
       </div>
     </mat-card-content>
-    <div class="bottomButtons">
+    <div class="bottomButtons">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <button mat-icon-button matTooltip="Remind me" class="Button">
         <mat-icon class="icons">add_alert</mat-icon>
       </button>

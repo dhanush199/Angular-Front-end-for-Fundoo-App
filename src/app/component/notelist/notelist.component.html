@@ -9,27 +9,27 @@
 
  <div>
     <div class="outerLayout" *ngFor="let products of products | noteFilter">
-      <mat-card class="outerLayout" style="background-color: wheat" style="width: 570px;">
-            <i class="far fa-heart" (click)="changeColor(products)" id="{{products.title}}" 
+      <mat-card class="matCard" >
+            <i class="far fa-heart" (click)="changeColor(products)" 
             style="color: black; background-color: white ; float:right"></i> 
         <mat-card-header >
           <mat-card-title></mat-card-title>
         </mat-card-header>
-        <mat-card-content (click)=openDialog(products)>
-          <div class="container">
+        <mat-card-content (click)="openDialog(products)">
+          <div class="inputs">
             <mat-form-field>
               <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
             </mat-form-field>
           </div>
   
-          <div class="container">
+          <div class="inputs">
             <mat-form-field>
               <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
             </mat-form-field>
           </div>
   
         </mat-card-content>
-        <div class="bottomButtons">
+        <div class="bottomButtons">                                                                       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <button mat-icon-button matTooltip="Remind me" class="Button">
             <mat-icon class="icons">add_alert</mat-icon>
           </button>

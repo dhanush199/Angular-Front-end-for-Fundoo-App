@@ -1,9 +1,10 @@
 .outerLayout{
     align-items: center;
+    align-content: center;
     padding-left: 120px;
     padding-top: 15px;
-    background-color: "wheat" ; 
-    width: 570px;
+    padding-bottom: 80px;
+    width: 100px;
 }
 
 .Button{
@@ -14,6 +15,8 @@
 
 .bottomButtons{
     border-bottom-color: white;
+    align-items: center;
+    align-content: center;
 }
 
 .icons{
@@ -24,4 +27,21 @@
     color: black; 
     background-color: black ;
      float:right;
+}
+
+.matCard{
+    padding-top: 50px;
+    align-items: center;
+    align-content: center;
+    background-color:white;
+    width: 400px; 
+    border-color: white;
+    height: 170px;
+}
+
+.inputs{
+    align-content: center;
+    align-items: center;
+    padding-left: 100px;
+    background-color: white;
 }

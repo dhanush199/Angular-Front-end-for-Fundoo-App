@@ -1,18 +1,18 @@
 <i>Trash notes are</i>
   <div class="outerLayout" *ngFor="let products of products| noteFilter :'trash'">
-    <mat-card class="outerLayout">
+    <mat-card class="matCard">
       <mat-card-header >
         <mat-card-title></mat-card-title>
       </mat-card-header>
       <mat-card-content (click)=openDialog(products)>
         
 
-        <div class="container">
+        <div class="inputs">
           <mat-form-field>
             <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
           </mat-form-field>
         </div>
-        <div class="container">
+        <div class="inputs">
           <mat-form-field>
             <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
           </mat-form-field>
@@ -20,7 +20,6 @@
       </mat-card-content>
       <mat-card-actions>
         <div id="signButton">
-            
           <button mat-button (click)=onRestore(products)><mat-icon class="icons">undo</mat-icon>
             restore</button></div>
       </mat-card-actions>
