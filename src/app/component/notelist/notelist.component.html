@@ -5,7 +5,7 @@
 
 <app-pinned-notes [products]="products | noteFilter : 'pinned'"></app-pinned-notes>
 
-<div  *ngIf="products!=0">
+<div *ngIf=products>
   <i>Other Notes</i>
   <div class="outerLayout" *ngFor="let products of products | noteFilter">
     <mat-card class="matCard">

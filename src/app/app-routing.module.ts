@@ -10,6 +10,7 @@ import { ResetPasswordComponent } from './component/user-components/reset-passwo
 import { ForgotPasswordComponent } from './component/user-components/forgot-password/forgot-password.component';
 import { LoginComponent } from './component/user-components/login/login.component';
 import { EditLabelComponent } from './component/edit-label/edit-label.component';
+import { NoteCardComponent } from './note-card/note-card.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -23,7 +24,8 @@ export const appRoutes: Routes = [
       { path: 'notelist', component: NotelistComponent },
       { path: 'trash', component: ThrashComponent },
       { path: 'archive', component: ArchiveComponent },
-      { path: 'edit-label', component: EditLabelComponent }
+      { path: 'edit-label', component: EditLabelComponent },
+      { path: 'search', component: NoteCardComponent}
     ]
   },
   { path: 'register', component: RegisterComponent },

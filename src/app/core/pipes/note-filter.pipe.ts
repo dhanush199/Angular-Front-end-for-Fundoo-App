@@ -32,7 +32,7 @@ export class NoteFilterPipe implements PipeTransform {
       return notes.filter((item) => {
         if (!item.inTrash && item.pinned) {
           return item;
-        }
+        }        
       });
     }
     return null;

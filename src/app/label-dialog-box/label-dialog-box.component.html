@@ -1,5 +1,16 @@
+<input #search (keyup)="0">
+<ul>
 
-<div fxLayout="row" class="division" *ngFor="let label of labels">
+  <li *ngFor="let label of (labels | searchPipe: search.value )"> {{label.labelName}}
+      <button (click)=onAddLabel(label) class="labelButtons" mat-button style="float:right">
+          Add
+        </button>
+  </li>
+</ul>
+
+
+
+<!-- <div fxLayout="row" class="division" *ngFor="let label of labels">
 
     <button (click)=deletLabel(data) class="labelButtons" mat-button style="float:right">
       <img class="labelButtons" src="./assets/images/crossMark.svg" />
@@ -11,4 +22,4 @@
      add 
     </button>
     <br>
-  </div>
+  </div> -->

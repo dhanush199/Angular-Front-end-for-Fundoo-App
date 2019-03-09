@@ -17,8 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [],
@@ -39,6 +38,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatOptionModule,
     MatDialogModule, 
     BrowserModule, 
+    MatSnackBarModule,
     MatButtonToggleModule,
     MatSelectModule, 
     MatIconModule,
@@ -55,6 +55,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
      MatToolbarModule,
      MatSlideToggleModule,
     MatInputModule, 
+    MatSnackBarModule,
     MatSliderModule,
     MatDialogModule, 
     MatIconModule, 

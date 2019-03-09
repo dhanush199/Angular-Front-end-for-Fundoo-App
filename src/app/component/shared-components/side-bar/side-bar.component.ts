@@ -31,8 +31,7 @@ export class SideBarComponent implements OnInit {
     });
     this.labelservice.getLabels().subscribe((resp: any) => {
       this.labels = resp
-      console.log(resp)
-    }, (error) => console.log(error));
+    }, (error) => console.log());
   }
   notes() {
     this.router.navigate(['home/notelist'])
@@ -42,10 +41,8 @@ export class SideBarComponent implements OnInit {
       width: '550px',
       data: label
     });
-    console.log(dialogRef)
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(label)
     });
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-note-create',
@@ -12,7 +13,7 @@ export class NoteCreateComponent implements OnInit {
   public submitted = false;
   public panelOpenState = false;
    private temp: any
-  constructor(private noteService: NoteService,
+  constructor(private noteService: NoteService,private snackBar: MatSnackBar,
     private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -20,7 +21,7 @@ export class NoteCreateComponent implements OnInit {
       title: [''],
       discription: ['']
     });
-    this.closePanel();
+    //this.saveNote()
   };
   get f() { return this.createNoteForm.controls; }
 
@@ -32,13 +33,16 @@ export class NoteCreateComponent implements OnInit {
     }
     this.temp = !note.discription;
     this.noteService.save(note);
+    this.snackBar.open("Successfully created", "Ok", {
+      duration: 2000,
+    });
   }
   saveNote(title, discription) {
+    if(!this.panelOpenState){
+    }
     console.log(title)
     console.log(discription)
   }
 
-  closePanel(){
-  console.log(this.panelOpenState)
-}
+
 }

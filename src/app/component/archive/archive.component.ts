@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Note } from 'src/app/core/model/note';
@@ -25,11 +25,14 @@ export class ArchiveComponent implements OnInit {
   @Input() products: Note;
   i=true
   label
+  removable=true
   pinnedColor=false
   noteForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
-  constructor(private httpUtil:HttputilService, private labelService:LabelService, private router: Router, private service: NoteService, private dialog: MatDialog) { }
+  constructor(private httpUtil:HttputilService, private labelService:LabelService, 
+    private router: Router, private service: NoteService, private dialog: MatDialog,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
    this.readAll();
@@ -84,6 +87,9 @@ export class ArchiveComponent implements OnInit {
   onUnArchive(products) {
       products.archive = false
       this.service.updateNote(products, products.id)
+      this.snackBar.open("UnArchived", "Ok", {
+        duration: 2000,
+      });
   }
 
   changeColor(products) {
@@ -92,10 +98,18 @@ export class ArchiveComponent implements OnInit {
     if (this.i){
       icon.style.background = "black"
       products.pinned=true
+      this.snackBar.open("Pinned", "Ok", {
+        duration: 2000,
+      });
+
     }
     else{
       products.pinned=false
       icon.style.background = "white"
+      this.snackBar.open("UnPinned", "Ok", {
+        duration: 2000,
+      });
+
     }
       this.service.updateNote(products, products.id)
   }
@@ -103,22 +117,13 @@ export class ArchiveComponent implements OnInit {
   onTrash(note){
     note.inTrash=true
     this.service.updateNote(note, note.id)
+    this.snackBar.open("Moved to trash", "Ok", {
+      duration: 2000,
+    });
+
+ 
   }
   
-  // onchangeColor(products) {
-  //   this.pinnedColor = !this.pinnedColor
-  //   if (this.pinnedColor) {
-  //     console.log(products)
-  //     products.pinned=true
-  //     this.service.updateNote(products, products.id)
-  //   }
-  //   if (!this.pinnedColor) {
-  //     console.log(products)
-  //     products.pinned=false
-  //     this.service.updateNote(products, products.id)
-  //   }
-  // }
-
   /* dialog box for labels */
   onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
@@ -128,8 +133,13 @@ export class ArchiveComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
+
   removeLabel(label,note){
     this.labelService.removeLabelNote(label,note).subscribe(resp => {
+      this.snackBar.open("Label has been removed", "Ok", {
+        duration: 2000,
+      });
+
     }, (error) => console.log(error));
   }
 }

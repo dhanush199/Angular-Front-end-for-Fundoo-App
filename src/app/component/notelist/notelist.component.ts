@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Inject } from '@angular/core';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { Router } from '@angular/router';
@@ -27,6 +27,7 @@ export interface DialogData {
 export class NotelistComponent implements OnInit {
   @Input() products: Note;
   @Input() public viewChanged = false;
+  @Input() search
   noteForm: FormGroup;
   removable=true
   togle = true
@@ -34,7 +35,8 @@ export class NotelistComponent implements OnInit {
   label= []
   panelOpenState: boolean = false;
   submitted = false;
-  constructor(private router: Router,private labelService:LabelService, private noteService: NoteService, public dialog: MatDialog,
+  constructor(private router: Router,private labelService:LabelService, private noteService: NoteService,
+     public dialog: MatDialog,private snackBar:MatSnackBar,
     public dialogRef: MatDialogRef<NotelistComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
@@ -68,16 +70,22 @@ export class NotelistComponent implements OnInit {
     console.log(products)
     products.archive = true
     this.noteService.updateNote(products, products.id)
+    this.snackBar.open("Archived", "Ok", {
+      duration: 2000,
+    });
   }
 
   onTrash(products) {
     products.inTrash = 1
     this.noteService.updateNote(products, products.id)
+    this.snackBar.open("Moved to trash", "Ok", {
+      duration: 2000,
+    });
   }
 
   readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
-      this.products = resp
+      this.products = resp;
   
       // console.log(resp)
     }, (error) => console.log(error));
@@ -91,10 +99,16 @@ export class NotelistComponent implements OnInit {
       icon.style.background = "black"
       products.pinned = true
       console.log(products)
+      this.snackBar.open("Pinned", "Ok", {
+        duration: 2000,
+      });
     }
     else {
       products.pinned = false
       icon.style.background = "white"
+      this.snackBar.open("Unpinned", "Ok", {
+        duration: 2000,
+      });
     }
     this.noteService.updateNote(products, products.id)
   }
@@ -112,7 +126,9 @@ export class NotelistComponent implements OnInit {
 
   removeLabel(label,note){
     this.labelService.removeLabelNote(label,note).subscribe(resp => {
-      // console.log(resp)
+      this.snackBar.open("Label removed", "Ok", {
+        duration: 2000,
+      });
     }, (error) => console.log(error));
   }
   

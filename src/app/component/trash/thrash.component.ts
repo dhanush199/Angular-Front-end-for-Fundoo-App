@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { Note } from 'src/app/core/model/note';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
@@ -22,7 +22,8 @@ export class ThrashComponent implements OnInit {
   trashForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
-  constructor(private router: Router, private service: NoteService, private dialog: MatDialog) { }
+  constructor(private router: Router, private service: NoteService, 
+    private dialog: MatDialog,  private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     console.log(this.products)
@@ -69,6 +70,8 @@ export class ThrashComponent implements OnInit {
   onRestore(products) {
     products.inTrash = false
     this.service.updateNote(products, products.id)
+    this.snackBar.open("Successfully restored", "Ok", {
+      duration: 2000,
+    });
   }
-
 }

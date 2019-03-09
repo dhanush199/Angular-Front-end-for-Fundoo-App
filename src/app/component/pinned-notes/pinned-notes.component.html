@@ -1,5 +1,5 @@
 <!-- <div fxLayout="column" fxLayoutAlign="place-evenly center" *ngIf="products!=0"> -->
-  <i>pinner notes</i>
+  <i>pinned notes</i>
   <div class="outerLayout" *ngFor="let products of products | noteFilter : 'pinned'">
     <mat-card class="matCard">
       <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
@@ -18,6 +18,17 @@
             <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
           </mat-form-field>
         </div>
+
+
+        <mat-chip-list #chipList class="chipList">
+            <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
+              (removed)="removeLabel(label,products)">
+              {{label.labelName}}
+              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+
+          
       </mat-card-content>
       <div class="bottomButtons">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <button mat-icon-button matTooltip="Remind me" class="Button">
@@ -41,6 +52,7 @@
         </button>
         <mat-menu #more="matMenu" class="morecard">
           <button mat-button (click)=onTrash(products)>Delete Note</button>
+          <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
         </mat-menu>
         <button mat-icon-button matTooltip="undo" class="Button">
           <mat-icon class="icons">undo</mat-icon>

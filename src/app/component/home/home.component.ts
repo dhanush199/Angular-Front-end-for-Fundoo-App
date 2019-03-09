@@ -1,9 +1,9 @@
-import { Component, OnInit, Input, EventEmitter } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Note } from 'src/app/core/model/note';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { Subject, Observable, observable } from 'rxjs';
+import { Subject} from 'rxjs';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
+import { Router } from '@angular/router';
+import { DataServiceService } from 'src/app/data.service';
 
 @Component({
   selector: 'app-home',
@@ -11,24 +11,50 @@ import { NoteService } from 'src/app/core/services/NoteService/note.service';
   styleUrls: ['./home.component.css'],
 })
 
-export class HomeComponent implements OnInit {
-  public toggleNav: Subject<any> = new Subject();
-  panelOpenState = false;
-  note: Note;
+export class HomeComponent implements OnInit{
+  
   dynamicdata: Note;
-  public hasThemeChanged = false;
-  name = 'Toggle view';
+  @Output() toggle = new EventEmitter();
+  public toggleNav: Subject<any> = new Subject();
+  public btnClick: Subject<any> = new Subject();
+  notes:Note[]
+  searchData = {
+    data:''
+  };
+  
+  constructor(private data:DataServiceService,private router:Router,private noteService:NoteService){}
 
-  constructor(private router: Router, private noteService: NoteService) { }
-
-  ngOnInit() {
+  ngOnInit(){
+    this.readAll()
+    console.log(this.searchData.data);
   }
-  public onChangeTheme() {
-   this.hasThemeChanged = !this.hasThemeChanged;
+
+  readAll() {
+    this.noteService.getAll().subscribe((resp: any) => {
+      this.notes = resp
+      // console.log(resp)
+    }, (error) => console.log(error));
+  }
+  
+  public toggleOnClick() {
+    this.toggle.emit();
   }
 
-  public toggle() {
+  public toggleSide() {
     this.toggleNav.next();
   }
+
+  searchState() {
+    this.router.navigate(['home','search']);
+
+
+  }
+
+  onStatusChanged(finished: Boolean) {
+    if(finished) {
+      this.data.searchData(this.searchData.data);
+    }
+  }
+
 }
 

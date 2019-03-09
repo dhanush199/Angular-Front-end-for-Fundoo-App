@@ -6,36 +6,6 @@
             <button aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" matTooltip="Menu">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
-
-            <!-- <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>arrow_drop_down</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item (click)="navigateNotes()">
-                    <mat-icon>note_add</mat-icon>
-                    <span>Notes</span>
-                </button>
-
-                <button mat-menu-item>
-                    <mat-icon>notifications</mat-icon>
-                    <span>Remainder</span>
-                </button>
-
-                <button mat-menu-item>
-                    <mat-icon>edit</mat-icon>
-                    <span>Edit Labels</span>
-                </button>
-                <button mat-menu-item (click)="navigateArchive()">
-                    <mat-icon>archive</mat-icon>
-                    <span>Archive</span>
-                </button>
-
-                <button mat-menu-item (click)="navigateTrash()">
-                    <mat-icon>Trash</mat-icon>
-                    <span>Trash</span>
-                </button>
-            </mat-menu> -->
-
             <ng-template #tempTtext>
 
             </ng-template>
@@ -47,52 +17,57 @@
 
 
             <div class="slinput" ng-init="">
-                <i class="fa fa-search left-icon"></i>
-                <input type="search" placeholder="Search here" ng-model="searchInputVal" />
-                <i ng-class="{'fa' : true, 'fa-close' : true, 'right-icon' : true, active : (searchInputVal.length > 0)}"
-                    ng-click="searchInputVal = ''"></i>
+                <!-- <i class="fa fa-search left-icon"></i>
+                <input type="search" placeholder="Search here" ng-model="searchInputVal"/>
+
+ -->
+
+
+                <input class="searchBox" type="search" placeholder="Search" [(ngModel)]="searchData.data" (keyup)="onStatusChanged($event)" (click)="searchState()">
+                
+
+
+
+
+    
+                <!-- <i ng-class="{'fa' : true, 'fa-close' : true, 'right-icon' : true, active : (searchInputVal.length > 0)}"
+                    ng-click="searchInputVal = ''"></i> -->
             </div>
-           
+
             <a mat-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
                 <mat-icon class="topButtons">refresh</mat-icon>
             </a>
 
-            <mat-icon   class="topButtons" matSuffix (click)="onChangeTheme()" matTooltip="list and grid">
+            <mat-icon class="topButtons" matSuffix (click)="onChangeTheme()" matTooltip="list and grid">
                 {{hide ? 'view_module' : 'view_agenda'}}</mat-icon>
             &nbsp;
             &nbsp;
 
-
-
-            <!-- <app-list [viewChanged]="hasThemeChanged"></app-list> -->
-
-
-
             <button mat-icon-button [matMenuTriggerFor]="sett" matTooltip="settings">
-                <mat-icon  class="topButtons" >settings</mat-icon>
+                <mat-icon class="topButtons">settings</mat-icon>
             </button>
-            <mat-menu  class="topButtons" #sett="matMenu">
-                <button  class="topButtons" mat-menu-item>
+            <mat-menu class="topButtons" #sett="matMenu">
+                <button class="topButtons" mat-menu-item>
 
                     <span>Settings</span>
                 </button>
-                <button  class="topButtons" mat-menu-item>
+                <button class="topButtons" mat-menu-item>
 
                     <span>Send Feedback</span>
                 </button>
-                <button   class="topButtons" mat-menu-item>
+                <button class="topButtons" mat-menu-item>
 
                     <span>Edit Labels</span>
                 </button>
-                <button  class="topButtons" mat-menu-item>
+                <button class="topButtons" mat-menu-item>
 
                     <span>Help</span>
                 </button>
-                <button  class="topButtons" mat-menu-item>
+                <button class="topButtons" mat-menu-item>
 
                     <span>App downloads</span>
                 </button>
-                <button  class="topButtons" mat-menu-item>
+                <button class="topButtons" mat-menu-item>
 
                     <span>Keyboard shortcuts</span>
                 </button>
@@ -108,22 +83,20 @@
                     <mat-grid-tile>
 
                         <button mat-button [matMenuTriggerFor]="user" matTooltip="Google account">
-                            <mat-icon  class="topButtons" >face</mat-icon>
+                            <mat-icon class="topButtons">face</mat-icon>
                         </button>
                     </mat-grid-tile>
 
-
-
                     <mat-grid-tile>
 
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Search">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Search">
                             <mat-icon>Google</mat-icon>
                         </button>
                     </mat-grid-tile>
 
 
                     <mat-grid-tile>
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Maps">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Maps">
                             <mat-icon>Maps</mat-icon>
                         </button>
 
@@ -133,14 +106,14 @@
 
                     <mat-grid-tile>
 
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Youtube">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Youtube">
                             <mat-icon>Youtube</mat-icon>
                         </button>
                     </mat-grid-tile>
 
 
                     <mat-grid-tile>
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Playstore">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Playstore">
                             <mat-icon>Play</mat-icon>
                         </button>
 
@@ -149,21 +122,21 @@
 
                     <mat-grid-tile>
 
-                        <button mat-button   class="topButtons" [matMenuTriggerFor]="user" matTooltip="Gmail">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Gmail">
                             <mat-icon>mail</mat-icon>
                         </button>
                     </mat-grid-tile>
 
 
                     <mat-grid-tile>
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Contacts">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Contacts">
                             <mat-icon>perm_contact_calendar</mat-icon>
                         </button>
                     </mat-grid-tile>
 
 
                     <mat-grid-tile>
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Drive">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Drive">
                             <mat-icon>Drive</mat-icon>
                         </button>
 
@@ -171,49 +144,43 @@
 
                     <mat-grid-tile>
 
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Calender">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Calender">
                             <mat-icon>calendar_today</mat-icon>
                         </button>
                     </mat-grid-tile>
 
-
                     <mat-grid-tile>
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google+">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google+">
                             <mat-icon>Google+</mat-icon>
                         </button>
                     </mat-grid-tile>
 
-
                     <mat-grid-tile>
 
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Translate">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Translate">
                             <mat-icon>translate</mat-icon>
                         </button>
                     </mat-grid-tile>
 
                     <mat-grid-tile>
-                        <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Photos">
+                        <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Photos">
                             <mat-icon>photo</mat-icon>
                         </button>
-
 
                     </mat-grid-tile>
                 </mat-grid-list>
 
             </mat-menu>
 
-
-
-            <button  class="topButtons" mat-button matTooltip="Notifications">
+            <button class="topButtons" mat-button matTooltip="Notifications">
                 <mat-icon>notifications_on</mat-icon>
             </button>
 
-
-            <button mat-button  class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google account">
+            <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google account">
                 <mat-icon>account_circle</mat-icon>
             </button>
             <mat-menu #user="matMenu" class="topButtons">
-                <button  class="topButtons" mat-menu-item>
+                <button class="topButtons" mat-menu-item>
                     <mat-icon>logout</mat-icon>
                     <a mat-button routerLink="/login">
                         <span>Logout</span>
@@ -225,8 +192,6 @@
         </mat-toolbar-row>
     </mat-toolbar>
 </div>
-
-
 
 <mat-divider></mat-divider>
 
