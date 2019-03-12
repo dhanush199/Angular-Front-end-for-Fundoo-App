@@ -24,12 +24,12 @@ export class HomeComponent implements OnInit{
   
   constructor(private data:DataServiceService,private router:Router,private noteService:NoteService){}
 
-  ngOnInit(){
+  public ngOnInit(){
     this.readAll()
     console.log(this.searchData.data);
   }
 
-  readAll() {
+  public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.notes = resp
       // console.log(resp)
@@ -37,24 +37,26 @@ export class HomeComponent implements OnInit{
   }
   
   public toggleOnClick() {
-    this.toggle.emit();
+    // this.toggle.emit();
+    // this.haToggle = !this.haToggle;
+    this.toggleNav.next();
   }
 
   public toggleSide() {
     this.toggleNav.next();
   }
 
-  searchState() {
+  public searchState() {
     this.router.navigate(['home','search']);
-
-
   }
 
-  onStatusChanged(finished: Boolean) {
+  public onStatusChanged(finished: Boolean) {
     if(finished) {
       this.data.searchData(this.searchData.data);
     }
   }
+
+
 
 }
 

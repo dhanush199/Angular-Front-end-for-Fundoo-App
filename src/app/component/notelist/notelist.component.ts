@@ -40,17 +40,17 @@ export class NotelistComponent implements OnInit {
     public dialogRef: MatDialogRef<NotelistComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
-  ngOnInit() {
+    public ngOnInit() {
     this.readAll()
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
-  togglePanel() {
+  public togglePanel() {
     this.panelOpenState = !this.panelOpenState;
   }
 
-  openDialog(note): void {
+  public vopenDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
       data: note
@@ -61,12 +61,12 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  onCloseUpdateNote(note) {
+  public onCloseUpdateNote(note) {
     // console.log(note)
     this.noteService.updateNote(note, note.id)
   }
 
-  onArchive(products) {
+  public onArchive(products) {
     console.log(products)
     products.archive = true
     this.noteService.updateNote(products, products.id)
@@ -75,7 +75,7 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  onTrash(products) {
+  public onTrash(products) {
     products.inTrash = 1
     this.noteService.updateNote(products, products.id)
     this.snackBar.open("Moved to trash", "Ok", {
@@ -83,7 +83,7 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  readAll() {
+  public  readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp;
   
@@ -91,7 +91,7 @@ export class NotelistComponent implements OnInit {
     }, (error) => console.log(error));
   }
 
-  changeColor(products) {
+  public changeColor(products) {
     var icon = document.getElementById(products.title);
     // console.log(products)
     this.togle = !this.togle
@@ -113,7 +113,7 @@ export class NotelistComponent implements OnInit {
     this.noteService.updateNote(products, products.id)
   }
 
-  onClickDialog(products): void {
+  public onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
       width: '550px',
       data: products
@@ -124,7 +124,7 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  removeLabel(label,note){
+  public removeLabel(label,note){
     this.labelService.removeLabelNote(label,note).subscribe(resp => {
       this.snackBar.open("Label removed", "Ok", {
         duration: 2000,

@@ -14,7 +14,7 @@ export interface DialogData {
 @Component({
   selector: 'app-thrash',
   templateUrl: './thrash.component.html',
-  styleUrls: ['./thrash.component.css']
+  styleUrls: ['./thrash.component.scss']
 })
 export class ThrashComponent implements OnInit {
   @Input() products: Note;
@@ -25,14 +25,14 @@ export class ThrashComponent implements OnInit {
   constructor(private router: Router, private service: NoteService, 
     private dialog: MatDialog,  private snackBar: MatSnackBar) { }
 
-  ngOnInit() {
+    public ngOnInit() {
     console.log(this.products)
     this.readAll()
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
-  readAll() {
+  public readAll() {
     this.service.getAll().subscribe((products: any) => {
       console.log(products);
       console.log(products.Archive);
@@ -41,15 +41,15 @@ export class ThrashComponent implements OnInit {
     }, (error) => console.log(error));
   }
 
-  togglePanel() {
+  public togglePanel() {
     this.panelOpenState = !this.panelOpenState;
   }
 
-  delete(id) {
+  public delete(id) {
     this.service.delete(id)
   }
 
-  openDialog(note): void {
+  public openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
       data:
@@ -63,15 +63,26 @@ export class ThrashComponent implements OnInit {
     });
   }
 
-  onCloseUpdateNote(note) {
+  public onCloseUpdateNote(note) {
     this.service.updateNote(note, note.id)
   }
 
-  onRestore(products) {
+  public onRestore(products) {
     products.inTrash = false
     this.service.updateNote(products, products.id)
     this.snackBar.open("Successfully restored", "Ok", {
       duration: 2000,
     });
   }
+
+ public deletPermanently(note){
+  this.service.delete(note.id).subscribe(result => {
+    console.log(note.id)
+    this.snackBar.open("Deleted permanently", "Ok", {
+      duration: 2000,
+    });
+  },(error)=>{
+
+  });
+ }
 }

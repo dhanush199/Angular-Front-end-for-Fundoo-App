@@ -1,28 +1,33 @@
-<i>Trash notes are</i>
-  <div class="outerLayout" *ngFor="let products of products| noteFilter :'trash'">
-    <mat-card class="matCard">
-      <mat-card-header >
-        <mat-card-title></mat-card-title>
-      </mat-card-header>
-      <mat-card-content (click)=openDialog(products)>
-        
+<div *ngIf="products" align="center">
+  <i>Trash Notes are</i>
+</div>
+<div class="outerLayout" *ngFor="let products of products| noteFilter :'trash'">
+  <mat-card class="matCard">
+    <mat-card-header>
+      <mat-card-title></mat-card-title>
+    </mat-card-header>
+    <mat-card-content (click)=openDialog(products)>
+      <div class="inputs">
+        <mat-form-field>
+          <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
+        </mat-form-field>
+      </div>
+      <div class="inputs">
+        <mat-form-field>
+          <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div id="signButton">
+        <button mat-button  class="restore-deleteButtons"  (click)=onRestore(products) mat-toolTip="restore">
+            <i class="fas fa-history"  style="float:right"></i>
+        </button>
 
-        <div class="inputs">
-          <mat-form-field>
-            <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
-          </mat-form-field>
-        </div>
-        <div class="inputs">
-          <mat-form-field>
-            <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
-          </mat-form-field>
-        </div>
-      </mat-card-content>
-      <mat-card-actions>
-        <div id="signButton">
-            
-          <button mat-button (click)=onRestore(products)><mat-icon class="icons">undo</mat-icon>
-            restore</button></div>
-      </mat-card-actions>
-    </mat-card>
-  </div>
+        <button class="restore-deleteButtons" mat-button (click)=deletPermanently(products) mat-toolTip="restore">
+            <i class="fa fa-trash"></i>      
+            </button></div>
+        
+    </mat-card-actions>
+  </mat-card>
+</div>

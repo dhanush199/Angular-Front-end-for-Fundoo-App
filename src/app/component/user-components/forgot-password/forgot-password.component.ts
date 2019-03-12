@@ -30,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
 
   get f() { return this.forgotPasswordForm.controls; }
 
-  onSubmit(user) {
+  public onSubmit(user) {
     this.submitted = true;
     console.log(this.forgotPasswordForm.value)
 

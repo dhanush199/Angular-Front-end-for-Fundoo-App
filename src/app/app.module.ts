@@ -30,6 +30,7 @@ import { LabelDialogBoxComponent } from './label-dialog-box/label-dialog-box.com
 import { SearchPipePipe } from './core/pipes/search-pipe.pipe';
 import { MainSearchPipe } from './main-search.pipe';
 import { NoteCardComponent } from './note-card/note-card.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -56,7 +57,8 @@ export function tokenGetter() {
     LabelDialogBoxComponent,
     SearchPipePipe,
     MainSearchPipe,
-    NoteCardComponent
+    NoteCardComponent,
+    ImageUploadComponent
 
   ],
 

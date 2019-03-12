@@ -16,19 +16,19 @@ export class LabelDialogBoxComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelService: LabelService,
     private snackBar:MatSnackBar) { }
 
-  ngOnInit() {
+    public ngOnInit() {
     this.labelService.getLabels().subscribe((resp: any) => {
       this.labels = resp
       console.log(resp)
     }, (error) => console.log(error));
   }
 
-  onNoClick(data, id): void {
+  public onNoClick(data, id): void {
     this.dialogRef.close();
     console.log(data);
   }
 
-  onAddLabel(label){
+  public onAddLabel(label){
     this.labelService.mapLabelTONote(label,this.data).subscribe((resp:any)=>{
       this.snackBar.open("lsbel has been added", "ok", {
         duration: 2000,

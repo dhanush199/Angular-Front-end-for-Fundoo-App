@@ -2,10 +2,11 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
 html, body { 
-  background-color: white;
+  background-color:whitesmoke white;
    height: 100%;
    margin: 0%;
  }
+
  mat-expansion-panel{
   width: 50%;
   flex: auto

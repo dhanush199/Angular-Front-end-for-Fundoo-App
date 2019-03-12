@@ -24,21 +24,18 @@ export class PinnedNotesComponent implements OnInit {
     private dialog: MatDialog,private snackBar: MatSnackBar,
     private labelService:LabelService) { }
 
-  ngOnInit() {
+    public ngOnInit() {
     console.log(this.products)
   }
 
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
-  togglePanel() {
+  public togglePanel() {
     this.panelOpenState = !this.panelOpenState;
   }
 
-  delete(id) {
-    this.service.delete(id)
-  }
-  openDialog(note): void {
+  public openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
       data:
@@ -49,17 +46,17 @@ export class PinnedNotesComponent implements OnInit {
     });
   }
 
-  onCloseUpdateNote(note) {
+  public onCloseUpdateNote(note) {
     console.log(note)
     this.service.updateNote(note, note.id)
   }
 
-  onRestore(products) {
+  public onRestore(products) {
     products.inTrash = false
     this.service.updateNote(products, products.id)
   }
 
-  changeColor(products) {
+  public changeColor(products) {
     var icon = document.getElementById(products.title);
     console.log(products)
     if (this.togle){
@@ -80,7 +77,7 @@ export class PinnedNotesComponent implements OnInit {
       this.service.updateNote(products, products.id)
   }
 
-  onTrash(note){
+  public onTrash(note){
     note.inTrash=true
     this.service.updateNote(note, note.id)
     this.snackBar.open("Moved to trash", "Ok", {
@@ -88,7 +85,7 @@ export class PinnedNotesComponent implements OnInit {
     });
   }
 
-  onArchive(products){
+  public onArchive(products){
     products.archive=true
     this.service.updateNote(products, products.id);
     this.snackBar.open("Archived", "Ok", {
@@ -96,17 +93,16 @@ export class PinnedNotesComponent implements OnInit {
     });
   }
 
-  onClickDialog(products): void {
+  public onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
       width: '550px',
       data: products
     });
-    // console.log(dialogRef)
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(this.label)
     });
   }
-  removeLabel(label,note){
+
+  public removeLabel(label,note){
     this.labelService.removeLabelNote(label,note).subscribe(resp => {
       this.snackBar.open("Label removed", "Ok", {
         duration: 2000,

@@ -3,7 +3,7 @@
     <mat-toolbar class="fixed-header" fxFlex="100%;" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
 
         <mat-toolbar-row>
-            <button aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()" matTooltip="Menu">
+            <button mat-icon-button aria-label="Toggle sidenav"  (click)="toggleOnClick()" matTooltip="Menu">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <ng-template #tempTtext>
@@ -17,21 +17,16 @@
 
 
             <div class="slinput" ng-init="">
-                <!-- <i class="fa fa-search left-icon"></i>
-                <input type="search" placeholder="Search here" ng-model="searchInputVal"/>
 
- -->
-
-
-                <input class="searchBox" type="search" placeholder="Search" [(ngModel)]="searchData.data" (keyup)="onStatusChanged($event)" (click)="searchState()">
-                
+                <input class="searchBox" type="search" placeholder="Search" [(ngModel)]="searchData.data"
+                    (keyup)="onStatusChanged($event)" (click)="searchState()">
 
 
 
 
-    
-                <!-- <i ng-class="{'fa' : true, 'fa-close' : true, 'right-icon' : true, active : (searchInputVal.length > 0)}"
-                    ng-click="searchInputVal = ''"></i> -->
+
+
+
             </div>
 
             <a mat-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
@@ -47,7 +42,7 @@
                 <mat-icon class="topButtons">settings</mat-icon>
             </button>
             <mat-menu class="topButtons" #sett="matMenu">
-                <button class="topButtons" mat-menu-item>
+                <button mat-icon-button class="topButtons" mat-menu-item>
 
                     <span>Settings</span>
                 </button>
@@ -166,12 +161,9 @@
                         <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Photos">
                             <mat-icon>photo</mat-icon>
                         </button>
-
                     </mat-grid-tile>
                 </mat-grid-list>
-
             </mat-menu>
-
             <button class="topButtons" mat-button matTooltip="Notifications">
                 <mat-icon>notifications_on</mat-icon>
             </button>
@@ -187,8 +179,6 @@
                     </a>
                 </button>
             </mat-menu>
-
-
         </mat-toolbar-row>
     </mat-toolbar>
 </div>

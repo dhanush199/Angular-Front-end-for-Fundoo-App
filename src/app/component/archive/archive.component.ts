@@ -34,7 +34,7 @@ export class ArchiveComponent implements OnInit {
     private router: Router, private service: NoteService, private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
 
-  ngOnInit() {
+    public ngOnInit() {
    this.readAll();
    this.labelService.getLabels().subscribe((resp: any) => {
     this.label = resp;
@@ -47,7 +47,7 @@ export class ArchiveComponent implements OnInit {
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
 
-  readAll() {
+  public readAll() {
     this.service.getAll().subscribe((products: any) => {
       console.log(products);
       console.log(products.Archive);
@@ -56,15 +56,11 @@ export class ArchiveComponent implements OnInit {
     }, (error) => console.log(error));
   }
 
-  togglePanel() {
+  public togglePanel() {
     this.panelOpenState = !this.panelOpenState;
   }
-
-  delete(id) {
-    this.service.delete(id)
-  }
   
-  openDialog(note): void {
+  public openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
       data:note
@@ -79,12 +75,12 @@ export class ArchiveComponent implements OnInit {
     });
   }
 
-  onCloseUpdateNote(note) {
+  public  onCloseUpdateNote(note) {
     console.log(note)
     this.service.updateNote(note, note.id)
   }
 
-  onUnArchive(products) {
+  public onUnArchive(products) {
       products.archive = false
       this.service.updateNote(products, products.id)
       this.snackBar.open("UnArchived", "Ok", {
@@ -92,7 +88,7 @@ export class ArchiveComponent implements OnInit {
       });
   }
 
-  changeColor(products) {
+  public changeColor(products) {
     var icon = document.getElementById(products.title);
     this.i = !this.i
     if (this.i){
@@ -114,7 +110,7 @@ export class ArchiveComponent implements OnInit {
       this.service.updateNote(products, products.id)
   }
 
-  onTrash(note){
+  public onTrash(note){
     note.inTrash=true
     this.service.updateNote(note, note.id)
     this.snackBar.open("Moved to trash", "Ok", {
@@ -125,7 +121,7 @@ export class ArchiveComponent implements OnInit {
   }
   
   /* dialog box for labels */
-  onClickDialog(products): void {
+  public onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
       width: '550px',
       data: products
@@ -134,7 +130,7 @@ export class ArchiveComponent implements OnInit {
     });
   }
 
-  removeLabel(label,note){
+  public removeLabel(label,note){
     this.labelService.removeLabelNote(label,note).subscribe(resp => {
       this.snackBar.open("Label has been removed", "Ok", {
         duration: 2000,

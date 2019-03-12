@@ -10,7 +10,7 @@ export class UserService {
 
   constructor( private route: ActivatedRoute, private router: Router, private httpUtil: HttputilService) { }
 
-  login(user) {
+  public login(user) {
     this.httpUtil.post(environment.base_url + '/loginuser', user).subscribe(response => {
       console.log(response);
       localStorage.setItem('token', response.headers.get('token'));
@@ -18,17 +18,17 @@ export class UserService {
     }, (error) => console.log(error));
   }
 
-  register(user) {
+  public register(user) {
     this.httpUtil.post(environment.base_url + '/registeruser', user).subscribe(response => {
     }, (error) => console.log(error));
 
   }
 
-  forgotPassword(user) {
+  public forgotPassword(user) {
     return this.httpUtil.post(environment.base_url + '/forgotpassword', user);
   }
 
-  resetPassword(user,id) {
+  public resetPassword(user,id) {
     return this.httpUtil.put(environment.base_url+'/resetpassword/'+id, user,id);
   }
 }

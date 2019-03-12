@@ -13,24 +13,24 @@ export class UpdateNoteComponent {
 
   constructor(
     public dialogRef: MatDialogRef<UpdateNoteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,private service: NoteService) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: NoteService) { }
 
-  onNoClick(note,id): void {
+  public onNoClick(note, id): void {
     this.dialogRef.close();
     // console.log(note);
-   this.service.updateNote(note,id)
+    this.service.updateNote(note, id)
     // console.log(note);
   }
 
-  updateNote(note,id,title,disc) {
+  public updateNote(note, id, title, disc) {
     console.log(title);
     console.log(disc);
-    note={
-      "title":title,
-      "discription":disc,
-      "noteId":note.id
+    note = {
+      "title": title,
+      "discription": disc,
+      "noteId": note.id
     }
-    this.service.updateNote(note,id)
+    this.service.updateNote(note, id)
     this.dialogRef.close();
 
   }

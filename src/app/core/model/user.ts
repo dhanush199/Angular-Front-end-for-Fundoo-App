@@ -3,4 +3,5 @@ export class User{
     "mobileNumber":string;
     "password":string;
     "emailId":string;
+    "image":any
 }

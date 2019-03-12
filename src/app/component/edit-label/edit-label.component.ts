@@ -21,27 +21,28 @@ export class EditLabelComponent implements OnInit {
     public dialogRef: MatDialogRef<EditLabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelservice: LabelService) { }
 
-  ngOnInit() {
+    public ngOnInit() {
   }
 
-  onNoClick(data, id): void {
+  public onNoClick(data, id): void {
     this.dialogRef.close();
     console.log(data);
   }
 
-  deletLabel(label) {
+  public deletLabel(label) {
     this.labelservice.deleteLabel(label).subscribe((resp: any) => {
       // this.products = resp
       console.log(resp)
     }, (error) => console.log(error));
   }
-  onUpdateLabel(label) {
+
+  public onUpdateLabel(label) {
     this.labelservice.updateLabel(label).subscribe((resp: any) => {
       console.log(resp)
     }, (error) => console.log(error));
   }
 
-  createlabel(labelName) {
+  public createlabel(labelName) {
     const label = {
       "labelName": labelName,
     }

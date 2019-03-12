@@ -2,46 +2,41 @@
     border-bottom-color: white;
     align-items: center;
     align-content: center;
+    padding-left: 15%;
 }
 
 .outerLayout{
     align-items: center;
     align-content: center;
-    padding-left: 120px;
     padding-top: 15px;
     padding-bottom: 80px;
-    width: 100px; 
+    width: 20%;
+    padding-left: 26%; 
 }
 
 .Button{
     border-color: transparent;
     background-color:white;
-    
-
-}
-
-.morecard{
-    background-color:white;
-    border: transparent
 }
 
 .icons{
-    color:lightslategrey
+    color:black;
 }
 
 .matCard{
     padding-top: 50px;
+    padding-left: 10%;
     align-items: center;
     align-content: center;
     background-color:white;
     width: 400px; 
-    border-color: white;
     height: 200px;
 }
 
 .inputs{
     align-content: center;
     align-items: center;
-    padding-left: 100px;
-    background-color: white;
+    padding-left: 6%;
+    width: 10%;
+    background-color:transparent;
 }

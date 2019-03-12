@@ -14,19 +14,16 @@ export class RegisterComponent implements OnInit {
     loading = false;
     submitted = false;
 
-    constructor( 
-        private formBuilder: FormBuilder,
-        private router: Router,private Userservice:UserService) { }
+    constructor( private formBuilder: FormBuilder,
+        private router: Router, private Userservice: UserService) { }
 
-    ngOnInit() {
+    public ngOnInit() {
 
         this.registerForm = this.formBuilder.group({
             emailId: ['', [Validators.required, Validators.pattern(this.REGEX_EMAILID)]],
             mobileNumber: ['', [Validators.required, Validators.pattern(this.REGEX_MOBILENUMBER)]],
             name: ['', [Validators.required, Validators.pattern(this.REGEX_USERNAME)]],
             password: ['', [Validators.required, Validators.minLength(6)]],
-    
-
         });
     }
 
@@ -35,16 +32,8 @@ export class RegisterComponent implements OnInit {
 
     onSubmit(user) {
         this.submitted = true;
-
-      
-
-        // stop here if form is invalid
-        // if (this.registerForm.invalid) {
-        //     return;
-        // }
-
         this.loading = true;
         this.Userservice.register(user);
     }
-  
+
 }

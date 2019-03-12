@@ -10,12 +10,12 @@ export class LabelService {
   public API = '//localhost:8081/user';
   constructor(private http: HttputilService) { }
 
-  getLabels() {
+  public getLabels() {
     var header = this.getHeader()
     return this.http.get(this.API + '/retrievelabel', header);
   }
 
-  getHeader() {
+  public getHeader() {
     var token = localStorage.getItem('token')
     const httpheaders = {
       headers: new HttpHeaders({
@@ -26,7 +26,7 @@ export class LabelService {
     return httpheaders;
   }
 
-  deleteLabel(label) {
+  public deleteLabel(label) {
     var token = localStorage.getItem('token')
     console.log(label.labelName)
     var labelName = label.labelName
@@ -37,24 +37,24 @@ export class LabelService {
     });
   }
 
-  updateLabel(label) {
+  public updateLabel(label) {
     var header = this.getHeader()
     return this.http.put(this.API + '/editlabel', label, header);
   }
 
-  createLabel(label){
+  public createLabel(label){
     var header = this.getHeader()
     return this.http.postWithBody(this.API + '/createlabel', label, header);
   }
 
-  mapLabelTONote(label,note){
+  public mapLabelTONote(label,note){
     var header = this.getHeader()
     var noteId= note.id
     var labelId=label.id
     return this.http.put(this.API + '/map-note-label/'+noteId+'/'+labelId,1, header);
   }
 
-  removeLabelNote(label,note){
+  public removeLabelNote(label,note){
     var noteId= note.id
     var labelId=label.id
     var header = this.getHeader()

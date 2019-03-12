@@ -1,7 +1,7 @@
 .outerLayout{
     align-items: center;
     align-content: center;
-    padding-left: 120px;
+    padding-left: 26%;
     padding-top: 15px;
     padding-bottom: 80px;
     width: 100px;
@@ -20,7 +20,8 @@
 }
 
 .icons{
-    color:lightslategrey
+    /* color:lightslategrey */
+    color:black;
 }
 
 .far-fa-heart{
@@ -41,7 +42,8 @@
 
 .inputs{
     align-content: center;
+    padding-left: 8%;
     align-items: center;
-    padding-left: 100px;
+    color:black;
     background-color: white;
 }

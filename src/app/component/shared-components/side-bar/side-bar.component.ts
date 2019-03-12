@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
@@ -15,13 +15,12 @@ export interface DialogData {
   templateUrl: './side-bar.component.html',
   styleUrls: ['./side-bar.component.css']
 })
-export class SideBarComponent implements OnInit {
+export class SideBarComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') public drawer;
-  labels:[]
-  label:Label
-  @Input() products: Label;
+  labels: []
+  // @Input() products: Label;
   @Input() public toggleSidebar: Subject<any>;;
-  constructor(public dialog: MatDialog,private router: Router, private labelservice: LabelService) { }
+  constructor(public dialog: MatDialog, private router: Router, private labelservice: LabelService) { }
 
   ngOnInit() {
     this.toggleSidebar.subscribe(event => {
@@ -44,6 +43,9 @@ export class SideBarComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+  ngOnDestroy() {
+    this.toggleSidebar.unsubscribe();
   }
 }
 

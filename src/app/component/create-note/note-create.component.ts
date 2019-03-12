@@ -16,7 +16,7 @@ export class NoteCreateComponent implements OnInit {
   constructor(private noteService: NoteService,private snackBar: MatSnackBar,
     private formBuilder: FormBuilder) { }
 
-  ngOnInit() {
+    public ngOnInit() {
     this.createNoteForm = this.formBuilder.group({
       title: [''],
       discription: ['']
@@ -37,12 +37,12 @@ export class NoteCreateComponent implements OnInit {
       duration: 2000,
     });
   }
-  saveNote(title, discription) {
+
+  public  saveNote(title, discription) {
     if(!this.panelOpenState){
     }
     console.log(title)
     console.log(discription)
   }
-
 
 }

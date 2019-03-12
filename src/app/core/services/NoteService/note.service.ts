@@ -8,7 +8,7 @@ import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class NoteService {
-  
+
   notes = [];
   titl: null
   discriptio: null
@@ -16,7 +16,7 @@ export class NoteService {
   constructor(private http: HttpClient, private router: Router, private httpUtil: HttputilService) {
   }
 
-  getHeader() {
+  public getHeader() {
     var token = localStorage.getItem('token')
     const httpheaders = {
       headers: new HttpHeaders({
@@ -27,32 +27,26 @@ export class NoteService {
     return httpheaders;
   }
 
-  getAll(): Observable<any> {
-    var header=this.getHeader()
+  public getAll(): Observable<any> {
+    var header = this.getHeader()
     return this.httpUtil.get(this.API + '/retrievenote', header)
 
   }
 
-  save(note) {
-    var header=this.getHeader()
+  public save(note) {
+    var header = this.getHeader()
     this.httpUtil.postWithBody(this.API + '/createnote', note, header).subscribe(response => {
       console.log(response);
     }, (error) => console.log(error));
   }
 
-  delete(id) {
-    var header=this.getHeader()
-    this.httpUtil.deleteWithParams(this.API + '/delete/' + header, {
-      params: {
-        noteId: id
-      },
-      observe: 'response'
-    }).subscribe(response => {
-      console.log(response);
-    }, (error) => console.log(error));
+  public delete(id) {
+    var header = this.getHeader()
+    console.log("this is my id",id)
+    return this.httpUtil.delete(this.API + '/delete/' + id, header);
   }
 
-  updateNote(note, noteId) {
+  public updateNote(note, noteId) {
     console.log(note)
     var token = localStorage.getItem('token')
     console.log(token)

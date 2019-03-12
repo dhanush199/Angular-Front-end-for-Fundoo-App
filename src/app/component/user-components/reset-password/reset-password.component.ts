@@ -16,7 +16,7 @@ export class ResetPasswordComponent implements OnInit {
   public id = this.activatedRoute.snapshot.params.id;
 
 
-  ngOnInit() {
+  public ngOnInit() {
   }
 
   password = new FormControl('', [Validators.required, Validators.minLength(6)]); //Password validation
@@ -25,7 +25,7 @@ export class ResetPasswordComponent implements OnInit {
   /**
    * @description Getting password error message
    */
-  getPasswordErrorMessage() {
+  public getPasswordErrorMessage() {
     return this.password.hasError('required') ? "Can't be empty" :
       this.password.hasError('minlength') ? 'Minimum 6 characters' : 
         '';
@@ -34,7 +34,7 @@ export class ResetPasswordComponent implements OnInit {
   /**
    * @description Getting confirm password error message
    */
-  getPasswordMatch() {
+  public getPasswordMatch() {
       return this.repeatPassword.hasError('required') ? "'Can't be empty" :
         this.repeatPassword.hasError('minlength') ? 'Minimum 6 characters' :
          '';
@@ -44,7 +44,7 @@ export class ResetPasswordComponent implements OnInit {
    * @param password 
    * @param repeatPassword 
    */
-  confirmPassword (password, repeatPassword) {
+  public confirmPassword (password, repeatPassword) {
     console.log(password == repeatPassword);
     var tokenObject = {};
     if(password == repeatPassword){

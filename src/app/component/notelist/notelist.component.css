@@ -1,9 +1,10 @@
 .outerLayout{
     align-items: center;
     align-content: center;
-    padding-left: 120px;
+    padding-left: 26%;
     padding-top: 15px;
     padding-bottom: 80px;
+    background-color: transparent;
     width: 100px; 
 }
 
@@ -20,7 +21,9 @@
 }
 
 .icons{
-    color:lightslategrey;
+    /* color:lightslategrey; */
+    color:black;
+
 }
 
 .matCard{
@@ -34,7 +37,7 @@
 }
 
 .inputs{
-    padding-left: 100px;
+    padding-left: 8%;
     background-color: white;
 }
 
