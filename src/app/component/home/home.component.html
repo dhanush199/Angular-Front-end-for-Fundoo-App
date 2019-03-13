@@ -3,7 +3,7 @@
     <mat-toolbar class="fixed-header" fxFlex="100%;" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
 
         <mat-toolbar-row>
-            <button mat-icon-button aria-label="Toggle sidenav"  (click)="toggleOnClick()" matTooltip="Menu">
+            <button mat-icon-button aria-label="Toggle sidenav" (click)="toggleOnClick()" matTooltip="Menu">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <ng-template #tempTtext>
@@ -178,7 +178,26 @@
                         <span>Logout</span>
                     </a>
                 </button>
+                <button class="topButtons" mat-menu-item>
+                    <mat-icon>user</mat-icon>
+                    <a mat-button routerLink="/upload-photo">
+                        <span>upload picture</span>
+                    </a>
+                </button>
+
             </mat-menu>
+
+            <td>
+                    <!-- <img [src] = "'public/img/' + user.image"/> -->
+                    <img src="{{user.image}}" />
+
+
+
+            </td>
+
+
+
+
         </mat-toolbar-row>
     </mat-toolbar>
 </div>

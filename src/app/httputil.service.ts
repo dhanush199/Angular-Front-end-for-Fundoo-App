@@ -32,9 +32,7 @@ export class HttputilService {
   postWithParam(url,params){
     return this.http.post<any>(url,params);
   }
-  // postWithHeader(url,header){
-  //   return this.http.post<any>(url,header);
-  // }
+ 
   deleteWithParams(url,params){
     return this.http.delete(url,params);
   }

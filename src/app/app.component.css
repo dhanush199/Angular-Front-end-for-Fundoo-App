@@ -41,14 +41,10 @@
 
 .hiddentakeNotes {
   width: 580px;
-  /* height: 133px; */
   position: relative;
-  /* top: 0;
-  bottom: 0; */
   left: 0;
   right: 0;
   margin: auto;
-  /* margin-top: -50px; */
   padding: 5px;
   margin-bottom: 5px;
 }
@@ -57,15 +53,6 @@
     float: right;
     opacity: 0.5;
 }
-/* .hiddentakeNotes {
-    width: 80%;
-    border: none;
-    outline: none;
-    margin-top: 5px;
-    font-size: 15px;
-    padding-top: 9px;
-    margin-left: 20px;
-    /* margin-top: 0px; */
 
 
 .inputTitleNote {

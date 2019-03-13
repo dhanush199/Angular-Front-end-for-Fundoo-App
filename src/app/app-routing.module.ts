@@ -11,6 +11,7 @@ import { ForgotPasswordComponent } from './component/user-components/forgot-pass
 import { LoginComponent } from './component/user-components/login/login.component';
 import { EditLabelComponent } from './component/edit-label/edit-label.component';
 import { NoteCardComponent } from './note-card/note-card.component';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -30,6 +31,9 @@ export const appRoutes: Routes = [
   },
   { path: 'register', component: RegisterComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'upload-photo', component: ImageUploadComponent},
+
+  
   { path: '**', redirectTo: 'login' }
 ];
 @NgModule({

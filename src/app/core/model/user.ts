@@ -1,7 +1,7 @@
-export class User{
-    "name":string;
-    "mobileNumber":string;
-    "password":string;
-    "emailId":string;
-    "image":any
+export class User {
+    "name": string;
+    "mobileNumber": string;
+    "password": string;
+    "emailId": string;
+    "image": FormData = new FormData();
 }

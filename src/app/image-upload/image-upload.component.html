@@ -1,6 +1,16 @@
+<div align="center">
+
 <input
   style="display: none"
   type="file" (change)="onFileChanged($event)"
   #fileInput>
 <button (click)="fileInput.click()">Select File</button>
 <button (click)="onUpload()">Upload!</button>
+</div>
+
+
+<!-- <form>
+  <button (click)=postMethod($event.target.files)>
+    <input id=”myForm” type=”file” name=”file” (change)=”postMethod($event.target.files)”>
+  </button>
+</form> -->

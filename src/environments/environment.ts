@@ -4,7 +4,8 @@
 import { enableProdMode } from '@angular/core';
 
 export const environment = {
-  production: false,
+  production: true,
+
   base_url:'http://localhost:8080/user',
   enableProdMode(){}
 };

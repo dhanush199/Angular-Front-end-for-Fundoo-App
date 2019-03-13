@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttputilService } from 'src/app/httputil.service';
 import { environment } from 'src/environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,10 @@ export class UserService {
 
   public resetPassword(user,id) {
     return this.httpUtil.put(environment.base_url+'/resetpassword/'+id, user,id);
+  }
+
+  public getUser():Observable<any>{
+    var token=localStorage.getItem('token')
+    return this.httpUtil.get(environment.base_url+'/get-user/'+token,1);
   }
 }
