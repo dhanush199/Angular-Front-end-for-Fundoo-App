@@ -31,6 +31,7 @@ import { SearchPipePipe } from './core/pipes/search-pipe.pipe';
 import { MainSearchPipe } from './main-search.pipe';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { CollaboratorDialogBoxComponent } from './component/user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -58,7 +59,8 @@ export function tokenGetter() {
     SearchPipePipe,
     MainSearchPipe,
     NoteCardComponent,
-    ImageUploadComponent
+    ImageUploadComponent,
+    CollaboratorDialogBoxComponent
 
   ],
 
@@ -84,7 +86,7 @@ export function tokenGetter() {
   exports: [
     AppMaterialModule
   ],
-  entryComponents: [UpdateNoteComponent,LabelDialogBoxComponent],
+  entryComponents: [UpdateNoteComponent,LabelDialogBoxComponent,CollaboratorDialogBoxComponent],
   
   providers: [UserService, HomeComponent,
     { provide: MatDialogRef, useValue: {} },

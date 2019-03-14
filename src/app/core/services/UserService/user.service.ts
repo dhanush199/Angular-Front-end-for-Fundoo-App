@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  constructor( private route: ActivatedRoute, private router: Router, private httpUtil: HttputilService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private httpUtil: HttputilService) { }
 
   public login(user) {
     this.httpUtil.post(environment.base_url + '/loginuser', user).subscribe(response => {
@@ -29,12 +29,16 @@ export class UserService {
     return this.httpUtil.post(environment.base_url + '/forgotpassword', user);
   }
 
-  public resetPassword(user,id) {
-    return this.httpUtil.put(environment.base_url+'/resetpassword/'+id, user,id);
+  public resetPassword(user, id) {
+    return this.httpUtil.put(environment.base_url + '/resetpassword/' + id, user, id);
   }
 
-  public getUser():Observable<any>{
-    var token=localStorage.getItem('token')
-    return this.httpUtil.get(environment.base_url+'/get-user/'+token,1);
+  public getUser(): Observable<any> {
+    var token = localStorage.getItem('token')
+    return this.httpUtil.get(environment.base_url + '/get-user/' + token, 1);
+  }
+
+  public updateUser(user) {
+    return this.httpUtil.post(environment.base_url + '/updateuser',user)
   }
 }

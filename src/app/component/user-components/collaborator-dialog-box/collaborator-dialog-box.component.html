@@ -1,0 +1,28 @@
+<!-- <div>
+  <div>
+    <img class="image" [src]="picture?.imageSrc">
+    <i>{{users?.emailId}} (Owner)</i>
+  </div> <br><br>
+</div> -->
+
+
+
+<div>
+  <div>
+    <input matInput [(ngModel)]="data.title" [value]=title placeholder="Title">
+  </div>
+
+  <br>
+  <br>
+  <div>
+
+    <textarea matInput [(ngModel)]="data.discription" [value]=disc placeholder="Discription"></textarea>
+
+    </div>
+
+   
+    <br>
+    <br>
+    <button mat-button (click)="updateNote(data.id,title,disc)" style="float:right">Close</button>
+  </div>
+

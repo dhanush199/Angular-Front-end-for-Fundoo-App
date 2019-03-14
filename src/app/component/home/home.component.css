@@ -62,5 +62,31 @@ main {
   align-content: center;
   align-items: center;
   padding: 8px;
+  border: transparent;
+  /* border-radius: 500%; */
+  
+}
+
+.image {
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 600%;
   border: transparent
 }
+
+.imageonClick{
+  background-color: white;
+  width: 100px;
+  align-content: center;
+  align-self: center;
+  height: 100px;
+  padding-left: 20%;
+  border-radius: 300%;
+}
+
+/* .imageChange{
+  height: 80%;
+  width: 20%;
+  padding-left: 0%;
+} */

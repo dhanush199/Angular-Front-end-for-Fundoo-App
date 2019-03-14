@@ -8,11 +8,10 @@ import { Note } from 'src/app/core/model/note';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
 import { LabelDialogBoxComponent } from 'src/app/label-dialog-box/label-dialog-box.component';
 import { LabelService } from 'src/app/core/services/LabelService/label.service';
-
-// export interface DialogData {
-//   title: string;
-//   discription: string;
-// }
+import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
+import { UserService } from 'src/app/core/services/UserService/user.service';
+import { DomSanitizer } from '@angular/platform-browser';
+import { User } from 'src/app/core/model/user';
 
 export interface DialogData {
   labelName: string;
@@ -32,16 +31,20 @@ export class NotelistComponent implements OnInit {
   removable=true
   togle = true
   notes: Note
+  user:User
+  picture:any
   label= []
   panelOpenState: boolean = false;
   submitted = false;
   constructor(private router: Router,private labelService:LabelService, private noteService: NoteService,
      public dialog: MatDialog,private snackBar:MatSnackBar,
     public dialogRef: MatDialogRef<NotelistComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,private userService:UserService,
+    private sanitizer: DomSanitizer) { }
 
     public ngOnInit() {
     this.readAll()
+    this.getUser()
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
@@ -50,19 +53,17 @@ export class NotelistComponent implements OnInit {
     this.panelOpenState = !this.panelOpenState;
   }
 
-  public vopenDialog(note): void {
+  public openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(result)
      // this.noteService.updateNote(note, note.id)
     });
   }
 
   public onCloseUpdateNote(note) {
-    // console.log(note)
     this.noteService.updateNote(note, note.id)
   }
 
@@ -73,6 +74,7 @@ export class NotelistComponent implements OnInit {
     this.snackBar.open("Archived", "Ok", {
       duration: 2000,
     });
+    this.readAll()
   }
 
   public onTrash(products) {
@@ -81,19 +83,18 @@ export class NotelistComponent implements OnInit {
     this.snackBar.open("Moved to trash", "Ok", {
       duration: 2000,
     });
+    this.readAll()
   }
 
   public  readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp;
   
-      // console.log(resp)
     }, (error) => console.log(error));
   }
 
   public changeColor(products) {
     var icon = document.getElementById(products.title);
-    // console.log(products)
     this.togle = !this.togle
     if (this.togle) {
       icon.style.background = "black"
@@ -102,6 +103,7 @@ export class NotelistComponent implements OnInit {
       this.snackBar.open("Pinned", "Ok", {
         duration: 2000,
       });
+    
     }
     else {
       products.pinned = false
@@ -111,6 +113,7 @@ export class NotelistComponent implements OnInit {
       });
     }
     this.noteService.updateNote(products, products.id)
+    this.readAll()
   }
 
   public onClickDialog(products): void {
@@ -118,9 +121,7 @@ export class NotelistComponent implements OnInit {
       width: '550px',
       data: products
     });
-    // console.log(dialogRef)
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(this.label)
     });
   }
 
@@ -130,9 +131,38 @@ export class NotelistComponent implements OnInit {
         duration: 2000,
       });
     }, (error) => console.log(error));
+    this.labelService.removeLabelNote(label,note)
   }
   
-  
+  public getUser() {
+    this.userService.getUser().subscribe((resp) => {
+      this.user = resp;
+      this.user = {
+        ...resp,
+        image: `data:image/text;base64, ${resp.image}`,
+      };
+      const url = `data:${resp.contentType};base64,${resp.image}`;
+      this.picture = {
+        imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
+      }
+      console.log(this.picture)
+    }, (error) => {
+      console.log(error)
+    })
+  }
+
+   /*collaborator*/
+   public onClickDialogBox(products): void {
+     console.log(products)
+    const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
+      width: '550px',
+      data: products
+     
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
 }
 
 

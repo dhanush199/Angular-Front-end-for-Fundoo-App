@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, Inject } from '@angular/core';
 import { Note } from 'src/app/core/model/note';
 import { Subject } from 'rxjs';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { DataServiceService } from 'src/app/data.service';
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { User } from 'src/app/core/model/user';
+import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Component({
   selector: 'app-home',
@@ -20,11 +22,13 @@ export class HomeComponent implements OnInit {
   public btnClick: Subject<any> = new Subject();
   notes: Note[]
   user: User
+  picture: any
   searchData = {
     data: ''
   };
 
-  constructor(private userService: UserService, private data: DataServiceService, private router: Router, private noteService: NoteService) { }
+  constructor(private userService: UserService,
+  public dataservice:DataServiceService,private sanitizer: DomSanitizer,private router: Router, private noteService: NoteService) { }
 
   public ngOnInit() {
     this.readAll()
@@ -35,13 +39,10 @@ export class HomeComponent implements OnInit {
   public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.notes = resp
-      // console.log(resp)
     }, (error) => console.log(error));
   }
 
   public toggleOnClick() {
-    // this.toggle.emit();
-    // this.haToggle = !this.haToggle;
     this.toggleNav.next();
   }
 
@@ -55,23 +56,29 @@ export class HomeComponent implements OnInit {
 
   public onStatusChanged(finished: Boolean) {
     if (finished) {
-      this.data.searchData(this.searchData.data);
+      this.dataservice.searchData(this.searchData.data);
     }
   }
 
-  uploadPhoto() {
+  public uploadPhoto() {
     this.router.navigate(['upload-photo'])
   }
 
-  getUser() {
+  public getUser() {
     this.userService.getUser().subscribe((resp) => {
-      this.user=resp
-      console.log( this.user)
+      this.user = resp;
+      this.user = {
+        ...resp,
+        image: `data:image/text;base64, ${resp.image}`,
+        // pic: `data:image/text;base64, ${resp.pic}`
+      };
+      const url = `data:${resp.contentType};base64,${resp.image}`;
+      this.picture = {
+        imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
+      }
+      console.log(this.picture)
     }, (error) => {
       console.log(error)
-
     })
   }
-
 }
-

@@ -3,5 +3,6 @@ export class User {
     "mobileNumber": string;
     "password": string;
     "emailId": string;
-    "image": FormData = new FormData();
+    "image":any
+    "coEmailId":String
 }

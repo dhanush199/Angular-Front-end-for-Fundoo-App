@@ -21,12 +21,6 @@
                 <input class="searchBox" type="search" placeholder="Search" [(ngModel)]="searchData.data"
                     (keyup)="onStatusChanged($event)" (click)="searchState()">
 
-
-
-
-
-
-
             </div>
 
             <a mat-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
@@ -38,8 +32,8 @@
             &nbsp;
             &nbsp;
 
-            <button mat-icon-button [matMenuTriggerFor]="sett" matTooltip="settings">
-                <mat-icon class="topButtons">settings</mat-icon>
+            <button mat-icon-button class="topButtons" [matMenuTriggerFor]="sett" matTooltip="settings">
+                    <mat-icon>build</mat-icon>
             </button>
             <mat-menu class="topButtons" #sett="matMenu">
                 <button mat-icon-button class="topButtons" mat-menu-item>
@@ -169,34 +163,26 @@
             </button>
 
             <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google account">
-                <mat-icon>account_circle</mat-icon>
+                <img class="image" [src]="picture?.imageSrc">
             </button>
             <mat-menu #user="matMenu" class="topButtons">
+                <img class="imageonClick" [src]="picture?.imageSrc">
                 <button class="topButtons" mat-menu-item>
                     <mat-icon>logout</mat-icon>
                     <a mat-button routerLink="/login">
                         <span>Logout</span>
                     </a>
+
                 </button>
+
                 <button class="topButtons" mat-menu-item>
-                    <mat-icon>user</mat-icon>
                     <a mat-button routerLink="/upload-photo">
-                        <span>upload picture</span>
+                        <mat-icon>photo</mat-icon>
+                        <span>Change Image</span>
                     </a>
                 </button>
 
             </mat-menu>
-
-            <td>
-                    <!-- <img [src] = "'public/img/' + user.image"/> -->
-                    <img src="{{user.image}}" />
-
-
-
-            </td>
-
-
-
 
         </mat-toolbar-row>
     </mat-toolbar>

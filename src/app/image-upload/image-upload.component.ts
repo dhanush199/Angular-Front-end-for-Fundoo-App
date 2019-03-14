@@ -1,18 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttputilService } from '../httputil.service';
 import { User } from '../core/model/user';
-import { HttpHeaders, HttpRequest, HttpEvent } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { UserService } from '../core/services/UserService/user.service';
 
 @Component({
   selector: 'app-image-upload',
   templateUrl: './image-upload.component.html',
   styleUrls: ['./image-upload.component.css']
 })
-export class ImageUploadComponent {
-
-  constructor(public httpUtil: HttputilService) {}
-  
+export class ImageUploadComponent   {
+  constructor(public httpUtil: HttputilService,private userService:UserService) {}
   selectedFile: File
   user: User
   fileToUpload: File
@@ -38,6 +35,5 @@ export class ImageUploadComponent {
       reportProgress: true,
       responseType: 'text'
     });
-
   }
 }
