@@ -14,8 +14,8 @@ export class CollaboratorDialogBoxComponent implements OnInit {
 
   @Input() users: User
   picture: any
-
-
+  disc: String
+  emails: []
   constructor(public dialog: MatDialog, private sanitizer: DomSanitizer,
     public dialogRef: MatDialogRef<CollaboratorDialogBoxComponent>, private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -23,6 +23,10 @@ export class CollaboratorDialogBoxComponent implements OnInit {
 
   public ngOnInit() {
     this.getUser()
+    this.userService.getCollEmails().subscribe((resp: any) => {
+      this.emails = resp
+      console.log(resp)
+    }, (error) => console.log(error));
   }
   public onNoClick(data, id): void {
     this.dialogRef.close();
@@ -49,22 +53,14 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   }
 
 
-  addCollaborator(emailId){
-    console.log(emailId)
-    var user = {
-      ...this.users,
-      coEmailId: emailId
-    };
+ public onAddCollab(email) {
+    console.log(email)
+
     console.log(this.data)
-    console.log(user)
-    this.userService.updateUser(user)
+    // console.log(user)
+    // this.userService.updateUser(user)
   }
 
-  updateNote(data,title,disc){
-console.log(data)
-console.log(title)
-console.log(disc)
 
-  }
 
 }

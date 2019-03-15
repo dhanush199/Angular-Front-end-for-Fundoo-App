@@ -103,7 +103,6 @@ export class NotelistComponent implements OnInit {
       this.snackBar.open("Pinned", "Ok", {
         duration: 2000,
       });
-    
     }
     else {
       products.pinned = false

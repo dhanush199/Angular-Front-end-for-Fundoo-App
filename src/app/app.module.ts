@@ -32,6 +32,7 @@ import { MainSearchPipe } from './main-search.pipe';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { CollaboratorDialogBoxComponent } from './component/user-components/collaborator-dialog-box/collaborator-dialog-box.component';
+import { EmailIdPipe } from './email-id.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -60,7 +61,8 @@ export function tokenGetter() {
     MainSearchPipe,
     NoteCardComponent,
     ImageUploadComponent,
-    CollaboratorDialogBoxComponent
+    CollaboratorDialogBoxComponent,
+    EmailIdPipe
 
   ],
 
