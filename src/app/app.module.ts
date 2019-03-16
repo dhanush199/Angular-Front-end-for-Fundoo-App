@@ -33,6 +33,7 @@ import { NoteCardComponent } from './note-card/note-card.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { CollaboratorDialogBoxComponent } from './component/user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 import { EmailIdPipe } from './email-id.pipe';
+import { NoteDisplayComponent } from './note-display/note-display.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -62,7 +63,8 @@ export function tokenGetter() {
     NoteCardComponent,
     ImageUploadComponent,
     CollaboratorDialogBoxComponent,
-    EmailIdPipe
+    EmailIdPipe,
+    NoteDisplayComponent
 
   ],
 

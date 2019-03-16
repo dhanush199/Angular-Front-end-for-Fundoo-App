@@ -10,8 +10,6 @@
 
 .Button{
     border-color: transparent;
-    background-color:white;
-
 }
 
 .bottomButtons{
@@ -45,32 +43,16 @@
     background-color: transparent
 }
 
-
-/* .card-content {
-    min-height: 100px;
-    background-color: azure;
-    padding: 20px;
-}
-:host {
-.gk {
-padding: 20px;
-.note-wrapper {
-    margin: 10px 20px;
-}
-&-grid-view {
-  display: flex;
-  flex-wrap: wrap;
-  .note-content {
-    width: 250px;
-   @extend .card-content;
-  }
-}
-&-list-view {
-  .note-content {
-    width: 100%;
-   @extend .card-content;
-  }
+.colorMenuDiv {
+    width:136px;
+    height:110px;
+    position:absolute;
+    z-index: 2;
+    border:1px solid #e8e8e8
 }
 
+.colorMenuButton {
+    height:26px;
+    width:26px;
+    margin:4px;
 }
-} */

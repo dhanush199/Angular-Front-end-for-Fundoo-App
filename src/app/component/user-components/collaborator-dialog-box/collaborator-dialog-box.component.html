@@ -1,5 +1,5 @@
 <div>
-
+{{collabUser}}
   <b>Collaborator</b>
   <mat-divider></mat-divider>
   <div>
@@ -11,10 +11,11 @@
 <input #search (keyup)="0">
 <ul>
 
-  <li *ngFor="let email of (emails | emailIdFilter: search.value)"> {{email}}
+  <li *ngFor="let email of merged"> {{email}}
       <button (click)=onAddCollab(email) class="emailButtons" mat-button>
        <span>Add</span>
         </button>
+        <!-- (merged | emailIdFilter: search.value)" -->
       </li>
 </ul>
 <mat-divider></mat-divider>

@@ -20,7 +20,7 @@ export interface DialogData {
 @Component({
   selector: 'app-note-list',
   templateUrl: 'notelist.component.html',
-  styleUrls: ['./notelist.component.css']
+  styleUrls: ['./notelist.component.scss']
 
 })
 export class NotelistComponent implements OnInit {
@@ -33,6 +33,33 @@ export class NotelistComponent implements OnInit {
   notes: Note
   user:User
   picture:any
+  colorMenu=false
+  fillTheColor;
+  colors = [
+    "#fff",
+
+    '#FFFF00',
+
+    '#FFFAFA',
+
+    '#B0E0E6',
+
+    '#FFC0CB',
+
+    '#00FA9A',
+
+    '#E0FFFF',
+
+    '	#ADFF2F',
+
+    '#00FFFF',
+
+    '#DEB887',
+
+    '#BA55D3',
+
+    '	#FF0000'
+  ]
   label= []
   panelOpenState: boolean = false;
   submitted = false;
@@ -162,6 +189,21 @@ export class NotelistComponent implements OnInit {
     });
   }
 
+  colorChange() {
+    if (this.colorMenu)
+      this.colorMenu = false
+    else
+      this.colorMenu = true;
+  }
+
+  addColor(color,products) {
+    this.fillTheColor = color;
+    products.colore=color;
+    console.log(color);
+    console.log(products);
+    this.noteService.updateNote(products, products.id)
+
+  }
 }
 
 

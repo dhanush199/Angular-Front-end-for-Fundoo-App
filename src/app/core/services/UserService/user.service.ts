@@ -42,7 +42,12 @@ export class UserService {
     return this.httpUtil.post(environment.base_url + '/updateuser',user)
   }
 
-  public getCollEmails(){
+  // public getCollEmails(){
+  //   var token=localStorage.getItem('token')
+  //   return this.httpUtil.get(environment.base_url +'/get-all-user/'+token,1)
+  // }
+
+  public getCollUser(){
     var token=localStorage.getItem('token')
     return this.httpUtil.get(environment.base_url +'/get-all-user/'+token,1)
   }

@@ -10,12 +10,13 @@ import { User } from 'src/app/core/model/user';
   templateUrl: './collaborator-dialog-box.component.html',
   styleUrls: ['./collaborator-dialog-box.component.css']
 })
-export class CollaboratorDialogBoxComponent implements OnInit {
 
+export class CollaboratorDialogBoxComponent implements OnInit {
   @Input() users: User
   picture: any
   disc: String
   emails: []
+  collabUser:[] 
   constructor(public dialog: MatDialog, private sanitizer: DomSanitizer,
     public dialogRef: MatDialogRef<CollaboratorDialogBoxComponent>, private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
@@ -23,11 +24,13 @@ export class CollaboratorDialogBoxComponent implements OnInit {
 
   public ngOnInit() {
     this.getUser()
-    this.userService.getCollEmails().subscribe((resp: any) => {
-      this.emails = resp
-      console.log(resp)
-    }, (error) => console.log(error));
+    // this.userService.getCollEmails().subscribe((resp: any) => {
+    //   this.emails = resp
+    //   console.log(resp)
+    // }, (error) => console.log(error));
+    this.getCollbUsers()
   }
+
   public onNoClick(data, id): void {
     this.dialogRef.close();
     console.log(data)
@@ -39,28 +42,31 @@ export class CollaboratorDialogBoxComponent implements OnInit {
       this.users = {
         ...resp,
         image: `data:image/text;base64, ${resp.image}`,
-        // pic: `data:image/text;base64, ${resp.pic}`
       };
       const url = `data:${resp.contentType};base64,${resp.image}`;
       this.picture = {
         imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
       }
-
       console.log(this.picture)
     }, (error) => {
       console.log(error)
     })
   }
 
-
- public onAddCollab(email) {
+  public onAddCollab(email) {
     console.log(email)
-
     console.log(this.data)
-    // console.log(user)
-    // this.userService.updateUser(user)
   }
 
+  getCollbUsers() {
+    this.userService.getCollUser().subscribe((users) => {
+      // const modifiedUser = users.reduce((list, item) => {
 
-
+      // }, []);
+      var merged = [].concat.apply([], users);
+      this.collabUser = merged
+    }, (error) => {
+      console.log(error)
+    })
+  }
 }

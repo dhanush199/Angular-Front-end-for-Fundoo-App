@@ -4,25 +4,25 @@
 
 <div fxLayout="column" fxLayoutAlign="stretch">
   <app-pinned-notes [products]="products | noteFilter : 'pinned'"></app-pinned-notes>
-  <div *ngIf=products  >
+  <div *ngIf=products>
     <div *ngIf="products" align="center">
-        <i>Other Notes are</i>
-      </div>
+      <i>Other Notes are</i>
+    </div>
     <div class="outerLayout" *ngFor="let products of products | noteFilter">
-      <mat-card class="matCard" >
+      <mat-card class="matCard" [style.background-color]="products.colore">
         <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
-          style="color: black; background-color: white ; float:right"></i>
+          style="color: black; background-color: white ; float:right" [style.background-color]="products.colore"></i>
         <mat-card-header>
-          <mat-card-title></mat-card-title>
+          <!-- <mat-card-title></mat-card-title> -->
         </mat-card-header>
         <mat-card-content (click)="openDialog(products)">
           <div class="inputs">
-            <mat-form-field>
+            <mat-form-field [style.background-color]="products.colore">
               <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
             </mat-form-field>
           </div>
 
-          <div class="inputs">
+          <div class="inputs" [style.background-color]="products.colore">
             <mat-form-field>
               <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
             </mat-form-field>
@@ -35,36 +35,48 @@
               <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
             </mat-chip>
           </mat-chip-list>
-
         </mat-card-content>
-        <div class="bottomButtons"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button mat-icon-button matTooltip="Remind me" class="Button">
+        <div class="bottomButtons" [style.background-color]="products.colore"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-icon-button matTooltip="Remind me">
             <mat-icon class="icons">add_alert</mat-icon>
           </button>
-          <button (click)="onClickDialogBox(products)" mat-icon-button matTooltip="Collaborator" class="Button">
+          <button (click)="onClickDialogBox(products)" mat-icon-button matTooltip="Collaborator" class="Button"
+            [style.background-color]="products.colore">
             <mat-icon class="icons">person_add</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Change color" class="Button">
-            <mat-icon class="icons">palette</mat-icon>
-          </button>
-          <button mat-icon-button matTooltip="Add image" class="Button">
+          <!-- <button (click)="colorChange()" type="button" class="Button">
+           <span> <mat-icon class="icons">palette</mat-icon></span>
+          </button> -->
+          <!-- <button type="button" (click)="colorChange()"> -->
+          <i class="material-icons innerIconDiv" (click)="colorChange()">
+            color_lens
+          </i>
+          <!-- </button> -->
+
+          <div *ngIf="colorMenu" class="colorMenuDiv">
+            <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors"
+              [style.background]="customColor" (click)="addColor(customColor,products)">
+            </button>
+          </div>
+
+          <button mat-icon-button matTooltip="Add image">
             <mat-icon class="icons">image</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="Archive" class="Button">
+          <button mat-icon-button matTooltip="Archive">
             <mat-icon class="icons" (click)=onArchive(products)>archive</mat-icon>
           </button>
 
-          <button mat-icon-button [matMenuTriggerFor]="more" matTooltip="more" class="Button">
+          <button mat-icon-button [matMenuTriggerFor]="more" matTooltip="more">
             <mat-icon class="icons">more_vert</mat-icon>
           </button>
           <mat-menu #more="matMenu" class="morecard">
             <button mat-button (click)=onTrash(products)>Delete Note</button>
             <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
           </mat-menu>
-          <button mat-icon-button matTooltip="undo" class="Button">
+          <button mat-icon-button matTooltip="undo">
             <mat-icon class="icons">undo</mat-icon>
           </button>
-          <button mat-icon-button matTooltip="redo" class="Button">
+          <button mat-icon-button matTooltip="redo">
             <mat-icon class="icons">redo</mat-icon>
           </button>
         </div>
@@ -75,11 +87,3 @@
   </div>
 </div>
 
-<!-- <div  class="gk" 
- [ngClass]="viewChanged ? 'gk-grid-view': 'gk-list-view'">
-  <ng-container *ngFor="let products of products">
-    <div class="note-wrapper">
-      <p class="note-content">{{products.title}}</p>
-    </div>
-  </ng-container>
-</div> -->

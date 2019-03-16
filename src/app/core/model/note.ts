@@ -7,4 +7,5 @@ export interface Note {
      id:Number;
      labelList:String[];
      labelName:String;
+     colore:String;
 }
