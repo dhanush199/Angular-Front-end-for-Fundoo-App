@@ -23,7 +23,7 @@ export interface DialogData {
 
 export class ArchiveComponent implements OnInit {
   @Input() products: Note;
-  i=true
+  pinnedIcon=true
   label
   removable=true
   pinnedColor=false
@@ -82,7 +82,11 @@ export class ArchiveComponent implements OnInit {
 
   public onUnArchive(products) {
       products.archive = false
-      this.service.updateNote(products, products.id)
+      this.service.updateNote(products, products.id).subscribe(resp=>{
+        console.log(resp)
+      },(error)=>{
+        console.log(error)
+      })
       this.snackBar.open("UnArchived", "Ok", {
         duration: 2000,
       });
@@ -90,8 +94,8 @@ export class ArchiveComponent implements OnInit {
 
   public changeColor(products) {
     var icon = document.getElementById(products.title);
-    this.i = !this.i
-    if (this.i){
+    this.pinnedIcon = !this.pinnedIcon
+    if (this.pinnedIcon){
       icon.style.background = "black"
       products.pinned=true
       this.snackBar.open("Pinned", "Ok", {

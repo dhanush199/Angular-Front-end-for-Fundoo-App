@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UpdateNoteComponent } from '../update-notes/update-notes.component';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -7,26 +7,44 @@ import { MatDialog, MatSnackBar } from '@angular/material';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
 import { LabelDialogBoxComponent } from 'src/app/label-dialog-box/label-dialog-box.component';
 import { LabelService } from 'src/app/core/services/LabelService/label.service';
+import { DataServiceService } from 'src/app/core/services/Data-service/data.service';
 
 @Component({
   selector: 'app-pinned-notes',
   templateUrl: './pinned-notes.component.html',
-  styleUrls: ['./pinned-notes.component.css']
+  styleUrls: ['./pinned-notes.component.scss']
 })
 export class PinnedNotesComponent implements OnInit {
   @Input() products: Note;
+  @Input() view:boolean
+  @Output() onStatusChange = new EventEmitter<boolean>();
+grid=false
+
   togle = true
   pinnedForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
-  removable=true
+  removable=true;
+  fillTheColor;
+  colorMenu=false;
+  colors = [
+    "#fff",'#FFFF00','#FFFAFA','#B0E0E6','#FFC0CB',
+    '#00FA9A','#E0FFFF','	#ADFF2F','#00FFFF','#DEB887',
+    '#BA55D3','#FF0000'
+  ]
   constructor(private router: Router, private service: NoteService, 
-    private dialog: MatDialog,private snackBar: MatSnackBar,
+    private dialog: MatDialog,private snackBar: MatSnackBar,private data:DataServiceService,
     private labelService:LabelService) { }
 
     public ngOnInit() {
-    console.log(this.products)
-  }
+      this.data.currentMessage.subscribe((message:any) => {
+        this.view = message 
+      })  
+    
+      this.data.getTheme().subscribe((resp) =>
+      this.grid = resp
+);
+}
 
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
@@ -74,7 +92,11 @@ export class PinnedNotesComponent implements OnInit {
       });
     }
     this.togle = !this.togle
-      this.service.updateNote(products, products.id)
+      this.service.updateNote(products, products.id).subscribe(resp=>{
+        console.log(resp)
+      },(error)=>{
+        console.log(error)
+      })
   }
 
   public onTrash(note){
@@ -87,7 +109,11 @@ export class PinnedNotesComponent implements OnInit {
 
   public onArchive(products){
     products.archive=true
-    this.service.updateNote(products, products.id);
+    this.service.updateNote(products, products.id).subscribe(resp=>{
+      console.log(resp)
+    },(error)=>{
+      console.log(error)
+    })
     this.snackBar.open("Archived", "Ok", {
       duration: 2000,
     });
@@ -109,4 +135,34 @@ export class PinnedNotesComponent implements OnInit {
       });
     }, (error) => console.log(error));
   }
+
+  colorChange() {
+    if (this.colorMenu)
+      this.colorMenu = false
+    else
+      this.colorMenu = true;
+  }
+
+  addColor(color, products) {
+    this.fillTheColor = color;
+    products.colore = color;
+    console.log(color);
+    console.log(products);
+    this.service.updateNote(products, products.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
+    // this.readAll()
+  }
+  public readAll() {
+    this.service.getAll().subscribe((resp: any) => {
+      this.products = resp;
+    }, (error) => console.log(error));
+  }
+
+  changeStatus(finished: boolean) {
+    this.onStatusChange.emit(finished);
+  }
+ 
 }

@@ -21,7 +21,7 @@ export class NoteCreateComponent implements OnInit {
       title: [''],
       discription: ['']
     });
-    //this.saveNote()
+    this.readAll()
   };
   get f() { return this.createNoteForm.controls; }
 
@@ -32,17 +32,16 @@ export class NoteCreateComponent implements OnInit {
       return;
     }
     this.temp = !note.discription;
-    this.noteService.save(note);
-    this.snackBar.open("Successfully created", "Ok", {
-      duration: 2000,
-    });
+    this.noteService.save(note).subscribe(resp=>{
+      this.snackBar.open("Successfully created", "Ok", {
+        duration: 2000,
+      });
+    },(error)=>{
+      console.log(error)
+    })
   }
-
-  public  saveNote(title, discription) {
-    if(!this.panelOpenState){
-    }
-    console.log(title)
-    console.log(discription)
+  public readAll() {
+    this.noteService.getAll().subscribe((resp: any) => {
+    }, (error) => console.log(error));
   }
-
 }

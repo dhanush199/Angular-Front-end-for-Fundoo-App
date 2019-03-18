@@ -15,7 +15,7 @@ import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes
 import { ArchiveComponent } from 'src/app/component/archive/archive.component';
 import { ThrashComponent } from 'src/app/component/trash/thrash.component';
 import { PinnedNotesComponent } from 'src/app/component/pinned-notes/pinned-notes.component';
-import {MatGridListModule} from '@angular/material/grid-list';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { NoteFilterPipe } from 'src/app/core/pipes/note-filter.pipe';
 import { RegisterComponent } from './component/user-components/register/register.component';
@@ -28,12 +28,11 @@ import { SideBarComponent } from './component/shared-components/side-bar/side-ba
 import { GridViewComponent } from './component/shared-components/grid-view/grid-view.component';
 import { LabelDialogBoxComponent } from './label-dialog-box/label-dialog-box.component';
 import { SearchPipePipe } from './core/pipes/search-pipe.pipe';
-import { MainSearchPipe } from './main-search.pipe';
+import { MainSearchPipe } from './core/pipes/main-search.pipe';
 import { NoteCardComponent } from './note-card/note-card.component';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { CollaboratorDialogBoxComponent } from './component/user-components/collaborator-dialog-box/collaborator-dialog-box.component';
-import { EmailIdPipe } from './email-id.pipe';
-import { NoteDisplayComponent } from './note-display/note-display.component';
+import { EmailIdPipe } from './core/pipes/email-id.pipe';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -64,7 +63,6 @@ export function tokenGetter() {
     ImageUploadComponent,
     CollaboratorDialogBoxComponent,
     EmailIdPipe,
-    NoteDisplayComponent
 
   ],
 
@@ -90,12 +88,14 @@ export function tokenGetter() {
   exports: [
     AppMaterialModule
   ],
-  entryComponents: [UpdateNoteComponent,LabelDialogBoxComponent,CollaboratorDialogBoxComponent],
-  
+  entryComponents: [UpdateNoteComponent,
+    LabelDialogBoxComponent,
+    CollaboratorDialogBoxComponent],
+
   providers: [UserService, HomeComponent,
     { provide: MatDialogRef, useValue: {} },
     { provide: MAT_DIALOG_DATA, useValue: [] },],
-   
+
   bootstrap: [AppComponent]
 })
 export class AppModule {

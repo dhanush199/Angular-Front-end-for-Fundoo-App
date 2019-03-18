@@ -47,11 +47,10 @@ export class LabelService {
     return this.http.postWithBody(this.API + '/createlabel', label, header);
   }
 
-  public mapLabelTONote(label,note){
-    var header = this.getHeader()
-    var noteId= note.id
-    var labelId=label.id
-    return this.http.put(this.API + '/map-note-label/'+noteId+'/'+labelId,1, header);
+  public mapLabelTONote({id: labelId},{id: noteId}){
+    const header = this.getHeader();
+    const url = `${this.API}/map-note-label/${noteId}/${labelId}`;
+    return this.http.put(url,{}, header);
   }
 
   public removeLabelNote(label,note){

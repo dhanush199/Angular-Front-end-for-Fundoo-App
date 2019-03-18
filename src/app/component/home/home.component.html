@@ -27,13 +27,22 @@
                 <mat-icon class="topButtons">refresh</mat-icon>
             </a>
 
-            <mat-icon class="topButtons" matSuffix (click)="onChangeTheme()" matTooltip="list and grid">
-                {{hide ? 'view_module' : 'view_agenda'}}</mat-icon>
+            <button mat-icon-button (click)="viewGrid()" fxHide.xs="true" fxShow.sm="false" fxShow.md="true"
+                fxShow.lg="true">
+                <mat-icon *ngIf="!grid">view_stream</mat-icon>
+                <mat-icon *ngIf="grid">view_module</mat-icon>
+            </button>
+
+
+
+
+
+
             &nbsp;
             &nbsp;
 
             <button mat-icon-button class="topButtons" [matMenuTriggerFor]="sett" matTooltip="settings">
-                    <mat-icon>build</mat-icon>
+                <mat-icon>build</mat-icon>
             </button>
             <mat-menu class="topButtons" #sett="matMenu">
                 <button mat-icon-button class="topButtons" mat-menu-item>
@@ -167,12 +176,11 @@
             </button>
             <mat-menu #user="matMenu" class="topButtons">
                 <img class="imageonClick" [src]="picture?.imageSrc">
-                <button class="topButtons" mat-menu-item>
+                <button (click)="logout()" class="topButtons" mat-menu-item>
                     <mat-icon>logout</mat-icon>
-                    <a mat-button routerLink="/login">
+                    <a mat-button>
                         <span>Logout</span>
                     </a>
-
                 </button>
 
                 <button class="topButtons" mat-menu-item>

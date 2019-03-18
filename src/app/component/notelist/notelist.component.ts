@@ -12,9 +12,11 @@ import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from 'src/app/core/model/user';
+import { DataServiceService } from 'src/app/core/services/Data-service/data.service';
 
 export interface DialogData {
   labelName: string;
+  id: number;
 }
 
 @Component({
@@ -28,49 +30,35 @@ export class NotelistComponent implements OnInit {
   @Input() public viewChanged = false;
   @Input() search
   noteForm: FormGroup;
-  removable=true
+  removable = true;
   togle = true
   notes: Note
-  user:User
-  picture:any
-  colorMenu=false
+  noteArray: any
+  user: User
+  picture: any
+  colorMenu = false
   fillTheColor;
+  grid=false;
   colors = [
-    "#fff",
-
-    '#FFFF00',
-
-    '#FFFAFA',
-
-    '#B0E0E6',
-
-    '#FFC0CB',
-
-    '#00FA9A',
-
-    '#E0FFFF',
-
-    '	#ADFF2F',
-
-    '#00FFFF',
-
-    '#DEB887',
-
-    '#BA55D3',
-
-    '	#FF0000'
+    "#fff",    '#FFFF00',    '#FFFAFA',    '#B0E0E6',    '#FFC0CB',
+    '#00FA9A',    '#E0FFFF',  '	#ADFF2F',    '#00FFFF',    '#DEB887',
+    '#BA55D3',    '	#FF0000'
   ]
-  label= []
+
   panelOpenState: boolean = false;
   submitted = false;
-  constructor(private router: Router,private labelService:LabelService, private noteService: NoteService,
-     public dialog: MatDialog,private snackBar:MatSnackBar,
+  constructor(private router: Router, private labelService: LabelService, private noteService: NoteService,
+    public dialog: MatDialog, private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<NotelistComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData,private userService:UserService,
-    private sanitizer: DomSanitizer) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private userService: UserService,
+    private sanitizer: DomSanitizer,private dataService:DataServiceService) { }
 
-    public ngOnInit() {
+  public ngOnInit() {
     this.readAll()
+
+    this.dataService.getTheme().subscribe((resp) =>
+    this.grid = resp
+);
     this.getUser()
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
@@ -86,37 +74,49 @@ export class NotelistComponent implements OnInit {
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
-     // this.noteService.updateNote(note, note.id)
+      this.noteService.updateNote(note, note.id)
     });
   }
 
   public onCloseUpdateNote(note) {
-    this.noteService.updateNote(note, note.id)
+    this.noteService.updateNote(note, note.id).subscribe(resp => {
+      this.noteArray = resp
+      this.snackBar.open("note updated", "Ok", {
+        duration: 2000,
+      });
+    }, (error) => {
+      console.log(error)
+    })
   }
 
   public onArchive(products) {
     console.log(products)
     products.archive = true
-    this.noteService.updateNote(products, products.id)
+    this.noteService.updateNote(products, products.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
     this.snackBar.open("Archived", "Ok", {
       duration: 2000,
     });
-    this.readAll()
   }
 
   public onTrash(products) {
-    products.inTrash = 1
-    this.noteService.updateNote(products, products.id)
+    products.inTrash = true
+    this.noteService.updateNote(products, products.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
     this.snackBar.open("Moved to trash", "Ok", {
       duration: 2000,
     });
-    this.readAll()
   }
 
-  public  readAll() {
+  public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp;
-  
     }, (error) => console.log(error));
   }
 
@@ -138,8 +138,10 @@ export class NotelistComponent implements OnInit {
         duration: 2000,
       });
     }
-    this.noteService.updateNote(products, products.id)
-    this.readAll()
+    this.noteService.updateNote(products, products.id).subscribe((resp: any) => {
+      this.products = resp;
+
+    }, (error) => console.log(error));
   }
 
   public onClickDialog(products): void {
@@ -151,15 +153,15 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  public removeLabel(label,note){
-    this.labelService.removeLabelNote(label,note).subscribe(resp => {
+  public removeLabel(label, note) {
+    this.labelService.removeLabelNote(label, note).subscribe(resp => {
       this.snackBar.open("Label removed", "Ok", {
         duration: 2000,
       });
     }, (error) => console.log(error));
-    this.labelService.removeLabelNote(label,note)
+    this.labelService.removeLabelNote(label, note)
   }
-  
+
   public getUser() {
     this.userService.getUser().subscribe((resp) => {
       this.user = resp;
@@ -177,13 +179,13 @@ export class NotelistComponent implements OnInit {
     })
   }
 
-   /*collaborator*/
-   public onClickDialogBox(products): void {
-     console.log(products)
+  /*collaborator*/
+  public onClickDialogBox(products): void {
+    console.log(products)
     const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
       width: '550px',
       data: products
-     
+
     });
     dialogRef.afterClosed().subscribe(result => {
     });
@@ -196,13 +198,15 @@ export class NotelistComponent implements OnInit {
       this.colorMenu = true;
   }
 
-  addColor(color,products) {
+  addColor(color, products) {
     this.fillTheColor = color;
-    products.colore=color;
-    console.log(color);
-    console.log(products);
-    this.noteService.updateNote(products, products.id)
-
+    products.colore = color;
+    this.noteService.updateNote(products, products.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
+    this.readAll()
   }
 }
 

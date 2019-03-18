@@ -40,3 +40,18 @@
     width: 10%;
     background-color:transparent;
 }
+
+.matCard1{
+    padding-top: 50px;
+    background-color:white;
+    align-content: center;
+    align-items: center;
+    width: 400px; 
+    height: 200px;
+}
+
+.cardContent{
+    width: 50%;
+    height: 50%;
+    padding-top: 0%;
+}

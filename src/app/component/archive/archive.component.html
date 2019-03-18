@@ -1,75 +1,62 @@
 <div *ngIf="products" align="center">
   <i>Archived Notes are</i>
 </div>
-<div class="outerLayout" *ngFor="let products of products | noteFilter : 'archive'">
-  <mat-card class="matCard" style="background-color: wheat" style="width: 570px;"
-    *ngIf="products.archive && !products.inThrash">
-    <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
-      style="color: black; background-color: white ; float:right"></i>
 
-    <!-- <mat-icon class="icons" (click)=onchangeColor(products) 
-        [ngStyle]="{'background-color':pinnedColor === false ? 'white' : 'black' }"> 
-          add_alert</mat-icon> -->
-
-
-    <mat-card-header>
-      <mat-card-title></mat-card-title>
-    </mat-card-header>
-    <mat-card-content (click)=openDialog(products)>
-      <div class="inputs">
-        <mat-form-field>
-          <input matInput placeholder="Title" value={{products.title}} [formControl]="title">
-        </mat-form-field>
-      </div>
-      <div class="inputs">
-        <mat-form-field>
-          <input matInput placeholder="Discription" value="{{products.discription}}" [formControl]="discription">
-        </mat-form-field>
-      </div>
-
-      <mat-chip-list #chipList class="chipList">
-        <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
-          (removed)="removeLabel(label,products)">
-          {{label.labelName}}
-          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-        </mat-chip>
-      </mat-chip-list>
-
-    </mat-card-content>
-
-    <div class="bottomButtons">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <button mat-icon-button matTooltip="Remind me" class="Button">
-        <mat-icon class="icons">add_alert</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Collaborator" class="Button">
-        <mat-icon class="icons">person_add</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Change color" class="Button">
-        <mat-icon class="icons">palette</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="Add image" class="Button">
-        <mat-icon class="icons">image</mat-icon>
-      </button>
-      <button mat-icon-button (click)=sendToArchive(note) matTooltip="Archive" class="Button">
-        <mat-icon class="icons" (click)=onUnArchive(products)>archive</mat-icon>
-      </button>
-
-      <button mat-icon-button [matMenuTriggerFor]="more" matTooltip="more" class="Button">
-        <mat-icon class="icons">more_vert</mat-icon>
-      </button>
-      <mat-menu #more="matMenu" class="morecard">
-        <div fxLayout="columns">
-          <button mat-button class="morecard" (click)=onTrash(products)>Delete Note</button>
-          <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
+<div fxLayout="column" fxLayoutAlign="stretch" align="center">
+    <div *ngFor="let products of products| noteFilter:'archive'">
+      <mat-card class="matCard1" [style.background-color]="products.colore">
+        <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
+          style="color: black; background-color: white ; float:right"></i>
+        <mat-card-content class="cardContent" (click)="openDialog(products)">
+          <input matInput placeholder="Title" value={{products.title}} [formControl]="title"> <br><br><br>
+          <input matInput placeholder="Description" value="{{products.discription}}" [formControl]="discription">
+        </mat-card-content>
+        <mat-chip-list #chipList class="chipList">
+          <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
+            (removed)="removeLabel(label,products)">
+            {{label.labelName}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+        </mat-chip-list><br>
+        <div class="bottomButtons" [style.background-color]="products.colore">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button mat-button matTooltip="Remind me">
+            <mat-icon class="icons">add_alert</mat-icon>
+          </button>
+          <button (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator" class="Button"
+            [style.background-color]="products.colore">
+            <mat-icon class="icons">person_add</mat-icon>
+          </button>
+          <i class="material-icons innerIconDiv" (click)="colorChange()">
+            color_lens
+          </i>
+          <div *ngIf="colorMenu" class="colorMenuDiv">
+            <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors"
+              [style.background]="customColor" (click)="addColor(customColor,products)">
+            </button>
+          </div>
+  
+          <button mat-button matTooltip="Add image">
+            <mat-icon class="icons">image</mat-icon>
+          </button>
+          <button mat-button matTooltip="Archive">
+            <mat-icon class="icons" (click)=onUnArchive(products)>archive</mat-icon>
+          </button>
+  
+          <button mat-button [matMenuTriggerFor]="more" matTooltip="more">
+            <mat-icon class="icons">more_vert</mat-icon>
+          </button>
+          <mat-menu #more="matMenu" class="morecard">
+            <button mat-button (click)=onTrash(products)>Delete Note</button>
+            <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
+          </mat-menu>
+          <button mat-button matTooltip="undo">
+            <mat-icon class="icons">undo</mat-icon>
+          </button>
+          <button mat-button matTooltip="redo">
+            <mat-icon class="icons">redo</mat-icon>
+          </button>
         </div>
-      </mat-menu>
-
-      <button mat-icon-button matTooltip="undo" class="Button">
-        <mat-icon class="icons">undo</mat-icon>
-      </button>
-      <button mat-icon-button matTooltip="redo" class="Button">
-        <mat-icon class="icons">redo</mat-icon>
-      </button>
+      </mat-card><br><br>
     </div>
-  </mat-card>
 </div>

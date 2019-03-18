@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Note } from './core/model/note';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Note } from '../../model/note';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataServiceService {
-
-  label: any
-  search: any
-  note: Note[] = []
+  public theme$: Subject<any> = new Subject(); private label: string;
+  private search: String;
+  private note: Note[] = []
 
   private messageSource = new BehaviorSubject(false);
   currentMessage = this.messageSource.asObservable();
@@ -30,14 +29,25 @@ export class DataServiceService {
   }
 
   notelist(note: Note[]) {
-    this.note = note
+    this.note = note;
     this.NoteSource.next(note);
   }
 
 
   searchData(search: String) {
-    this.search = search
+    this.search = search;
     this.searchDataSource.next(search);
   }
 
+  public get labels(): Observable<any> {
+    return this.labelSource.asObservable();;
+  }
+
+  public setTheme(themeChanged: boolean) {
+    this.theme$.next(themeChanged);
+  }
+
+  public getTheme() {
+    return this.theme$;
+  }
 }

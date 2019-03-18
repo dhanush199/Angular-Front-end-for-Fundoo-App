@@ -3,7 +3,7 @@ import { Note } from 'src/app/core/model/note';
 import { Subject } from 'rxjs';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
 import { Router } from '@angular/router';
-import { DataServiceService } from 'src/app/data.service';
+import { DataServiceService } from 'src/app/core/services/Data-service/data.service';
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { User } from 'src/app/core/model/user';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -17,12 +17,16 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 export class HomeComponent implements OnInit {
   dynamicdata: Note;
+  grid=false
+
   @Output() toggle = new EventEmitter();
   public toggleNav: Subject<any> = new Subject();
   public btnClick: Subject<any> = new Subject();
   notes: Note[]
-  user: User
-  picture: any
+  user: User;
+  picture: any;
+  
+
   searchData = {
     data: ''
   };
@@ -44,6 +48,11 @@ export class HomeComponent implements OnInit {
 
   public toggleOnClick() {
     this.toggleNav.next();
+  }
+
+  logout(){
+    localStorage.removeItem('token')
+    this.router.navigate(['login']);
   }
 
   public toggleSide() {
@@ -81,4 +90,15 @@ export class HomeComponent implements OnInit {
       console.log(error)
     })
   }
+
+  // toggleView(){
+  //    this.view=!(this.view);
+  //   this.dataservice.changeMessage(this.view);
+  // }
+
+  public viewGrid() {
+    this.grid = !this.grid;
+    this.dataservice.setTheme(this.grid);
+  }
+
 }

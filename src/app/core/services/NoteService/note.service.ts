@@ -28,37 +28,27 @@ export class NoteService {
   }
 
   public getAll(): Observable<any> {
-    var header = this.getHeader()
+    var header = this.getHeader();
     return this.httpUtil.get(this.API + '/retrievenote', header)
 
   }
 
   public save(note) {
-    var header = this.getHeader()
-    this.httpUtil.postWithBody(this.API + '/createnote', note, header).subscribe(response => {
-      console.log(response);
-    }, (error) => console.log(error));
+    var header = this.getHeader();
+   return this.httpUtil.postWithBody(this.API + '/createnote', note, header)
   }
 
   public delete(id) {
-    var header = this.getHeader()
-    console.log("this is my id",id)
+    var header = this.getHeader();
     return this.httpUtil.delete(this.API + '/delete/' + id, header);
   }
 
   public updateNote(note, noteId) {
-    console.log(note)
     var token = localStorage.getItem('token')
-    console.log(token)
-    this.httpUtil.put(this.API + '/editnote', note, {
+    return this.httpUtil.put(this.API + '/editnote', note, {
       params: {
         noteId: noteId,
         token: token
-      },
-      observe: 'response'
-    }
-    ).subscribe(response => {
-      console.log(response);
-    }, (error) => console.log(error));
+      }, observe: 'response'})
   }
 }

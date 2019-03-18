@@ -21,8 +21,8 @@ export const appRoutes: Routes = [
   {
     path: 'home', component: HomeComponent, canActivate: [AuthGuard], children: [
       
-      { path: '', redirectTo: 'notelist', pathMatch: 'full' },
-      { path: 'notelist', component: NotelistComponent },
+      { path: '', redirectTo: 'noteretrieve', pathMatch: 'full' },
+      { path: 'noteretrieve', component: NotelistComponent },
       { path: 'trash', component: ThrashComponent },
       { path: 'archive', component: ArchiveComponent },
       { path: 'edit-label', component: EditLabelComponent },

@@ -25,7 +25,7 @@ export class UserService {
 
   }
 
-  public forgotPassword(user) {
+  public forgotPassword(user): Observable<any> {
     return this.httpUtil.post(environment.base_url + '/forgotpassword', user);
   }
 

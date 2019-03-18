@@ -22,15 +22,12 @@ export class UpdateNoteComponent {
     // console.log(note);
   }
 
-  public updateNote(note, id, title, disc) {
-    console.log(title);
-    console.log(disc);
-    note = {
-      "title": title,
-      "discription": disc,
-      "noteId": note.id
-    }
-    this.service.updateNote(note, id)
+  public updateNote(data) {
+    this.service.updateNote(data, data.id).subscribe(resp=>{
+      console.log(resp)
+    },(error)=>{
+      console.log(error)
+    })
     this.dialogRef.close();
 
   }

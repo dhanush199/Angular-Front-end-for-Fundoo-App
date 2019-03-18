@@ -19,7 +19,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') public drawer;
   labels: []
   // @Input() products: Label;
-  @Input() public toggleSidebar: Subject<any>;;
+  @Input() public toggleSidebar: Subject<any>;
   constructor(public dialog: MatDialog, private router: Router, private labelservice: LabelService) { }
 
   ngOnInit() {
@@ -33,7 +33,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
     }, (error) => console.log());
   }
   notes() {
-    this.router.navigate(['home/notelist'])
+    this.router.navigate(['home/noteretrieve'])
   }
   openDialog(label): void {
     const dialogRef = this.dialog.open(EditLabelComponent, {

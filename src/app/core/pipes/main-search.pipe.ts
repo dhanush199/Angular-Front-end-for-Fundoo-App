@@ -1,5 +1,5 @@
 import { Pipe, PipeTransform, ɵConsole } from '@angular/core';
-import { Note } from './core/model/note';
+import { Note } from '../model/note';
 
 @Pipe({
   name: 'searchFilter'
