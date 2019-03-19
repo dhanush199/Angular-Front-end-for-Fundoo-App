@@ -14,64 +14,68 @@ import { MatNativeDateModule, MatSidenavModule, MatListModule } from '@angular/m
 import { MatDividerModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatChipsModule} from '@angular/material/chips';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 @NgModule({
   declarations: [],
   imports: [MatNativeDateModule,
-    MatSidenavModule, 
+    MatSidenavModule,
     MatListModule,
-    CommonModule, 
+    CommonModule,
     HttpClientInMemoryWebApiModule,
     MatSlideToggleModule,
     MatChipsModule,
-     MatToolbarModule,
-    MatFormFieldModule, 
+    MatToolbarModule,
+    MatFormFieldModule,
     HttpClientModule,
-     MatDividerModule,
-    MatInputModule, 
-    BrowserAnimationsModule, 
+    MatDividerModule,
+    MatInputModule,
+    BrowserAnimationsModule,
     MatSliderModule,
     MatOptionModule,
-    MatDialogModule, 
-    BrowserModule, 
+    MatDialogModule,
+    BrowserModule,
     MatSnackBarModule,
     MatButtonToggleModule,
-    MatSelectModule, 
+    MatSelectModule,
     MatIconModule,
-    MatCardModule, 
-    MatMenuModule, 
-    FlexLayoutModule, 
-    MatExpansionModule
+    MatCardModule,
+    MatMenuModule,
+    FlexLayoutModule,
+    MatExpansionModule,
+    MatAutocompleteModule
   ],
-  exports: [MatNativeDateModule, 
-    MatSidenavModule, 
-    MatListModule, 
+  exports: [MatNativeDateModule,
+    MatSidenavModule,
+    MatListModule,
     FlexLayoutModule,
     HttpClientInMemoryWebApiModule,
-     MatToolbarModule,
-     MatSlideToggleModule,
-    MatInputModule, 
+    MatToolbarModule,
+    MatSlideToggleModule,
+    MatInputModule,
     MatSnackBarModule,
     MatSliderModule,
-    MatDialogModule, 
-    MatIconModule, 
+    MatDialogModule,
+    MatIconModule,
     BrowserAnimationsModule,
     MatButtonToggleModule,
     MatOptionModule,
-    MatFormFieldModule, 
+    MatFormFieldModule,
     HttpClientModule,
-     MatDividerModule,
-    MatSelectModule, 
+    MatDividerModule,
+    MatSelectModule,
     MatChipsModule,
     BrowserModule,
-     MatMenuModule, 
-     MatInputModule,
+    MatMenuModule,
+    MatInputModule,
     MatCardModule,
-     MatExpansionModule
+    MatExpansionModule,
+    MatAutocompleteModule
   ],
 })
 export class AppMaterialModule { }

@@ -6,13 +6,14 @@ import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes
 import { Router } from '@angular/router';
 import { Note } from 'src/app/core/model/note';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
-import { LabelDialogBoxComponent } from 'src/app/label-dialog-box/label-dialog-box.component';
 import { LabelService } from 'src/app/core/services/LabelService/label.service';
 import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from 'src/app/core/model/user';
 import { DataServiceService } from 'src/app/core/services/Data-service/data.service';
+import { ColorPalets } from 'src/app/data-config';
+import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
 
 export interface DialogData {
   labelName: string;
@@ -33,36 +34,41 @@ export class NotelistComponent implements OnInit {
   removable = true;
   togle = true
   notes: Note
+  coNotes: any
   noteArray: any
   user: User
   picture: any
   colorMenu = false
   fillTheColor;
-  grid=false;
-  colors = [
-    "#fff",    '#FFFF00',    '#FFFAFA',    '#B0E0E6',    '#FFC0CB',
-    '#00FA9A',    '#E0FFFF',  '	#ADFF2F',    '#00FFFF',    '#DEB887',
-    '#BA55D3',    '	#FF0000'
-  ]
-
+  grid = false;
+  colors: string[] = ColorPalets
   panelOpenState: boolean = false;
   submitted = false;
   constructor(private router: Router, private labelService: LabelService, private noteService: NoteService,
     public dialog: MatDialog, private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<NotelistComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private userService: UserService,
-    private sanitizer: DomSanitizer,private dataService:DataServiceService) { }
+    private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
 
   public ngOnInit() {
+    this.getCoNotes()
     this.readAll()
-
     this.dataService.getTheme().subscribe((resp) =>
-    this.grid = resp
-);
+      this.grid = resp
+    );
     this.getUser()
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
+
+  public getCoNotes() {
+    this.noteService.getCollNotes().subscribe(resp=>{
+      this.coNotes=resp
+      console.log(resp)
+    },(error)=>{
+      console.log(error)
+    }) 
+   }
 
   public togglePanel() {
     this.panelOpenState = !this.panelOpenState;
@@ -117,6 +123,7 @@ export class NotelistComponent implements OnInit {
   public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp;
+    //  this.products = Object.assign({}, this.coNotes);
     }, (error) => console.log(error));
   }
 

@@ -4,6 +4,9 @@ import { DialogData } from '../../shared-components/side-bar/side-bar.component'
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from 'src/app/core/model/user';
+import { FormControl, Validators } from '@angular/forms';
+import { Collaborator } from 'src/app/core/model/collaborator';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 @Component({
   selector: 'app-collaborator-dialog-box',
@@ -16,20 +19,21 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   picture: any
   disc: String
   emails: []
-  collabUser:[] 
-  constructor(public dialog: MatDialog, private sanitizer: DomSanitizer,
+  collabUser: []
+  collaboratedUser: Collaborator
+  constructor(public dialog: MatDialog, private sanitizer: DomSanitizer,private noteService:NoteService,
     public dialogRef: MatDialogRef<CollaboratorDialogBoxComponent>, private userService: UserService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
   ) { }
 
   public ngOnInit() {
-    this.getUser()
-    // this.userService.getCollEmails().subscribe((resp: any) => {
-    //   this.emails = resp
-    //   console.log(resp)
-    // }, (error) => console.log(error));
-    this.getCollbUsers()
+    this.getUser();
+    this.userService.getCollUser().subscribe((resp: any) => {
+      this.emails = resp
+      console.log(resp)
+    }, (error) => console.log(error));
   }
+  emailId = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
   public onNoClick(data, id): void {
     this.dialogRef.close();
@@ -53,20 +57,34 @@ export class CollaboratorDialogBoxComponent implements OnInit {
     })
   }
 
-  public onAddCollab(email) {
+  onAddCollab(email, note) {
     console.log(email)
+    let collaboratedUser=
+      {
+        collEmailId: email,
+        noteId: note.id
+      };
+    this.noteService.doCollab(collaboratedUser).subscribe(resp=>{
+      console.log(resp)
+    },(error)=>{
+    console.log(error)
+    })
     console.log(this.data)
   }
 
-  getCollbUsers() {
-    this.userService.getCollUser().subscribe((users) => {
-      // const modifiedUser = users.reduce((list, item) => {
-
-      // }, []);
-      var merged = [].concat.apply([], users);
-      this.collabUser = merged
-    }, (error) => {
-      console.log(error)
-    })
+  deleteCollab(email, note,collId){
+    let collaboratedUser=
+    {
+      id: collId,
+      collEmailId: email,
+      noteId: note.id
+     
+    };
+  this.noteService.removeCollab(collaboratedUser).subscribe(resp=>{
+    console.log(resp)
+  },(error)=>{
+  console.log(error)
+  })
+  console.log(this.data)
   }
 }

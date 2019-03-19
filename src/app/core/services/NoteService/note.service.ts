@@ -51,4 +51,19 @@ export class NoteService {
         token: token
       }, observe: 'response'})
   }
+
+  public doCollab(collabUser){
+    var token=localStorage.getItem('token')
+    return this.httpUtil.put(this.API +'/add-collabarator/'+token,collabUser,{})
+  }
+
+  public removeCollab(collabUser){
+    var token=localStorage.getItem('token')
+    return this.httpUtil.put(this.API +'/remove-collabarator/'+token,collabUser,{})
+  }
+
+  public getCollNotes(){
+    var token=localStorage.getItem('token')
+    return this.httpUtil.get(this.API +'/get-collabaratoed-notes/'+token,{})
+  }
 }

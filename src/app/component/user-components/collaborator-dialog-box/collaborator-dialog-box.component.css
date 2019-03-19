@@ -8,6 +8,26 @@
     padding-top: 10%;
   }
 
-  .emailButtons{
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
   }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  
+.collabEmail {
+  outline: none
+}
+
+.collabRemoveIcon {
+  float: right;
+  cursor: pointer;
+}
+.collabEmail {
+  margin-bottom: 10px;
+}
+
   

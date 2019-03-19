@@ -3,6 +3,7 @@ export class User {
     "mobileNumber": string;
     "password": string;
     "emailId": string;
-    "image":any
-    "coEmailId":String
+    "image": any
+    "coEmailId": String;
+    "userId": number;
 }

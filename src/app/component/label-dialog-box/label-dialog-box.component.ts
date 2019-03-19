@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { DialogData } from '../component/notelist/notelist.component';
-import { LabelService } from '../core/services/LabelService/label.service';
+import { LabelService } from 'src/app/core/services/LabelService/label.service';
+import { DialogData } from '../notelist/notelist.component';
 
 @Component({
   selector: 'app-label-dialog-box',

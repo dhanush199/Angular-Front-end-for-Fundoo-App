@@ -1,4 +1,5 @@
 
+
 :host {
     .notegrid {
     &-container {
@@ -21,57 +22,41 @@
         flex-wrap: wrap;
         justify-content: space-around;
         mat-card{
-          width:300px;
+          width:400px;
           position: relative;
           box-shadow: 0 14px 28px rgba(110, 108, 108, 0.22), 0 10px 10px rgba(110, 108, 108, 0.22);
 }
       }
+}
+.container {
+    .mat-card-header {
+        display: flex;
+        justify-content: space-between;
+        button {
+            &.pinned-icon {
+                // background-color:orange;
+                width:20px;
+            }
+            img {
+                width:20px;
+            }
+        }
     }
-
-.outerLayout{
-    align-items: center;
-    align-content: center;
-    padding-left: 26%;
-    padding-top: 15px;
-    padding-bottom: 80px;
-    background-color: transparent;
-    width: 100px; 
+    
 }
 
-.Button{
-    border-color: transparent;
-}
+// .bottomButtons{
+//  align-content: center;
+//  align-items: center
+// }
 
-.bottomButtons{
-    border-bottom-color: white;
-    align-items: center;
-    align-content: center;
-}
-
-.icons{
-    color:black;
-    border: transparent
-}
-
-.matCard{
-    padding-top: 50px;
-    align-items: center;
-    align-content: center;
-    background-color:white;
-    width: 400px; 
-    border-color: white;
-    height: 200px;
-}
-
-
-
-.inputs{
-    padding-left: 8%;
-    background-color: white;
-}
+// .inputs{
+//     padding-left: 8%;
+//     background-color: white;
+// }
 
 .chipList{
-    background-color: transparent
+    background-color: transparent;
 }
 
 .colorMenuDiv {
@@ -84,6 +69,7 @@
 
 .colorMenuButton {
     height:26px;
+    background-color: red;
     width:26px;
     margin:4px;
 }
@@ -93,13 +79,20 @@
     background-color:white;
     align-content: center;
     align-items: center;
-    width: 300px; 
-    height: 180px;
+    width: 400px; 
+    height: 165px;
+    box-shadow: 0 14px 28px rgba(110, 108, 108, 0.22), 0 10px 10px rgba(110, 108, 108, 0.22);
+
 }
 
-.cardContent{
-    width: 50%;
-    height: 50%;
-    padding-top: 0%;
+// .cardContent{
+//     width: 50%;
+//     height: 50%;
+//     padding-top: 0%;
+// }
+
+.button{
+    background-color: transparent;
+    padding-left: 3%;
 }
-    }
+}

@@ -26,13 +26,13 @@ import { UserService } from './core/services/UserService/user.service';
 import { EditLabelComponent } from './component/edit-label/edit-label.component';
 import { SideBarComponent } from './component/shared-components/side-bar/side-bar.component';
 import { GridViewComponent } from './component/shared-components/grid-view/grid-view.component';
-import { LabelDialogBoxComponent } from './label-dialog-box/label-dialog-box.component';
 import { SearchPipePipe } from './core/pipes/search-pipe.pipe';
 import { MainSearchPipe } from './core/pipes/main-search.pipe';
-import { NoteCardComponent } from './note-card/note-card.component';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { CollaboratorDialogBoxComponent } from './component/user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 import { EmailIdPipe } from './core/pipes/email-id.pipe';
+import { ImageUploadComponent } from './component/image-upload/image-upload.component';
+import { NoteCardComponent } from './component/note-card/note-card.component';
+import { LabelDialogBoxComponent } from './component/label-dialog-box/label-dialog-box.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');

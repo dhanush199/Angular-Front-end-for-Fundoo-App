@@ -18,9 +18,8 @@
             <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
           </mat-chip>
         </mat-chip-list><br>
-        <div class="bottomButtons" [style.background-color]="products.colore">
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button mat-button matTooltip="Remind me">
+        <div  [style.background-color]="products.colore">
+          <button class="button" mat-button matTooltip="Remind me">
             <mat-icon class="icons">add_alert</mat-icon>
           </button>
           <button (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator" class="Button"
@@ -36,24 +35,24 @@
             </button>
           </div>
   
-          <button mat-button matTooltip="Add image">
+          <button class="button" mat-button matTooltip="Add image">
             <mat-icon class="icons">image</mat-icon>
           </button>
-          <button mat-button matTooltip="Archive">
+          <button class="button" mat-button matTooltip="Archive">
             <mat-icon class="icons" (click)=onUnArchive(products)>archive</mat-icon>
           </button>
   
-          <button mat-button [matMenuTriggerFor]="more" matTooltip="more">
+          <button class="button" mat-button [matMenuTriggerFor]="more" matTooltip="more">
             <mat-icon class="icons">more_vert</mat-icon>
           </button>
           <mat-menu #more="matMenu" class="morecard">
             <button mat-button (click)=onTrash(products)>Delete Note</button>
             <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
           </mat-menu>
-          <button mat-button matTooltip="undo">
+          <button class="button" mat-button matTooltip="undo">
             <mat-icon class="icons">undo</mat-icon>
           </button>
-          <button mat-button matTooltip="redo">
+          <button class="button" mat-button matTooltip="redo">
             <mat-icon class="icons">redo</mat-icon>
           </button>
         </div>

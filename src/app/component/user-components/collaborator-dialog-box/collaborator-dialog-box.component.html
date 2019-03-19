@@ -1,5 +1,5 @@
 <div>
-{{collabUser}}
+  {{collabUser}}
   <b>Collaborator</b>
   <mat-divider></mat-divider>
   <div>
@@ -7,16 +7,33 @@
     <i>{{users?.emailId}} (Owner)</i>
   </div> <br><br>
 
-
-<input #search (keyup)="0">
-<ul>
-
-  <li *ngFor="let email of merged"> {{email}}
-      <button (click)=onAddCollab(email) class="emailButtons" mat-button>
-       <span>Add</span>
-        </button>
-        <!-- (merged | emailIdFilter: search.value)" -->
-      </li>
-</ul>
-<mat-divider></mat-divider>
+  <div *ngFor="let item of data.collaborators">
+    <div class="collab">
+      {{item.name}}
+    </div>
+    <div>
+      <div class="collabEmail">
+        {{item.collEmailId}}
+        <i class="material-icons collabRemoveIcon" (click)="deleteCollab(item.collEmailId,data,item.id)">
+          close
+        </i>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <form class="example-form">
+    <mat-form-field class="example-full-width">
+      <input type="text" #search aria-label="Number" matInput [formControl]="myControl" [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete">
+        <mat-option *ngFor="let option of (emails| emailIdFilter: search.value)" [value]="option">
+          {{option}}
+          <button mat-button (click)=onAddCollab(option,data)>
+            <span>Add</span>
+          </button>
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field>
+  </form>
+  <mat-divider></mat-divider>
+  <button mat-button [mat-dialog-close]="{'email':newEmail}" style="float:right">Close</button>
 </div>

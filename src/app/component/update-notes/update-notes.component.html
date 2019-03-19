@@ -1,4 +1,4 @@
-<div>
+<div >
   <div>
     <input matInput [(ngModel)]="data.title" [value]=title placeholder="Title">
   </div>
@@ -9,12 +9,9 @@
 
     <textarea matInput [(ngModel)]="data.discription" [value]=disc placeholder="Discription"></textarea>
 
-    </div>
-
-   
-    <br>
-    <br>
-    <button mat-button (click)="updateNote(data)" style="float:right">Close</button>
   </div>
 
-
+  <br>
+  <br>
+  <button  mat-button (click)="updateNote(data)" style="float:right">Close</button>
+</div>

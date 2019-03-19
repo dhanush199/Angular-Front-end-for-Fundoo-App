@@ -1,13 +1,16 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { Note } from '../core/model/note';
-import { DataServiceService } from '../core/services/Data-service/data.service';
-import { NoteService } from '../core/services/NoteService/note.service';
 import { FormControl, Validators } from '@angular/forms';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
-import { LabelService } from '../core/services/LabelService/label.service';
 import { MatSnackBar, MatDialog, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { DialogData } from '../component/notelist/notelist.component';
-import { UpdateNoteComponent } from '../component/update-notes/update-notes.component';
+// import { DialogData } from '../component/notelist/notelist.component';
+import { LabelService } from 'src/app/core/services/LabelService/label.service';
+import { ColorPalets } from 'src/app/data-config';
+import { Note } from 'src/app/core/model/note';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
+import { UpdateNoteComponent } from '../update-notes/update-notes.component';
+import { DialogData } from '../notelist/notelist.component';
+import { DataServiceService } from 'src/app/core/services/Data-service/data.service';
+
 
 @Component({
   selector: 'app-note-card',
@@ -22,14 +25,11 @@ export class NoteCardComponent implements OnInit {
   fillTheColor;
   @Input() products: Note;
   togle = false;
-  colors = [
-    "#fff", '#FFFF00', '#FFFAFA', '#B0E0E6', '#FFC0CB',
-    '#00FA9A', '#E0FFFF', '	#ADFF2F', '#00FFFF', '#DEB887',
-    '#BA55D3', '	#FF0000'
-  ]
+  colors :string[]=ColorPalets
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<NoteCardComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
-    private labelService: LabelService, private noteService: NoteService, private dataService: DataServiceService, private service: NoteService) { }
+    private labelService: LabelService, private noteService: NoteService, private dataService: DataServiceService, 
+    private service: NoteService) { }
 
   public ngOnInit() {
     this.dataService.currentMessage.subscribe(message => this.view = message)

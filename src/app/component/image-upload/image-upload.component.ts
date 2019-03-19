@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HttputilService } from '../httputil.service';
-import { User } from '../core/model/user';
-import { UserService } from '../core/services/UserService/user.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/core/model/user';
+import { HttputilService } from 'src/app/httputil.service';
+import { UserService } from 'src/app/core/services/UserService/user.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -10,7 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./image-upload.component.css']
 })
 export class ImageUploadComponent {
-  constructor(public router: Router, public httpUtil: HttputilService, private userService: UserService) { }
+  constructor(public router: Router, public httpUtil: HttputilService, 
+    private userService: UserService) { }
   selectedFile: File
   user: User
   fileToUpload: File

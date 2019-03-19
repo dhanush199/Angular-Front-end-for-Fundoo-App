@@ -10,8 +10,8 @@ import { ResetPasswordComponent } from './component/user-components/reset-passwo
 import { ForgotPasswordComponent } from './component/user-components/forgot-password/forgot-password.component';
 import { LoginComponent } from './component/user-components/login/login.component';
 import { EditLabelComponent } from './component/edit-label/edit-label.component';
-import { NoteCardComponent } from './note-card/note-card.component';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { NoteCardComponent } from './component/note-card/note-card.component';
+import { ImageUploadComponent } from './component/image-upload/image-upload.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
