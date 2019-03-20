@@ -63,6 +63,7 @@ main {
   align-items: center;
   padding: 8px;
   border: transparent;
+  cursor: pointer;
   /* border-radius: 500%; */
   
 }
@@ -85,8 +86,16 @@ main {
   border-radius: 300%;
 }
 
-/* .imageChange{
-  height: 80%;
-  width: 20%;
-  padding-left: 0%;
-} */
+.keepImage{
+  width:45px;
+  padding-top: 17%;
+  padding-left: 20%;
+  padding-right: 20%;
+}
+
+.mainTogle{
+  background: transparent;
+  border: transparent;
+  cursor: pointer;
+}
+

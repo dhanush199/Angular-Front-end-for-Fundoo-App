@@ -4,7 +4,7 @@
   <mat-divider></mat-divider>
   <div>
     <img class="image" [src]="picture?.imageSrc">
-    <i>{{users?.emailId}} (Owner)</i>
+    <i>{{notes.collaborators.collEmailId}} (Owner)</i>
   </div> <br><br>
 
   <div *ngFor="let item of data.collaborators">
@@ -27,7 +27,7 @@
       <mat-autocomplete #auto="matAutocomplete">
         <mat-option *ngFor="let option of (emails| emailIdFilter: search.value)" [value]="option">
           {{option}}
-          <button mat-button (click)=onAddCollab(option,data)>
+          <button class="addButton" mat-button (click)=onAddCollab(option,data)>
             <span>Add</span>
           </button>
         </mat-option>

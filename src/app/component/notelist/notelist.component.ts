@@ -51,7 +51,6 @@ export class NotelistComponent implements OnInit {
     private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
 
   public ngOnInit() {
-    this.getCoNotes()
     this.readAll()
     this.dataService.getTheme().subscribe((resp) =>
       this.grid = resp
@@ -60,15 +59,6 @@ export class NotelistComponent implements OnInit {
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
-
-  public getCoNotes() {
-    this.noteService.getCollNotes().subscribe(resp=>{
-      this.coNotes=resp
-      console.log(resp)
-    },(error)=>{
-      console.log(error)
-    }) 
-   }
 
   public togglePanel() {
     this.panelOpenState = !this.panelOpenState;
@@ -123,7 +113,6 @@ export class NotelistComponent implements OnInit {
   public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp;
-    //  this.products = Object.assign({}, this.coNotes);
     }, (error) => console.log(error));
   }
 
@@ -213,8 +202,8 @@ export class NotelistComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
-    this.readAll()
   }
+
 }
 
 

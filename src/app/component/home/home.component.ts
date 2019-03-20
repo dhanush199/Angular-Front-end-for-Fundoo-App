@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   notes: Note[]
   user: User;
   picture: any;
+  view=false
   
 
   searchData = {
@@ -91,10 +92,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  // toggleView(){
-  //    this.view=!(this.view);
-  //   this.dataservice.changeMessage(this.view);
-  // }
+  toggleView(){
+     this.view=!(this.view);
+    this.dataservice.changeMessage(this.view);
+  }
 
   public viewGrid() {
     this.grid = !this.grid;

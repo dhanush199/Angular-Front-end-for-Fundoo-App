@@ -40,14 +40,17 @@
   #insidenave{
     width: 250px;
   }
+
   #button{
     border-style: none;
     width: 100%;
     font-family: sans-serif;
+    padding-left: 10%;
     height: 56px;
     padding: 5px;
     background-color: white;
     align-self: auto;
+    cursor: pointer;
   }
   #imgNotes{
     margin-right: 42px;
@@ -172,3 +175,10 @@
   custButton{
       align-self: auto;
   }
+
+  .description {
+    padding-left: 32px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+  }
+  

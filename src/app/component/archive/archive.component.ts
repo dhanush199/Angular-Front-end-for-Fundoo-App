@@ -9,6 +9,7 @@ import { LabelService } from 'src/app/core/services/LabelService/label.service';
 import { HttputilService } from 'src/app/httputil.service';
 import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
+import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 
 
 export interface DialogData {
@@ -164,5 +165,16 @@ export class ArchiveComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
+  }
+  /*collaborater dialog Box*/
+  public onClickDialogBox(products): void {
+    console.log(products)
+    const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
+      width: '550px',
+      data: products
+
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }

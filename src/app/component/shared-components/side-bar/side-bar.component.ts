@@ -47,6 +47,12 @@ export class SideBarComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.toggleSidebar.unsubscribe();
   }
+  archive(){
+    this.router.navigate(['home/archive'])
+  }
+  trash(){
+    this.router.navigate(['home/trash'])
+  }
 }
 
 

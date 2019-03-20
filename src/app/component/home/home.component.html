@@ -3,14 +3,14 @@
     <mat-toolbar class="fixed-header" fxFlex="100%;" fxFlex.xs="100%" fxFlex.sm="100%" fxFlex.md="100%">
 
         <mat-toolbar-row>
-            <button mat-icon-button aria-label="Toggle sidenav" (click)="toggleOnClick()" matTooltip="Menu">
+            <button class="mainTogle" mat-button aria-label="Toggle sidenav" (click)="toggleOnClick()"
+                matTooltip="Menu">
                 <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
             </button>
             <ng-template #tempTtext>
 
             </ng-template>
-            <span><img src="./assets/images/keep-512.png" style="width:50px;"></span>
-            &nbsp;&nbsp;
+            <span><img src="./assets/images/keep-512.png" class="keepImage"></span>
             <span>
                 <font size="5" face="arial">FundooNote</font>
             </span> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
@@ -23,29 +23,22 @@
 
             </div>
 
-            <a mat-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
+            <a mat-icon-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
                 <mat-icon class="topButtons">refresh</mat-icon>
-            </a>
+            </a>&nbsp;&nbsp;&nbsp;
 
-            <button mat-icon-button (click)="viewGrid()" fxHide.xs="true" fxShow.sm="false" fxShow.md="true"
-                fxShow.lg="true">
+            <button mat-button class="mainTogle" (click)="viewGrid()" fxHide.xs="true" fxShow.sm="false"
+                fxShow.md="true" fxShow.lg="true">
                 <mat-icon *ngIf="!grid">view_stream</mat-icon>
                 <mat-icon *ngIf="grid">view_module</mat-icon>
-            </button>
+            </button>&nbsp;&nbsp;&nbsp;
 
-
-
-
-
-
-            &nbsp;
-            &nbsp;
-
-            <button mat-icon-button class="topButtons" [matMenuTriggerFor]="sett" matTooltip="settings">
-                <mat-icon>build</mat-icon>
-            </button>
+            <button mat-button class="topButtons" [matMenuTriggerFor]="sett" matTooltip="settings">
+                <!-- <mat-icon>build</mat-icon> -->
+                <i class="fa fa-cogs" style="font-size:22px;"></i>
+            </button>&nbsp;&nbsp;&nbsp;
             <mat-menu class="topButtons" #sett="matMenu">
-                <button mat-icon-button class="topButtons" mat-menu-item>
+                <button mat-button class="topButtons" mat-menu-item>
 
                     <span>Settings</span>
                 </button>
@@ -73,9 +66,9 @@
 
             &nbsp;
 
-            <button class="topButtons" mat-icon-button [matMenuTriggerFor]="App" matTooltip="Apps">
+            <button class="topButtons" mat-button [matMenuTriggerFor]="App" matTooltip="Apps">
                 <mat-icon>apps</mat-icon>
-            </button>
+            </button>&nbsp;&nbsp;&nbsp;
             <mat-menu #App="matMenu" class="topButtons">
                 <mat-grid-list cols="3">
                     <mat-grid-tile>
@@ -169,7 +162,7 @@
             </mat-menu>
             <button class="topButtons" mat-button matTooltip="Notifications">
                 <mat-icon>notifications_on</mat-icon>
-            </button>
+            </button>&nbsp;&nbsp;&nbsp;
 
             <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google account">
                 <img class="image" [src]="picture?.imageSrc">
@@ -190,7 +183,9 @@
                     </a>
                 </button>
 
+
             </mat-menu>
+
 
         </mat-toolbar-row>
     </mat-toolbar>

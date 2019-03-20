@@ -3,6 +3,7 @@ import { HttputilService } from 'src/app/httputil.service';
 import { environment } from 'src/environments/environment';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +12,23 @@ export class UserService {
 
   constructor(private route: ActivatedRoute, private router: Router, private httpUtil: HttputilService) { }
 
+  public getHeader() {
+    let token = localStorage.getItem('token')
+    const httpheaders = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'token': token
+      })
+    };
+    return httpheaders;
+  }
+  
   public login(user) {
-    this.httpUtil.post(environment.base_url + '/loginuser', user).subscribe(response => {
-      console.log(response);
-      localStorage.setItem('token', response.headers.get('token'));
-      this.router.navigate(['/home']);
-    }, (error) => console.log(error));
+    return this.httpUtil.post(environment.base_url + '/loginuser', user);
   }
 
   public register(user) {
-    this.httpUtil.post(environment.base_url + '/registeruser', user).subscribe(response => {
-    }, (error) => console.log(error));
+   return this.httpUtil.post(environment.base_url + '/registeruser', user);
 
   }
 
@@ -34,8 +41,8 @@ export class UserService {
   }
 
   public getUser(): Observable<any> {
-    var token = localStorage.getItem('token')
-    return this.httpUtil.get(environment.base_url + '/get-user/' + token, 1);
+    let token = localStorage.getItem('token')
+    return this.httpUtil.get(environment.base_url + '/get-user/' + token, {});
   }
 
   public updateUser(user) {
@@ -43,8 +50,15 @@ export class UserService {
   }
 
   public getCollUser(){
-    var token=localStorage.getItem('token')
+    let token=localStorage.getItem('token')
     return this.httpUtil.get(environment.base_url +'/get-all-user/'+token,{})
   }
+
+
+  public getCollUserId(emailId){
+    let header=this.getHeader()
+    return this.httpUtil.get(environment.base_url +'/get-coll-user/'+emailId,header)
+  }
+
 
 }

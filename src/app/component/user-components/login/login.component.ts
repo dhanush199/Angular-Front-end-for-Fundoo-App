@@ -4,6 +4,7 @@ import { FormGroup, Validators } from '@angular/forms';
 import { FormBuilder } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from 'src/app/core/services/UserService/user.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
     selector: 'app-login',
@@ -18,7 +19,7 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     hide = true;
     myresponse: any;
-    constructor(private route: ActivatedRoute, private Userservice: UserService,
+    constructor(private route: ActivatedRoute, private Userservice: UserService,private snackBar:MatSnackBar,
          private formBuilder: FormBuilder, private router: Router, private _http: HttpClient) { }
     public ngOnInit() {
         this.loginForm = this.formBuilder.group({
@@ -35,6 +36,13 @@ export class LoginComponent implements OnInit {
         if (this.loginForm.invalid) {
             return;
         }
-        this.Userservice.login(user)
+        this.Userservice.login(user).subscribe(response => {
+            console.log(response);
+            localStorage.setItem('token', response.headers.get('token'));
+            this.router.navigate(['/home']);
+          }, (error) => {
+            this.snackBar.open("invalid user details", "Ok", {
+                duration: 2000,
+            });console.log(error)});
     }
 }

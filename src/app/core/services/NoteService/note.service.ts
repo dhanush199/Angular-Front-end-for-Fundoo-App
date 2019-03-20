@@ -62,8 +62,4 @@ export class NoteService {
     return this.httpUtil.put(this.API +'/remove-collabarator/'+token,collabUser,{})
   }
 
-  public getCollNotes(){
-    var token=localStorage.getItem('token')
-    return this.httpUtil.get(this.API +'/get-collabaratoed-notes/'+token,{})
-  }
 }

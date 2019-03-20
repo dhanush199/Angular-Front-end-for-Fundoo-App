@@ -1,56 +1,43 @@
-<mat-sidenav-container  class="example-container">
-    <mat-sidenav  #drawer mode="side" opened role="navigation">
-      <mat-nav-list >
-        
-        <button mat-menu-item  (click)="notes()" >
-          <mat-icon>notes</mat-icon>
-          <span>Notes</span>
-        </button>
-       
-        <button mat-menu-item>
-          <mat-icon>notifications</mat-icon>
-          <span>Remainder</span>
-        </button>
-        <mat-divider></mat-divider><br>
-     <div>
+<mat-sidenav-container class="example-container">
+  <mat-sidenav #drawer mode="side" opened role="navigation">
+    <mat-nav-list>
+      <button mat-menu-item (click)="notes()">
+        <mat-icon>notes</mat-icon>
+        <span>Notes</span>
+      </button>
+      <button mat-menu-item>
+        <mat-icon>notifications</mat-icon>
+        <span>Remainder</span>
+      </button>
+      <mat-divider></mat-divider><br>
+      <div>
         <span style="margin-left: 10px">
           <font face="arial">Label</font>
-        </span> <button mat-stroked-button id="editbutton" type="button">
+        </span> <button (click)=openDialog(labels) mat-stroked-button id="editbutton" type="button">
           <i class="fa fa-edit" style="font-size:20px"></i>Edit</button>
       </div>
       <div *ngFor="let labels of labels">
-        <button mat-stroked-button id="button"><i class="fa fa-pencil" style="font-size:20px"></i>
-          {{labels.labelName}}</button><br>
+       <button id="button"> <mat-icon>label_outline</mat-icon>
+        {{labels.labelName}}</button><br>
         <mat-divider></mat-divider>
       </div>
-
-      <div fxLayout=row fxLayoutGap="10%">
-        <button id="button" (click)=openDialog(labels) mat-stroked-button class=labelbutton>
-           
-                <i class="fa fa-edit" style="font-size:20px"></i>
-                Edit Label
-        </button>
-      </div>
-
-      <hr id="line">
-      <button mat-stroked-button id="button" [routerLink]="['/home/archive']">
-        <i class="fa fa-archive" style="font-size:20px"></i> Archive</button><br>
-      <button mat-stroked-button id="button" [routerLink]="['/home/trash']"><i class="fa fa-trash"
-          style="font-size:20px"></i>Trash</button><br>
-      <hr id="line">
-
+      <a mat-list-item (click)="archive()"><i class="material-icons icon"
+          style="font-size:30px">archive</i><span class="description">Archive</span> </a>
+      <a mat-list-item (click)="trash()"><i class="fa fa-trash" style="font-size:30px"></i><span
+          class="description">Trash</span> </a>
+      <br>
       <br>
 
       &nbsp; &nbsp;&nbsp; Privacy · Terms <br>
       &nbsp;&nbsp;&nbsp; Open-source licenses
-      </mat-nav-list>
-    </mat-sidenav>
-    <mat-sidenav-content>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
     <br>
     <br>
     <router-outlet></router-outlet>
     <br>
     <br>
-    </mat-sidenav-content>
-    
-  </mat-sidenav-container>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

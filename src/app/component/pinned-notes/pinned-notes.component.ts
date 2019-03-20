@@ -9,6 +9,7 @@ import { LabelService } from 'src/app/core/services/LabelService/label.service';
 import { DataServiceService } from 'src/app/core/services/Data-service/data.service';
 import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
+import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 
 @Component({
   selector: 'app-pinned-notes',
@@ -160,6 +161,17 @@ export class PinnedNotesComponent implements OnInit {
 
   changeStatus(finished: boolean) {
     this.onStatusChange.emit(finished);
+  }
+/*collaborater dialog Box*/
+  public onClickDialogBox(products): void {
+    console.log(products)
+    const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
+      width: '550px',
+      data: products
+
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }
