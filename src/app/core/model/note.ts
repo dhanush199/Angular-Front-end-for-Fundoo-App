@@ -1,3 +1,5 @@
+import { Collaborator } from './collaborator';
+
 export interface Note {
      discription: string;
      title: string;
@@ -9,4 +11,6 @@ export interface Note {
      labelName:String;
      colore:String;
      userId:number;
+     remainder:string;
+     collaboraters:Collaborator[]
 }

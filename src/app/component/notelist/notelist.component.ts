@@ -14,6 +14,7 @@ import { User } from 'src/app/core/model/user';
 import { DataServiceService } from 'src/app/core/services/Data-service/data.service';
 import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
+import { RemainderComponentComponent } from '../remainder-component/remainder-component.component';
 
 export interface DialogData {
   labelName: string;
@@ -41,9 +42,13 @@ export class NotelistComponent implements OnInit {
   colorMenu = false
   fillTheColor;
   grid = false;
-  colors: string[] = ColorPalets
+  // colorss: string[] = ColorPalets
   panelOpenState: boolean = false;
   submitted = false;
+
+  colors = ['CYAN', 'GREEN', 'YELLOW'];
+   myColor = '';
+
   constructor(private router: Router, private labelService: LabelService, private noteService: NoteService,
     public dialog: MatDialog, private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<NotelistComponent>,
@@ -202,6 +207,15 @@ export class NotelistComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
+  }
+  /*remainder dialog box*/
+  public openRemainder(products): void {
+    const dialogRef = this.dialog.open(RemainderComponentComponent, {
+      width: '550px',
+      data: products
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 
 }

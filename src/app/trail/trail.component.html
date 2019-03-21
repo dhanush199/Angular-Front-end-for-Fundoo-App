@@ -1,0 +1,67 @@
+
+<div class="container" [style.background-color]="products.colore" [dynamicHoverClass]="'has-hover'" *ngFor="let products of products">
+  <div class="container-header">
+      
+  </div>
+
+  <div class="container-body" >
+    <mat-card [style.background-color]="products.colore">
+      <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
+        style="color: black; background-color: royalblue ; float:right"></i>
+      <mat-card-content (click)="openDialog(products)" >
+        <input class="input" matInput placeholder="Title" [style.background-color]="products.colore" value={{products.title}} [formControl]="title"> <br><br><br>
+        <input class="input" matInput placeholder="Description" [style.background-color]="products.colore" value="{{products.discription}}" [formControl]="discription">
+      </mat-card-content>
+      <mat-chip-list #chipList class="chipList">
+        <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
+          (removed)="removeLabel(label,products)">
+          {{label.labelName}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+      </mat-chip-list><br>
+    </mat-card>
+  </div>
+
+  <div class="container-footer">
+    <div class="container-footer-buttons">
+      <div class="Bottombutton">
+      <button class="buttonSpace" (click)="onInit()" mat-button matTooltip="Remind me">
+        <mat-icon >add_alert</mat-icon>
+      </button>
+      <button class="buttonSpace" (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator"
+        [style.background-color]="products.colore">
+        <mat-icon >person_add</mat-icon>
+      </button>
+   
+       &nbsp;&nbsp;<i class="material-icons innerIconDiv" (click)="colorChange()">
+        color_lens
+      </i>
+      <div *ngIf="colorMenu" class="colorMenuDiv">
+        <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors" [style.background]="customColor"
+          (click)="addColor(customColor,products)">
+        </button>
+      </div>
+      <button class="buttonSpace" mat-icon-button matTooltip="Add image">
+        <mat-icon >image</mat-icon>
+      </button>
+      <button class="buttonSpace" mat-button matTooltip="Archive">
+        <mat-icon  (click)=onArchive(products)>archive</mat-icon>
+      </button>
+      <button class="buttonSpace" mat-button [matMenuTriggerFor]="more" matTooltip="more">
+        <mat-icon >more_vert</mat-icon>
+      </button>
+      <mat-menu #more="matMenu" class="morecard">
+        <button mat-button (click)=onTrash(products)>Delete Note</button>
+        <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
+      </mat-menu>
+
+      <button class="buttonSpace" mat-button matTooltip="undo">
+        <mat-icon>undo</mat-icon>
+      </button>
+      <button  class="buttonSpace" mat-button matTooltip="redo">
+        <mat-icon >redo</mat-icon>
+      </button> 
+    </div>
+    </div>
+  </div>
+</div><br><br><br><br><br><br>

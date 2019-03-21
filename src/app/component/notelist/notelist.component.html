@@ -12,9 +12,9 @@
   <i>Other Notes are</i>
 </div>
 
-<div fxLayout="column" fxLayoutAlign="stretch" align="center" class="container">
+<div fxLayout="column" fxLayoutAlign="stretch" align="center"  >
   <div *ngFor="let products of products| noteFilter">
-    <mat-card  [style.background-color]="products.colore" class="matCard1">
+    <mat-card  [style.background-color]="products.colore" class="matCard1"  >
       <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
         style="color: black; background-color: white ; float:right"></i>
       <mat-card-content  (click)="openDialog(products)">
@@ -30,7 +30,7 @@
       </mat-chip-list><br>
       <div class="bottomButtons" [style.background-color]="products.colore">
         <button class="button" mat-button matTooltip="Remind me">
-          <mat-icon class="icons">add_alert</mat-icon>
+          <mat-icon (click)="openRemainder(products)" class="icons">add_alert</mat-icon>
         </button>
         <button class="button" (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator"
           [style.background-color]="products.colore">

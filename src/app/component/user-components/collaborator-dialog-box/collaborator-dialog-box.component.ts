@@ -1,6 +1,5 @@
 import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/material';
-import { DialogData } from '../../shared-components/side-bar/side-bar.component';
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from 'src/app/core/model/user';
@@ -22,6 +21,7 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   emails: []
   collabUser: []
    notes: []
+   OwnerEmailId:any
   coUser;
   noteOwner:string
   collaboratedUser: Collaborator
@@ -34,14 +34,13 @@ export class CollaboratorDialogBoxComponent implements OnInit {
     var notes={
       ...this.data
     }
-//this.readAll()    // this.noteOwner=this.notes.userId
     this.getUser();
     this.userService.getCollUser().subscribe((resp: any) => {
       this.emails = resp
       console.log(resp)
     }, (error) => console.log(error));
    
-
+this.getNoteOwner();
   }
   emailId = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
@@ -119,5 +118,15 @@ export class CollaboratorDialogBoxComponent implements OnInit {
 
   public getCollaboraterId(email) {
     return this.userService.getCollUserId(email);
-  }   
+  }  
+  
+  public getNoteOwner(){
+    this.userService.getNoteOwner(this.data.userId).subscribe(resp=>{
+      console.log(resp)
+      this.OwnerEmailId=resp;
+
+    },(error)=>{
+      console.log(error)
+    })
+  }
 }

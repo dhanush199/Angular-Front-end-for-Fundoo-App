@@ -16,7 +16,7 @@ import { ArchiveComponent } from 'src/app/component/archive/archive.component';
 import { ThrashComponent } from 'src/app/component/trash/thrash.component';
 import { PinnedNotesComponent } from 'src/app/component/pinned-notes/pinned-notes.component';
 import { MatGridListModule } from '@angular/material/grid-list';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA, MatIconModule } from '@angular/material';
 import { NoteFilterPipe } from 'src/app/core/pipes/note-filter.pipe';
 import { RegisterComponent } from './component/user-components/register/register.component';
 import { ResetPasswordComponent } from './component/user-components/reset-password/reset-password.component';
@@ -33,6 +33,9 @@ import { EmailIdPipe } from './core/pipes/email-id.pipe';
 import { ImageUploadComponent } from './component/image-upload/image-upload.component';
 import { NoteCardComponent } from './component/note-card/note-card.component';
 import { LabelDialogBoxComponent } from './component/label-dialog-box/label-dialog-box.component';
+import { HoverDirective } from './hover.directive';
+import { TrailComponent } from './trail/trail.component';
+import { RemainderComponentComponent } from './component/remainder-component/remainder-component.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -63,11 +66,13 @@ export function tokenGetter() {
     ImageUploadComponent,
     CollaboratorDialogBoxComponent,
     EmailIdPipe,
-
+    HoverDirective,
+    TrailComponent,
+    RemainderComponentComponent,
   ],
 
   imports: [
-    CommonModule,
+    CommonModule, MatIconModule,
     BrowserModule,
     ReactiveFormsModule,
     AppRoutingModule,
@@ -90,7 +95,7 @@ export function tokenGetter() {
   ],
   entryComponents: [UpdateNoteComponent,
     LabelDialogBoxComponent,
-    CollaboratorDialogBoxComponent],
+    CollaboratorDialogBoxComponent,RemainderComponentComponent],
 
   providers: [UserService, HomeComponent,
     { provide: MatDialogRef, useValue: {} },

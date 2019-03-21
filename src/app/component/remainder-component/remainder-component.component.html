@@ -1,0 +1,7 @@
+
+<label>
+    Date Time:
+    <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
+    <owl-date-time #dt></owl-date-time>
+</label>
+<button (click)="setRemainder(dt)">save</button>

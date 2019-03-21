@@ -1,0 +1,106 @@
+
+@mixin display($value) {
+   .header-icon, .container-footer-buttons  {
+     display: $value;
+    }
+}
+
+
+.flex-box {
+  display: flex;
+    justify-content: space-between;
+}
+.container {
+  @include display(none);
+    padding: 10px;
+
+
+    height: 40%;
+    width: 40%;
+    border: 3px solid transparent;
+    padding: 10px;
+
+    border-collapse: separate;
+  border-spacing: 15px;
+  margin-left: 30%;
+  margin-top: 5%;
+
+    box-shadow: 0 14px 28px rgba(110, 108, 108, 0.22), 0 10px 10px rgba(110, 108, 108, 0.22);
+
+
+
+
+  color: black;
+  background-color: skyblue;
+  &-header {
+   @extend .flex-box;
+   height: 5%;
+   p {
+     background-color: red;
+     padding:  0 5px;
+     border-radius: 10px;
+   }
+  }
+  &-footer {
+    height: 20px;
+
+
+padding-top: 8%;
+
+
+    &-buttons {
+    @extend .flex-box;
+    }
+  }
+  &.has-hover  {
+    @include display(flex);
+    background-color: lightgrey;
+  }
+
+  .colorMenuDiv {
+    width:136px;
+    height:110px;
+    position:absolute;
+    z-index: 2;
+    border:1px solid #e8e8e8
+}
+
+.colorMenuButton {
+    height:26px;
+    background-color: red;
+    width:26px;
+    margin:4px;
+}
+
+.buttonSpace{
+background-color: transparent;
+margin-left:3% ;
+margin-right:3% ;
+border: transparent;
+
+}
+
+mat-card {
+  width: 30%;
+  padding-top: 10%;
+  height: 40%;
+  margin: auto;
+  width: 60%;
+  border: 3px solid transparent;
+  border: transparent;
+  padding: 5px;
+}
+
+.Bottombutton{
+  margin-top:10%;
+  margin: auto;
+  width: 100%;
+  border: 3px solid transparent;
+  padding: 10px;
+}
+.input{
+  border: transparent;
+  margin-top: 3%;
+}
+
+}

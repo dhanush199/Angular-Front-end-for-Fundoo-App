@@ -59,6 +59,14 @@ export class UserService {
     let header=this.getHeader()
     return this.httpUtil.get(environment.base_url +'/get-coll-user/'+emailId,header)
   }
+  public getNoteOwner(ownerId){
+    let token=localStorage.getItem('token')
+    return this.httpUtil.get(environment.base_url +'/get-user-email/'+token,{
+      params:{
+        coUserId:ownerId
+      }
+    })
+  }
 
 
 }

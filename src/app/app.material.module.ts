@@ -4,7 +4,7 @@ import { MatInputModule, MatFormFieldModule, MatOptionModule, MatSelectModule, M
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { BrowserModule } from '@angular/platform-browser';
@@ -19,11 +19,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 
 @NgModule({
   declarations: [],
-  imports: [MatNativeDateModule,
+  imports: [MatNativeDateModule,OwlDateTimeModule, 
+    OwlNativeDateTimeModule,
     MatSidenavModule,
     MatListModule,
     CommonModule,
@@ -52,6 +54,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
   ],
   exports: [MatNativeDateModule,
     MatSidenavModule,
+    OwlDateTimeModule,
+     OwlNativeDateTimeModule ,
     MatListModule,
     FlexLayoutModule,
     HttpClientInMemoryWebApiModule,
