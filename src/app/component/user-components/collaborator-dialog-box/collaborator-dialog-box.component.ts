@@ -3,7 +3,6 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog, MatSnackBar } from '@angular/
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from 'src/app/core/model/user';
-import { FormControl, Validators } from '@angular/forms';
 import { Collaborator } from 'src/app/core/model/collaborator';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
@@ -21,8 +20,8 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   emails: []
   collabUser: []
    notes: []
-   OwnerEmailId:any
-  coUser;
+   OwnerEmailId:User
+  coUser:User
   noteOwner:string
   collaboratedUser: Collaborator
   constructor(public dialog: MatDialog, private sanitizer: DomSanitizer, private noteService: NoteService,
@@ -42,7 +41,6 @@ export class CollaboratorDialogBoxComponent implements OnInit {
    
 this.getNoteOwner();
   }
-  emailId = new FormControl('', [Validators.required, Validators.minLength(1)]);
 
   public onNoClick(data, id): void {
     this.dialogRef.close();
@@ -69,12 +67,9 @@ this.getNoteOwner();
   public onAddCollab(email, note) {
     const arry = JSON.stringify(this.data)
     if (arry.search(email) == -1) {
-      this.getCollaboraterId(email).subscribe(resp => {
+      this.getCollaboraterId(email).subscribe((resp:any) => {
         this.coUser = resp
        console.log(this.coUser)
-       this.snackBar.open("added successfully", "Ok", {
-        duration: 2000,
-      });
      }, (error) => {
        console.log(error)
      })
@@ -121,7 +116,7 @@ this.getNoteOwner();
   }  
   
   public getNoteOwner(){
-    this.userService.getNoteOwner(this.data.userId).subscribe(resp=>{
+    this.userService.getNoteOwner(this.data.userId).subscribe((resp:any)=>{
       console.log(resp)
       this.OwnerEmailId=resp;
 

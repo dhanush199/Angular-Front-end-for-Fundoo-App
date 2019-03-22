@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Note } from 'src/app/core/model/note';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { DialogData } from '../shared-components/side-bar/side-bar.component';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 @Component({
   selector: 'app-remainder-component',
@@ -9,21 +10,22 @@ import { DialogData } from '../shared-components/side-bar/side-bar.component';
   styleUrls: ['./remainder-component.component.css']
 })
 export class RemainderComponentComponent implements OnInit {
-  note:Note
+  note: Note
   constructor(public dialog: MatDialog,
-    public dialogRef: MatDialogRef<RemainderComponentComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, 
-    private snackBar:MatSnackBar) { }
+    public dialogRef: MatDialogRef<RemainderComponentComponent>, private noteService: NoteService,
+    @Inject(MAT_DIALOG_DATA) public data,
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    console.log(this.data)
-
   }
   setRemainder(remainder) {
-    console.log(remainder)
-    console.log(this.data)
-
+    this.note = this.data;
+    this.note.reminder = remainder;
+    this.noteService.updateNote(this.note, this.note.id).subscribe((resp: any) => {
+      this.note = resp;
+    }, (error) => {console.log(error)});
   }
-
-
 }
+
+
+

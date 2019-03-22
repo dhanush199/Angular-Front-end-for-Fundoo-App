@@ -31,11 +31,11 @@ import { MainSearchPipe } from './core/pipes/main-search.pipe';
 import { CollaboratorDialogBoxComponent } from './component/user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 import { EmailIdPipe } from './core/pipes/email-id.pipe';
 import { ImageUploadComponent } from './component/image-upload/image-upload.component';
-import { NoteCardComponent } from './component/note-card/note-card.component';
 import { LabelDialogBoxComponent } from './component/label-dialog-box/label-dialog-box.component';
 import { HoverDirective } from './hover.directive';
 import { TrailComponent } from './trail/trail.component';
 import { RemainderComponentComponent } from './component/remainder-component/remainder-component.component';
+import { NoteSearchComponent } from './component/note-search/note-search.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -62,7 +62,7 @@ export function tokenGetter() {
     LabelDialogBoxComponent,
     SearchPipePipe,
     MainSearchPipe,
-    NoteCardComponent,
+    NoteSearchComponent,
     ImageUploadComponent,
     CollaboratorDialogBoxComponent,
     EmailIdPipe,

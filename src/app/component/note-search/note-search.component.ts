@@ -14,10 +14,10 @@ import { DataServiceService } from 'src/app/core/services/Data-service/data.serv
 
 @Component({
   selector: 'app-note-card',
-  templateUrl: './note-card.component.html',
-  styleUrls: ['./note-card.component.css']
+  templateUrl: './note-search.component.html',
+  styleUrls: ['./note-search.component.css']
 })
-export class NoteCardComponent implements OnInit {
+export class NoteSearchComponent implements OnInit {
   @Input() search;
   @Input() view: boolean;
   notes = []
@@ -26,7 +26,7 @@ export class NoteCardComponent implements OnInit {
   @Input() products: Note;
   togle = false;
   colors :string[]=ColorPalets
-  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<NoteCardComponent>,
+  constructor(public dialog: MatDialog, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<NoteSearchComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private labelService: LabelService, private noteService: NoteService, private dataService: DataServiceService, 
     private service: NoteService) { }

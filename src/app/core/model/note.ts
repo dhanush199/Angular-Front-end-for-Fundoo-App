@@ -11,6 +11,6 @@ export interface Note {
      labelName:String;
      colore:String;
      userId:number;
-     remainder:string;
+     reminder:string;
      collaboraters:Collaborator[]
 }

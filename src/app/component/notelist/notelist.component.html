@@ -3,12 +3,12 @@
 <div fxLayout="space-around" fxLayoutGap.xs="0" fxLayout.xs="column" fxLayoutGap="20px" fxLayout.gt-xs="row wrap"
   fxLayout="row wrap" class="notegrid" [ngClass]="grid ? 'notegrid-grid-view': 'notegrid-list-view'" >
   <app-pinned-notes [ngClass]="{'card-grid': !view,'card-list': view}"
-   [products]="products| noteFilter:'pinned'"(onStatusChange)="childStatusChanged($event)"> </app-pinned-notes>
+   [products]="products| noteFilter:'pinned'"(refreshEvent)="childStatusChanged($event)"> </app-pinned-notes>
 </div>
 
 
 
-<div align="center">
+<div *ngIf="products" align="center" >
   <i>Other Notes are</i>
 </div>
 
@@ -36,11 +36,11 @@
           [style.background-color]="products.colore">
           <mat-icon class="icons">person_add</mat-icon>
         </button>
-        &nbsp;&nbsp;<i class="material-icons innerIconDiv" (click)="colorChange()">
+        &nbsp;&nbsp;<i class="material-icons innerIconDiv" (click)="colorChange()" >
           color_lens
-        </i>
-        <div *ngIf="colorMenu" class="colorMenuDiv">
-          <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors"
+        </i> &nbsp;
+        <div *ngIf="colorMenu" class="colorMenuDiv" >
+          <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors" 
             [style.background]="customColor" (click)="addColor(customColor,products)">
           </button>
         </div>

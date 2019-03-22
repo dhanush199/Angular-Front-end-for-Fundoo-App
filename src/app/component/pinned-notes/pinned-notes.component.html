@@ -1,4 +1,4 @@
-<div align="center">
+<div align="center" *ngIf="products">
     <i>Pinned Notes are</i>
   </div>
 
@@ -28,7 +28,7 @@
         </button>
         &nbsp;&nbsp;<i class="material-icons innerIconDiv" (click)="colorChange()">
           color_lens
-        </i>
+        </i>&nbsp;&nbsp;
         <div *ngIf="colorMenu" class="colorMenuDiv">
           <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors"
             [style.background]="customColor" (click)="addColor(customColor,products)">

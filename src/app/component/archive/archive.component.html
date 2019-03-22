@@ -1,4 +1,4 @@
-<div *ngIf="products" align="center">
+<div *ngIf="products" align="center" >
   <i>Archived Notes are</i>
 </div>
 
@@ -25,10 +25,10 @@
           <button (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator" class="Button"
             [style.background-color]="products.colore">
             <mat-icon class="icons">person_add</mat-icon>
-          </button>
+          </button>&nbsp;&nbsp;
           <i class="material-icons innerIconDiv" (click)="colorChange()">
             color_lens
-          </i>
+          </i>&nbsp;&nbsp;
           <div *ngIf="colorMenu" class="colorMenuDiv">
             <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors"
               [style.background]="customColor" (click)="addColor(customColor,products)">

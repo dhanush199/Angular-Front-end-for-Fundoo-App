@@ -13,7 +13,7 @@ export class UpdateNoteComponent {
 
   constructor(
     public dialogRef: MatDialogRef<UpdateNoteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private service: NoteService) { }
+    @Inject(MAT_DIALOG_DATA) public data, private service: NoteService) { }
 
   public onNoClick(note, id): void {
     this.dialogRef.close();

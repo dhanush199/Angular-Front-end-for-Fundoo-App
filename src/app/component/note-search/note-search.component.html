@@ -19,41 +19,41 @@
       </mat-chip-list><br>
       <div class="bottomButtons" [style.background-color]="products.colore">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button mat-icon-button matTooltip="Remind me">
+        <button class="button" mat-icon-button matTooltip="Remind me">
           <mat-icon class="icons">add_alert</mat-icon>
         </button>
-        <button (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator"
+        <button class="button" (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator"
           [style.background-color]="products.colore">
-          <mat-icon class="icons">person_add</mat-icon>
-        </button>
+          <mat-icon >person_add</mat-icon>
+        </button>&nbsp;&nbsp;
         <i class="material-icons innerIconDiv" (click)="colorChange()">
           color_lens
-        </i>
+        </i>&nbsp;&nbsp;
         <div *ngIf="colorMenu" class="colorMenuDiv">
           <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors"
             [style.background]="customColor" (click)="addColor(customColor,products)">
           </button>
         </div>
 
-        <button mat-button matTooltip="Add image">
-          <mat-icon class="icons">image</mat-icon>
+        <button class="button" mat-button matTooltip="Add image">
+          <mat-icon >image</mat-icon>
         </button>
-        <button mat-button matTooltip="Archive">
-          <mat-icon class="icons" (click)=onArchive(products)>archive</mat-icon>
+        <button class="button" mat-button matTooltip="Archive">
+          <mat-icon  (click)=onArchive(products)>archive</mat-icon>
         </button>
 
-        <button mat-button [matMenuTriggerFor]="more" matTooltip="more">
-          <mat-icon class="icons">more_vert</mat-icon>
+        <button class="button" mat-button [matMenuTriggerFor]="more" matTooltip="more">
+          <mat-icon >more_vert</mat-icon>
         </button>
         <mat-menu #more="matMenu" class="morecard">
-          <button mat-button (click)=onTrash(products)>Delete Note</button>
+          <button class="button" mat-button (click)=onTrash(products)>Delete Note</button>
           <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
         </mat-menu>
-        <button mat-button matTooltip="undo">
-          <mat-icon class="icons">undo</mat-icon>
+        <button class="button" mat-button matTooltip="undo">
+          <mat-icon >undo</mat-icon>
         </button>
-        <button mat-button matTooltip="redo">
-          <mat-icon class="icons">redo</mat-icon>
+        <button class="button" mat-button matTooltip="redo">
+          <mat-icon >redo</mat-icon>
         </button>
       </div>
     </mat-card><br><br>

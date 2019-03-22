@@ -3,7 +3,7 @@
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 
 html, body { 
-  background-color:wheat;
+  background-color:transparent;
    height: 100%;
    margin: 0%;
  }

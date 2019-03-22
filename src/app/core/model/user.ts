@@ -6,4 +6,5 @@ export class User {
     "image": any
     "coEmailId": String;
     "userId": number;
+    "id":number;
 }

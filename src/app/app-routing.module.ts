@@ -10,8 +10,8 @@ import { ResetPasswordComponent } from './component/user-components/reset-passwo
 import { ForgotPasswordComponent } from './component/user-components/forgot-password/forgot-password.component';
 import { LoginComponent } from './component/user-components/login/login.component';
 import { EditLabelComponent } from './component/edit-label/edit-label.component';
-import { NoteCardComponent } from './component/note-card/note-card.component';
 import { ImageUploadComponent } from './component/image-upload/image-upload.component';
+import { NoteSearchComponent } from './component/note-search/note-search.component';
 
 export const appRoutes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,7 +26,7 @@ export const appRoutes: Routes = [
       { path: 'trash', component: ThrashComponent },
       { path: 'archive', component: ArchiveComponent },
       { path: 'edit-label', component: EditLabelComponent },
-      { path: 'search', component: NoteCardComponent}
+      { path: 'search', component: NoteSearchComponent}
     ]
   },
   { path: 'register', component: RegisterComponent },

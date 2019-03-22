@@ -42,12 +42,12 @@ export class NotelistComponent implements OnInit {
   colorMenu = false
   fillTheColor;
   grid = false;
-  // colorss: string[] = ColorPalets
+  colors: string[] = ColorPalets
   panelOpenState: boolean = false;
   submitted = false;
 
-  colors = ['CYAN', 'GREEN', 'YELLOW'];
-   myColor = '';
+  // colors = ['CYAN', 'GREEN', 'YELLOW'];
+  //  myColor = '';
 
   constructor(private router: Router, private labelService: LabelService, private noteService: NoteService,
     public dialog: MatDialog, private snackBar: MatSnackBar,
@@ -196,7 +196,7 @@ export class NotelistComponent implements OnInit {
     if (this.colorMenu)
       this.colorMenu = false
     else
-      this.colorMenu = true;
+    this.colorMenu  = true;
   }
 
   addColor(color, products) {
@@ -207,6 +207,7 @@ export class NotelistComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
+    this.colorMenu = false
   }
   /*remainder dialog box*/
   public openRemainder(products): void {
@@ -216,6 +217,9 @@ export class NotelistComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+  public childStatusChanged(products) {
+    this.noteService.updateNote(products, products.id);
   }
 
 }

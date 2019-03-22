@@ -68,7 +68,7 @@ export class ThrashComponent implements OnInit {
   }
 
   public onRestore(products) {
-    products.inTrash = false
+    products.inTrash = false;
     this.service.updateNote(products, products.id)
     this.snackBar.open("Successfully restored", "Ok", {
       duration: 2000,

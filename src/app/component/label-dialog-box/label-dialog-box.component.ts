@@ -30,6 +30,8 @@ export class LabelDialogBoxComponent implements OnInit {
 
   public onAddLabel(label){
     this.labelService.mapLabelTONote(label,this.data).subscribe((resp:any)=>{
+      console.log(resp)
+      debugger;
       this.snackBar.open("lsbel has been added", "ok", {
         duration: 2000,
       });

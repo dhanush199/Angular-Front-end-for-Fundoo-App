@@ -33,6 +33,7 @@ export class NoteCreateComponent implements OnInit {
     }
     this.temp = !note.discription;
     this.noteService.save(note).subscribe(resp=>{
+      console.log(resp)
       this.snackBar.open("Successfully created", "Ok", {
         duration: 2000,
       });

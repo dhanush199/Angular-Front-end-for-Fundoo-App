@@ -19,7 +19,7 @@ import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-
 export class PinnedNotesComponent implements OnInit {
   @Input() products: Note;
   @Input() view: boolean
-  @Output() onStatusChange = new EventEmitter<boolean>();
+  @Output() refreshEvent = new EventEmitter<any>();
   grid = false
 
   togle = true
@@ -67,11 +67,6 @@ export class PinnedNotesComponent implements OnInit {
     this.service.updateNote(note, note.id)
   }
 
-  public onRestore(products) {
-    products.inTrash = false
-    this.service.updateNote(products, products.id)
-  }
-
   public changeColor(products) {
     var icon = document.getElementById(products.title);
     console.log(products)
@@ -99,10 +94,14 @@ export class PinnedNotesComponent implements OnInit {
 
   public onTrash(note) {
     note.inTrash = true
-    this.service.updateNote(note, note.id)
-    this.snackBar.open("Moved to trash", "Ok", {
-      duration: 2000,
-    });
+    this.service.updateNote(note, note.id).subscribe(resp => {
+      this.snackBar.open("Moved to trash", "Ok", {
+        duration: 2000,
+      });
+    }, (error) => {
+      console.log(error)
+    })
+
   }
 
   public onArchive(products) {
@@ -115,6 +114,7 @@ export class PinnedNotesComponent implements OnInit {
     this.snackBar.open("Archived", "Ok", {
       duration: 2000,
     });
+    this.refreshEvent.emit(products);
   }
 
   public onClickDialog(products): void {
@@ -135,9 +135,6 @@ export class PinnedNotesComponent implements OnInit {
   }
 
   colorChange() {
-    // if (this.colorMenu)
-    //   this.colorMenu = false
-    // else
     this.colorMenu = !this.colorMenu;
   }
 
@@ -151,7 +148,7 @@ export class PinnedNotesComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
-    // this.readAll()
+    this.colorMenu = !this.colorMenu;
   }
   public readAll() {
     this.service.getAll().subscribe((resp: any) => {
@@ -160,9 +157,9 @@ export class PinnedNotesComponent implements OnInit {
   }
 
   changeStatus(finished: boolean) {
-    this.onStatusChange.emit(finished);
+    this.refreshEvent.emit(finished);
   }
-/*collaborater dialog Box*/
+  /*collaborater dialog Box*/
   public onClickDialogBox(products): void {
     console.log(products)
     const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
