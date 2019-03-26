@@ -21,7 +21,7 @@ export class CollaboratorDialogBoxComponent implements OnInit {
   collabUser: []
    notes: []
    OwnerEmailId:User
-  coUser:User
+   coUser:User
   noteOwner:string
   collaboratedUser: Collaborator
   constructor(public dialog: MatDialog, private sanitizer: DomSanitizer, private noteService: NoteService,
@@ -42,7 +42,7 @@ export class CollaboratorDialogBoxComponent implements OnInit {
 this.getNoteOwner();
   }
 
-  public onNoClick(data, id): void {
+  public onNoClick(data): void {
     this.dialogRef.close();
     console.log(data)
   }
@@ -69,16 +69,11 @@ this.getNoteOwner();
     if (arry.search(email) == -1) {
       this.getCollaboraterId(email).subscribe((resp:any) => {
         this.coUser = resp
-       console.log(this.coUser)
-     }, (error) => {
-       console.log(error)
-     })
-
-      let collaboratedUser =
+        const collaboratedUser =
       {
         collEmailId: email,
         noteId: note.id,
-        ownerId:this.coUser.id
+        ownerId:resp.id
       };
       this.noteService.doCollab(collaboratedUser).subscribe(resp => {
         console.log(resp)
@@ -88,6 +83,7 @@ this.getNoteOwner();
       }, (error) => {
         console.log(error)
       })
+     })
     } else {
       this.snackBar.open("user already present", "Ok", {
         duration: 2000,

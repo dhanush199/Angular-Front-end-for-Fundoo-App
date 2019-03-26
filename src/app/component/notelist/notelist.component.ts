@@ -46,9 +46,6 @@ export class NotelistComponent implements OnInit {
   panelOpenState: boolean = false;
   submitted = false;
 
-  // colors = ['CYAN', 'GREEN', 'YELLOW'];
-  //  myColor = '';
-
   constructor(private router: Router, private labelService: LabelService, private noteService: NoteService,
     public dialog: MatDialog, private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<NotelistComponent>,
@@ -192,22 +189,22 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  colorChange() {
-    if (this.colorMenu)
-      this.colorMenu = false
-    else
-    this.colorMenu  = true;
+  public colorChange(products) {
+      products.colorMenu=100;
   }
 
-  addColor(color, products) {
+  public addColor(color, products) {
     this.fillTheColor = color;
     products.colore = color;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
       console.log(resp)
-    }, (error) => {
+    }
+    
+    , (error) => {
       console.log(error)
-    })
-    this.colorMenu = false
+    }
+    )
+    products.colorMenu=0;
   }
   /*remainder dialog box*/
   public openRemainder(products): void {
@@ -218,8 +215,18 @@ export class NotelistComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-  public childStatusChanged(products) {
-    this.noteService.updateNote(products, products.id);
+
+  public childStatusChanged($event) {
+    this.readAll()
+  }
+
+  public removeReminder(note) {
+    note.reminder = null;
+    this.noteService.updateNote(note, note.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
   }
 
 }

@@ -23,7 +23,7 @@
 
             </div>
 
-            <a mat-icon-button routerLink="/home" routerLinkActive="active" matTooltip="Refresh">
+            <a mat-icon-button (click)="refreshPage()" routerLinkActive="active" matTooltip="Refresh">
                 <mat-icon class="topButtons">refresh</mat-icon>
             </a>&nbsp;&nbsp;&nbsp;
 
@@ -165,7 +165,7 @@
             </button>&nbsp;&nbsp;&nbsp;
 
             <button mat-button class="topButtons" [matMenuTriggerFor]="user" matTooltip="Google account">
-                <img class="image" [src]="picture?.imageSrc">
+                <img class="image" [src]="picture?.imageSrc" alt="./assets/images/profile.png">
             </button>
             <mat-menu #user="matMenu" class="topButtons">
                 <img class="imageonClick" [src]="picture?.imageSrc" alt="./assets/images/profile.png">

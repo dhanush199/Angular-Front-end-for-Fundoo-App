@@ -1,7 +1,4 @@
 
-<label>
-    Date Time:
-    <input [owlDateTimeTrigger]="dt" [owlDateTime]="dt">
-    <owl-date-time #dt></owl-date-time>
-</label>
-<button (click)="setRemainder(dt)">save</button>
+<input [owlDateTime]="dt1" [owlDateTimeTrigger]="dt1" placeholder="Date Time">
+<owl-date-time #dt1></owl-date-time>
+<button (click)="setRemainder(dt1)">save</button>

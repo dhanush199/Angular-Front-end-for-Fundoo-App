@@ -44,7 +44,7 @@ export class NoteService {
   }
 
   public updateNote(note, noteId) {
-    var token = localStorage.getItem('token')
+    var token = localStorage.getItem('token');
     return this.httpUtil.put(this.API + '/editnote', note, {
       params: {
         noteId: noteId,

@@ -19,12 +19,13 @@
       </mat-chip-list><br>
       <div class="bottomButtons" [style.background-color]="products.colore">
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <button class="button" mat-icon-button matTooltip="Remind me">
+        <button class="button" mat-icon-button matTooltip="Remind me" (click)="openRemainder(products)"
+          [style.background-color]="products.colore">
           <mat-icon class="icons">add_alert</mat-icon>
         </button>
         <button class="button" (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator"
           [style.background-color]="products.colore">
-          <mat-icon >person_add</mat-icon>
+          <mat-icon>person_add</mat-icon>
         </button>&nbsp;&nbsp;
         <i class="material-icons innerIconDiv" (click)="colorChange()">
           color_lens
@@ -35,29 +36,28 @@
           </button>
         </div>
 
-        <button class="button" mat-button matTooltip="Add image">
-          <mat-icon >image</mat-icon>
+        <button class="button" mat-button matTooltip="Add image" [style.background-color]="products.colore">
+          <mat-icon>image</mat-icon>
         </button>
-        <button class="button" mat-button matTooltip="Archive">
-          <mat-icon  (click)=onArchive(products)>archive</mat-icon>
+        <button class="button" mat-button matTooltip="Archive" [style.background-color]="products.colore">
+          <mat-icon (click)=onArchive(products)>archive</mat-icon>
         </button>
 
-        <button class="button" mat-button [matMenuTriggerFor]="more" matTooltip="more">
-          <mat-icon >more_vert</mat-icon>
+        <button class="button" mat-button [matMenuTriggerFor]="more" matTooltip="more"
+          [style.background-color]="products.colore">
+          <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #more="matMenu" class="morecard">
           <button class="button" mat-button (click)=onTrash(products)>Delete Note</button>
           <button (click)="onClickDialog(products)" mat-button class="morecard"> Add Label</button>
         </mat-menu>
-        <button class="button" mat-button matTooltip="undo">
-          <mat-icon >undo</mat-icon>
+        <button class="button" mat-button matTooltip="undo" [style.background-color]="products.colore">
+          <mat-icon>undo</mat-icon>
         </button>
-        <button class="button" mat-button matTooltip="redo">
-          <mat-icon >redo</mat-icon>
+        <button class="button" mat-button matTooltip="redo" [style.background-color]="products.colore">
+          <mat-icon>redo</mat-icon>
         </button>
       </div>
     </mat-card><br><br>
-
   </div>
-
 </div>

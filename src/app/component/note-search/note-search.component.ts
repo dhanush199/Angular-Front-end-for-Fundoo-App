@@ -10,6 +10,7 @@ import { NoteService } from 'src/app/core/services/NoteService/note.service';
 import { UpdateNoteComponent } from '../update-notes/update-notes.component';
 import { DialogData } from '../notelist/notelist.component';
 import { DataServiceService } from 'src/app/core/services/Data-service/data.service';
+import { RemainderComponentComponent } from '../remainder-component/remainder-component.component';
 
 
 @Component({
@@ -47,14 +48,14 @@ export class NoteSearchComponent implements OnInit {
       this.notes = resp;
     })
   }
-  colorChange() {
+  public colorChange() {
     if (this.colorMenu)
       this.colorMenu = false
     else
       this.colorMenu = true;
   }
 
-  addColor(color, products) {
+ public addColor(color, products) {
     this.fillTheColor = color;
     products.colore = color;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
@@ -139,5 +140,23 @@ export class NoteSearchComponent implements OnInit {
     this.snackBar.open("Moved to trash", "Ok", {
       duration: 2000,
     });
+  }
+
+   /*remainder dialog box*/
+   public openRemainder(products): void {
+    const dialogRef = this.dialog.open(RemainderComponentComponent, {
+      width: '550px',
+      data: products
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  public removeReminder(note) {
+    note.reminder = null;
+    this.service.updateNote(note, note.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
   }
 }

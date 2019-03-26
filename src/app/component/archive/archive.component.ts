@@ -10,6 +10,7 @@ import { HttputilService } from 'src/app/httputil.service';
 import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
 import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
+import { RemainderComponentComponent } from '../remainder-component/remainder-component.component';
 
 
 export interface DialogData {
@@ -28,7 +29,6 @@ export class ArchiveComponent implements OnInit {
   pinnedIcon = true
   public colors: string[] = ColorPalets
   label;
-  colorMenu = false;
   fillTheColor;
   removable = true
   pinnedColor = false
@@ -126,12 +126,14 @@ export class ArchiveComponent implements OnInit {
 
   public onTrash(note) {
     note.inTrash = true
-    this.service.updateNote(note, note.id)
-    this.snackBar.open("Moved to trash", "Ok", {
-      duration: 2000,
-    });
-
-
+    this.service.updateNote(note, note.id).subscribe(resp => {
+      console.log(resp);
+      this.snackBar.open("Moved to trash", "Ok", {
+        duration: 2000,
+      });
+    }, (error) => {
+      console.log(error)
+    })
   }
 
   /* dialog box for labels */
@@ -153,11 +155,11 @@ export class ArchiveComponent implements OnInit {
     }, (error) => console.log(error));
   }
 
-  colorChange() {
-    this.colorMenu = !this.colorMenu;
+  public colorChange(products) {
+    products.colorMenu=100;
   }
 
-  addColor(color, products) {
+  public addColor(color, products) {
     this.fillTheColor = color;
     products.colore = color;
     this.service.updateNote(products, products.id).subscribe(resp => {
@@ -165,7 +167,8 @@ export class ArchiveComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
-  }
+    products.colorMenu=0;
+    }
   /*collaborater dialog Box*/
   public onClickDialogBox(products): void {
     console.log(products)
@@ -176,5 +179,23 @@ export class ArchiveComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
     });
+  }
+  /*remainder dialog box*/
+  public openRemainder(products): void {
+    const dialogRef = this.dialog.open(RemainderComponentComponent, {
+      width: '550px',
+      data: products
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+  public removeReminder(note) {
+    note.reminder = null;
+    this.service.updateNote(note, note.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
   }
 }

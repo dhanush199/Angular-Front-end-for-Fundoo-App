@@ -1,17 +1,70 @@
-<div >
-  <div>
-    <input matInput [(ngModel)]="data.title" [value]=title placeholder="Title">
+<div    style="padding-top: 21px" [style.background-color]="data.colore" >
+  <div style="    margin-top: 5px;
+  margin-left: 17px">
+    <input matInput [(ngModel)]="data.title" [value]=title placeholder="Title" [style.background-color]="data.colore">
   </div>
 
   <br>
   <br>
-  <div>
+  <div  style="   margin-top: -20px; 
+  margin-left: 17px" [style.background-color]="data.colore">
 
-    <textarea matInput [(ngModel)]="data.discription" [value]=disc placeholder="Discription"></textarea>
+    <textarea matInput [(ngModel)]="data.discription" [value]=disc placeholder="Discription"
+      [style.background-color]="data.colore"></textarea>
 
   </div>
+</div>
+<div [style.background-color]="data.colore">
 
-  <br>
-  <br>
-  <button  mat-button (click)="updateNote(data)" style="float:right">Close</button>
+  <mat-chip-list #chipList class="chipList">
+    <mat-chip *ngIf="data.reminder" [removable]="removable" (removed)="removeReminder(data)">
+      <mat-icon>timer</mat-icon>
+      {{data.reminder | date:'short'}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+
+
+    <mat-chip *ngFor="let label of data.labelList" [removable]="removable" (removed)="removeLabel(label,products)">
+      {{label.labelName}}
+      <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list><br>
+  <button class="button" mat-button matTooltip="Remind me" [style.background-color]="data.colore">
+    <mat-icon (click)="openRemainder(data)" class="icons">add_alert</mat-icon>
+  </button>
+  <button class="button" (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator"
+    [style.background-color]="data.colore">
+    <mat-icon class="icons">person_add</mat-icon>
+  </button>
+  &nbsp;&nbsp;<i class="material-icons innerIconDiv" (click)="colorChange(data)">
+    color_lens
+  </i> &nbsp;
+  <div *ngIf="data.colorMenu==100" class="colorMenuDiv">
+    <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors" [style.background]="customColor"
+      (click)="addColor(customColor,data)">
+    </button>
+  </div>
+
+  <button class="button" mat-icon-button matTooltip="Add image">
+    <mat-icon class="icons">image</mat-icon>
+  </button>
+  <button mat-button class="button" matTooltip="Archive">
+    <mat-icon class="icons" (click)=onArchive(data)>archive</mat-icon>
+  </button>
+
+  <button mat-button class="button" [matMenuTriggerFor]="more" matTooltip="more">
+    <mat-icon class="icons">more_vert</mat-icon>
+  </button>
+  <mat-menu #more="matMenu" class="morecard">
+    <button mat-button (click)=onTrash(data)>Delete Note</button>
+    <button (click)="onClickDialog(data)" mat-button class="morecard"> Add Label</button>
+  </mat-menu>
+  <button class="button" mat-button matTooltip="undo">
+    <mat-icon class="icons">undo</mat-icon>
+  </button>
+  <button class="button" mat-button matTooltip="redo">
+    <mat-icon class="icons">redo</mat-icon>
+  </button>
+  <button mat-icon-button (click)="updateNote(data)" style="float: right;
+  margin-right: 14px">Close</button>&nbsp;
 </div>

@@ -20,10 +20,10 @@ export class RemainderComponentComponent implements OnInit {
   }
   setRemainder(remainder) {
     this.note = this.data;
-    this.note.reminder = remainder;
-    this.noteService.updateNote(this.note, this.note.id).subscribe((resp: any) => {
-      this.note = resp;
-    }, (error) => {console.log(error)});
+    this.note.reminder = remainder.selected;
+    this.noteService.updateNote(this.note, this.note.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => { console.log(error) });
   }
 }
 

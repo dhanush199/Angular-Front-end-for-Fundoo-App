@@ -9,14 +9,14 @@ import { DialogData } from '../notelist/notelist.component';
   styleUrls: ['./label-dialog-box.component.css']
 })
 export class LabelDialogBoxComponent implements OnInit {
-  @Input() 
+  @Input()
   labels: []
   constructor(public dialog: MatDialog,
     public dialogRef: MatDialogRef<LabelDialogBoxComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelService: LabelService,
-    private snackBar:MatSnackBar) { }
+    private snackBar: MatSnackBar) { }
 
-    public ngOnInit() {
+  public ngOnInit() {
     this.labelService.getLabels().subscribe((resp: any) => {
       this.labels = resp
       console.log(resp)
@@ -28,16 +28,16 @@ export class LabelDialogBoxComponent implements OnInit {
     console.log(data);
   }
 
-  public onAddLabel(label){
-    this.labelService.mapLabelTONote(label,this.data).subscribe((resp:any)=>{
+  public onAddLabel(label) {
+    this.labelService.mapLabelTONote(label, this.data).subscribe((resp: any) => {
       console.log(resp)
       debugger;
       this.snackBar.open("lsbel has been added", "ok", {
         duration: 2000,
       });
-    }    )
-    ,(error)=>{
-      console.log(error)
-    }
+    })
+      , (error) => {
+        console.log(error)
+      }
   }
 }

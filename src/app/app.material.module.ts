@@ -24,7 +24,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [],
-  imports: [MatNativeDateModule,OwlDateTimeModule, 
+  imports: [MatNativeDateModule,
+    OwlDateTimeModule, 
     OwlNativeDateTimeModule,
     MatSidenavModule,
     MatListModule,

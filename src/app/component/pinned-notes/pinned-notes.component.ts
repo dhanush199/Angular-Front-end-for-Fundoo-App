@@ -10,6 +10,7 @@ import { DataServiceService } from 'src/app/core/services/Data-service/data.serv
 import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
 import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
+import { RemainderComponentComponent } from '../remainder-component/remainder-component.component';
 
 @Component({
   selector: 'app-pinned-notes',
@@ -19,7 +20,7 @@ import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-
 export class PinnedNotesComponent implements OnInit {
   @Input() products: Note;
   @Input() view: boolean
-  @Output() refreshEvent = new EventEmitter<any>();
+  @Output() refreshEvent = new EventEmitter();
   grid = false
 
   togle = true
@@ -28,11 +29,12 @@ export class PinnedNotesComponent implements OnInit {
   submitted = false;
   removable = true;
   fillTheColor;
-  colorMenu = false;
   public colors: string[] = ColorPalets;
+
   constructor(private router: Router, private service: NoteService,
     private dialog: MatDialog, private snackBar: MatSnackBar, private data: DataServiceService,
-    private labelService: LabelService) { }
+    private labelService: LabelService,) { 
+    }
 
   public ngOnInit() {
     this.data.currentMessage.subscribe((message: any) => {
@@ -54,8 +56,7 @@ export class PinnedNotesComponent implements OnInit {
   public openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
-      data:
-        { title: note.title, discription: note.discription, id: note.id }
+      data:note
     });
     dialogRef.afterClosed().subscribe(result => {
       this.onCloseUpdateNote(note)
@@ -63,8 +64,9 @@ export class PinnedNotesComponent implements OnInit {
   }
 
   public onCloseUpdateNote(note) {
-    console.log(note)
-    this.service.updateNote(note, note.id)
+    this.service.updateNote(note, note.id);
+    const data={note}
+    this.refreshEvent.emit(data);
   }
 
   public changeColor(products) {
@@ -86,7 +88,8 @@ export class PinnedNotesComponent implements OnInit {
     }
     this.togle = !this.togle
     this.service.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      const data={products}
+      this.refreshEvent.emit(data);
     }, (error) => {
       console.log(error)
     })
@@ -98,6 +101,8 @@ export class PinnedNotesComponent implements OnInit {
       this.snackBar.open("Moved to trash", "Ok", {
         duration: 2000,
       });
+      const data={note}
+      this.refreshEvent.emit(data);
     }, (error) => {
       console.log(error)
     })
@@ -107,7 +112,8 @@ export class PinnedNotesComponent implements OnInit {
   public onArchive(products) {
     products.archive = true
     this.service.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      const data={products}
+      this.refreshEvent.emit(data);
     }, (error) => {
       console.log(error)
     })
@@ -131,34 +137,36 @@ export class PinnedNotesComponent implements OnInit {
       this.snackBar.open("Label removed", "Ok", {
         duration: 2000,
       });
+      const data={label}
+      this.refreshEvent.emit(data);
     }, (error) => console.log(error));
   }
 
-  colorChange() {
-    this.colorMenu = !this.colorMenu;
+  public colorChange(products) {
+  products.colorMenu=100;
   }
 
-  addColor(color, products) {
+  public addColor(color, products) {
     this.fillTheColor = color;
     products.colore = color;
     console.log(color);
     console.log(products);
     this.service.updateNote(products, products.id).subscribe(resp => {
       console.log(resp)
+      const data={products}
+      this.refreshEvent.emit(data);
     }, (error) => {
       console.log(error)
     })
-    this.colorMenu = !this.colorMenu;
-  }
+    products.colorMenu=0;
+    }
   public readAll() {
     this.service.getAll().subscribe((resp: any) => {
       this.products = resp;
     }, (error) => console.log(error));
   }
 
-  changeStatus(finished: boolean) {
-    this.refreshEvent.emit(finished);
-  }
+
   /*collaborater dialog Box*/
   public onClickDialogBox(products): void {
     console.log(products)
@@ -170,5 +178,22 @@ export class PinnedNotesComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
     });
   }
-
+  /*remainder dialog box*/
+  public openRemainder(products): void {
+    const dialogRef = this.dialog.open(RemainderComponentComponent, {
+      width: '550px',
+      data: products
+    });
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+  public removeReminder(note) {
+    note.reminder = null;
+    this.service.updateNote(note, note.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
+  }
+  
 }

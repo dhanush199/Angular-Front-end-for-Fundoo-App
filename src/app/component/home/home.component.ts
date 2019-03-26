@@ -102,4 +102,8 @@ export class HomeComponent implements OnInit {
     this.dataservice.setTheme(this.grid);
   }
 
+  public refreshPage(){
+    this.router.navigate(['home'])
+  }
+
 }

@@ -11,7 +11,15 @@
           <input matInput placeholder="Title" value={{products.title}} [formControl]="title"> <br><br><br>
           <input matInput placeholder="Description" value="{{products.discription}}" [formControl]="discription">
         </mat-card-content>
+
         <mat-chip-list #chipList class="chipList">
+            <mat-chip *ngIf="products.reminder" [removable]="removable" (removed)="removeReminder(products)">
+                <mat-icon>timer</mat-icon>  
+                {{products.reminder | date:'short'}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+
+
           <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
             (removed)="removeLabel(label,products)">
             {{label.labelName}}
@@ -19,17 +27,17 @@
           </mat-chip>
         </mat-chip-list><br>
         <div  [style.background-color]="products.colore">
-          <button class="button" mat-button matTooltip="Remind me">
+          <button class="button" mat-button matTooltip="Remind me" (click)="openRemainder(products)">
             <mat-icon class="icons">add_alert</mat-icon>
           </button>
           <button (click)="onClickDialogBox(products)" mat-button matTooltip="Collaborator" class="Button"
             [style.background-color]="products.colore">
             <mat-icon class="icons">person_add</mat-icon>
           </button>&nbsp;&nbsp;
-          <i class="material-icons innerIconDiv" (click)="colorChange()">
+          <i class="material-icons innerIconDiv" (click)="colorChange(products)">
             color_lens
           </i>&nbsp;&nbsp;
-          <div *ngIf="colorMenu" class="colorMenuDiv">
+          <div *ngIf="products.colorMenu==100" class="colorMenuDiv">
             <button class="colorMenuButton" mat-mini-fab *ngFor="let customColor of colors"
               [style.background]="customColor" (click)="addColor(customColor,products)">
             </button>

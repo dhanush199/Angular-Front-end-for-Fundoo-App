@@ -1,0 +1,53 @@
+
+
+
+.chipList{
+    background-color: transparent;
+}
+
+.colorMenuDiv {
+    width:136px;
+    height:110px;
+    position:absolute;
+    z-index: 2;
+    border:1px solid #e8e8e8
+}
+
+.colorMenuButton {
+    height:26px;
+    background-color: red;
+    width:26px;
+    margin:4px;
+}
+
+.matCard1{
+    padding-top: 50px;
+    background-color:white;
+    align-content: center;
+    align-items: center;
+    width: 400px; 
+    height: 165px;
+    box-shadow: 0 14px 28px rgba(110, 108, 108, 0.22), 0 10px 10px rgba(110, 108, 108, 0.22);
+
+}
+
+.button{
+    background-color: transparent;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+
+::ng-deep.mat-dialog-container {
+    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+    display: block;
+    padding: 0px;
+    box-sizing: border-box;
+    overflow: hidden;
+    outline: 0;
+    width: 550px;
+    height: 176px;
+    border-radius: 25px;
+    min-height: inherit;
+    max-height: inherit;
+}

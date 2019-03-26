@@ -12,5 +12,6 @@ export interface Note {
      colore:String;
      userId:number;
      reminder:string;
-     collaboraters:Collaborator[]
+     collaboraters:Collaborator[];
+     colorMenu:number;
 }

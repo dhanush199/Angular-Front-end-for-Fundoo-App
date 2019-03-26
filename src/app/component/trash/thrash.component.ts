@@ -34,8 +34,6 @@ export class ThrashComponent implements OnInit {
 
   public readAll() {
     this.service.getAll().subscribe((products: any) => {
-      console.log(products);
-      console.log(products.Archive);
       this.products = products;
       console.log(this.products)
     }, (error) => console.log(error));
@@ -69,10 +67,14 @@ export class ThrashComponent implements OnInit {
 
   public onRestore(products) {
     products.inTrash = false;
-    this.service.updateNote(products, products.id)
-    this.snackBar.open("Successfully restored", "Ok", {
-      duration: 2000,
-    });
+    this.service.updateNote(products, products.id).subscribe(resp=>{
+      this.snackBar.open("Successfully restored", "Ok", {
+        duration: 2000,
+      });
+    },(error)=>{
+      console.log(error)
+    })
+    
   }
 
  public deletPermanently(note){

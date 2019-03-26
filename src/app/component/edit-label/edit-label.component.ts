@@ -21,7 +21,7 @@ export class EditLabelComponent implements OnInit {
     public dialogRef: MatDialogRef<EditLabelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelservice: LabelService) { }
 
-    public ngOnInit() {
+  public ngOnInit() {
   }
 
   public onNoClick(data, id): void {
@@ -31,33 +31,22 @@ export class EditLabelComponent implements OnInit {
 
   public deletLabel(label) {
     this.labelservice.deleteLabel(label).subscribe((resp: any) => {
-      // this.products = resp
-      console.log(resp)
     }, (error) => console.log(error));
   }
 
   public onUpdateLabel(label) {
     this.labelservice.updateLabel(label).subscribe((resp: any) => {
-      console.log(resp)
     }, (error) => console.log(error));
   }
 
   public createlabel(labelName) {
-    const label = {
-      "labelName": labelName,
+    if (labelName != null) {
+      const label = {
+        "labelName": labelName,
+      }
+      this.labelService.createLabel(label).subscribe((resp: any) => {
+        console.log(resp)
+      }, (error) => console.log(error));
     }
-    this.labelService.createLabel(label).subscribe((resp: any) => {
-      console.log(resp)
-    }, (error) => console.log(error));
   }
 }
-
-
-
-
-
-
-
-
-
-
