@@ -20,11 +20,11 @@
     </mat-card-content>
     <mat-card-actions>
       <div id="signButton">
-        <button mat-button  class="restore-deleteButtons"  (click)=onRestore(products) mat-toolTip="restore">
+        <button mat-button  class="restore-deleteButtons"  (click)=onRestore(products) (onStatusChange)="childStatusChanged($event)" mat-toolTip="restore">
             <i class="fas fa-history"  style="float:right"></i>
         </button>
 
-        <button class="restore-deleteButtons" mat-button (click)=deletPermanently(products) mat-toolTip="restore">
+        <button class="restore-deleteButtons" mat-button (click)=deletPermanently(products) (onStatusChange)="childStatusChanged($event)" mat-toolTip="restore">
             <i class="fa fa-trash"></i>      
             </button></div>
         

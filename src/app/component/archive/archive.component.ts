@@ -55,10 +55,7 @@ export class ArchiveComponent implements OnInit {
 
   public readAll() {
     this.service.getAll().subscribe((products: any) => {
-      console.log(products);
-      console.log(products.Archive);
       this.products = products;
-      console.log(this.products)
     }, (error) => console.log(error));
   }
 
@@ -90,12 +87,13 @@ export class ArchiveComponent implements OnInit {
     products.archive = false
     this.service.updateNote(products, products.id).subscribe(resp => {
       console.log(resp)
+      this.snackBar.open("UnArchived", "Ok", {
+        duration: 2000,
+      });
     }, (error) => {
       console.log(error)
     })
-    this.snackBar.open("UnArchived", "Ok", {
-      duration: 2000,
-    });
+    this.readAll();
   }
 
   public changeColor(products) {
@@ -143,6 +141,7 @@ export class ArchiveComponent implements OnInit {
       data: products
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.readAll();
     });
   }
 
@@ -156,7 +155,7 @@ export class ArchiveComponent implements OnInit {
   }
 
   public colorChange(products) {
-    products.colorMenu=100;
+    products.colorMenu = 100;
   }
 
   public addColor(color, products) {
@@ -167,8 +166,8 @@ export class ArchiveComponent implements OnInit {
     }, (error) => {
       console.log(error)
     })
-    products.colorMenu=0;
-    }
+    products.colorMenu = 0;
+  }
   /*collaborater dialog Box*/
   public onClickDialogBox(products): void {
     console.log(products)

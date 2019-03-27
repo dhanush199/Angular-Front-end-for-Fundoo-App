@@ -2,6 +2,7 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { LabelService } from 'src/app/core/services/LabelService/label.service';
 import { DialogData } from '../notelist/notelist.component';
+import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 @Component({
   selector: 'app-label-dialog-box',
@@ -12,7 +13,7 @@ export class LabelDialogBoxComponent implements OnInit {
   @Input()
   labels: []
   constructor(public dialog: MatDialog,
-    public dialogRef: MatDialogRef<LabelDialogBoxComponent>,
+    public dialogRef: MatDialogRef<LabelDialogBoxComponent>,private noteService:NoteService,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelService: LabelService,
     private snackBar: MatSnackBar) { }
 
@@ -31,13 +32,14 @@ export class LabelDialogBoxComponent implements OnInit {
   public onAddLabel(label) {
     this.labelService.mapLabelTONote(label, this.data).subscribe((resp: any) => {
       console.log(resp)
-      debugger;
-      this.snackBar.open("lsbel has been added", "ok", {
+      this.snackBar.open("label has been added", "ok", {
         duration: 2000,
       });
     })
       , (error) => {
         console.log(error)
       }
+      // this.noteService.getAll()
   }
+  
 }

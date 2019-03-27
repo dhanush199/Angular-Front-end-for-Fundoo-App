@@ -24,6 +24,7 @@ export class NoteSearchComponent implements OnInit {
   notes = []
   colorMenu = false;
   fillTheColor;
+  removable=true;
   @Input() products: Note;
   togle = false;
   colors :string[]=ColorPalets
@@ -97,6 +98,7 @@ export class NoteSearchComponent implements OnInit {
       data: products
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.readAll();
     });
   }
 
@@ -107,6 +109,7 @@ export class NoteSearchComponent implements OnInit {
       });
     }, (error) => console.log(error));
     this.labelService.removeLabelNote(label, note)
+    this.readAll();
   }
   public openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {

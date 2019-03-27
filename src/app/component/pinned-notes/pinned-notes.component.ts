@@ -20,7 +20,9 @@ import { RemainderComponentComponent } from '../remainder-component/remainder-co
 export class PinnedNotesComponent implements OnInit {
   @Input() products: Note;
   @Input() view: boolean
-  @Output() refreshEvent = new EventEmitter();
+  // @Output() refreshEvent = new EventEmitter();
+  @Output() refreshEvent = new EventEmitter<boolean>();
+
   grid = false
 
   togle = true
@@ -33,8 +35,8 @@ export class PinnedNotesComponent implements OnInit {
 
   constructor(private router: Router, private service: NoteService,
     private dialog: MatDialog, private snackBar: MatSnackBar, private data: DataServiceService,
-    private labelService: LabelService,) { 
-    }
+    private labelService: LabelService, ) {
+  }
 
   public ngOnInit() {
     this.data.currentMessage.subscribe((message: any) => {
@@ -56,7 +58,7 @@ export class PinnedNotesComponent implements OnInit {
   public openDialog(note): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent, {
       width: '550px',
-      data:note
+      data: note
     });
     dialogRef.afterClosed().subscribe(result => {
       this.onCloseUpdateNote(note)
@@ -65,8 +67,7 @@ export class PinnedNotesComponent implements OnInit {
 
   public onCloseUpdateNote(note) {
     this.service.updateNote(note, note.id);
-    const data={note}
-    this.refreshEvent.emit(data);
+  
   }
 
   public changeColor(products) {
@@ -88,8 +89,6 @@ export class PinnedNotesComponent implements OnInit {
     }
     this.togle = !this.togle
     this.service.updateNote(products, products.id).subscribe(resp => {
-      const data={products}
-      this.refreshEvent.emit(data);
     }, (error) => {
       console.log(error)
     })
@@ -101,19 +100,16 @@ export class PinnedNotesComponent implements OnInit {
       this.snackBar.open("Moved to trash", "Ok", {
         duration: 2000,
       });
-      const data={note}
-      this.refreshEvent.emit(data);
     }, (error) => {
       console.log(error)
     })
+    this.readAll()
 
   }
 
   public onArchive(products) {
     products.archive = true
     this.service.updateNote(products, products.id).subscribe(resp => {
-      const data={products}
-      this.refreshEvent.emit(data);
     }, (error) => {
       console.log(error)
     })
@@ -121,15 +117,18 @@ export class PinnedNotesComponent implements OnInit {
       duration: 2000,
     });
     this.refreshEvent.emit(products);
+    this.readAll();
   }
-
+/*LabelAdd Dialog Box*/
   public onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
       width: '550px',
       data: products
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.readAll();
     });
+   
   }
 
   public removeLabel(label, note) {
@@ -137,13 +136,12 @@ export class PinnedNotesComponent implements OnInit {
       this.snackBar.open("Label removed", "Ok", {
         duration: 2000,
       });
-      const data={label}
-      this.refreshEvent.emit(data);
     }, (error) => console.log(error));
+    this.readAll()
   }
 
   public colorChange(products) {
-  products.colorMenu=100;
+    products.colorMenu = 100;
   }
 
   public addColor(color, products) {
@@ -153,13 +151,13 @@ export class PinnedNotesComponent implements OnInit {
     console.log(products);
     this.service.updateNote(products, products.id).subscribe(resp => {
       console.log(resp)
-      const data={products}
-      this.refreshEvent.emit(data);
     }, (error) => {
       console.log(error)
     })
-    products.colorMenu=0;
-    }
+    products.colorMenu = 0;
+    this.readAll()
+  }
+
   public readAll() {
     this.service.getAll().subscribe((resp: any) => {
       this.products = resp;
@@ -177,6 +175,7 @@ export class PinnedNotesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
     });
+    this.readAll();
   }
   /*remainder dialog box*/
   public openRemainder(products): void {
@@ -195,5 +194,10 @@ export class PinnedNotesComponent implements OnInit {
       console.log(error)
     })
   }
-  
+
+  public childStatusChanged(finished: boolean) {
+    if (finished){
+      this.readAll();
+    }
+  }
 }

@@ -87,4 +87,9 @@ export class ThrashComponent implements OnInit {
 
   });
  }
+ public childStatusChanged(finished: boolean) {
+  if (finished){
+    this.readAll();
+  }
+}
 }

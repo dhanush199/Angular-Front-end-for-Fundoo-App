@@ -1,7 +1,10 @@
 <div fxLayout="row" class="div1">
-  <input matInput [(ngModel)]="data.labelName" [value]=data.labelName placeholder="creat new label">
-  <button (click)=createlabel(data.labelName) >
-    <img  class="creatLabelButton" src="./assets/images/tick.png" style="float:right" />
+  <input matInput [(ngModel)]="data.labelName" [value]=data.labelName placeholder="creat new label"
+    style="margin-top: 18px;">
+  <button (click)=createlabel(data.labelName) style=" margin-right: 19px;
+  margin-top: 10px;">
+    <i class="fa fa-save" style="font-size:24px;float:right;"></i>
+
   </button>
 </div>
 

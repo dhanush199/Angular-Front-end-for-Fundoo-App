@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
   notes: Note[]
   user: User;
   picture: any;
+  userName:string
   view=false
   
 
@@ -77,6 +78,7 @@ export class HomeComponent implements OnInit {
   public getUser() {
     this.userService.getUser().subscribe((resp) => {
       this.user = resp;
+      this.userName=resp.name
       this.user = {
         ...resp,
         image: `data:image/text;base64, ${resp.image}`,

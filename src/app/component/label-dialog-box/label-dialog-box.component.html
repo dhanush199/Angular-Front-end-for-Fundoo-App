@@ -1,8 +1,10 @@
-<input #search (keyup)="0">
+<input #search (keyup)="0" style="margin-top: 33px;
+margin-left: 22px;" placeholder="search label">
 <ul>
 
   <li *ngFor="let label of (labels | searchPipe: search.value )"> {{label.labelName}}
-      <button (click)=onAddLabel(label) class="labelButtons" mat-button style="float:right">
+      <button (click)=onAddLabel(label) class="labelButtons" mat-button style=" float: right;
+      margin-right: 163px;">
           Add
         </button>
   </li>

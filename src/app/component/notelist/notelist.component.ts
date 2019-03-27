@@ -73,6 +73,7 @@ export class NotelistComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.noteService.updateNote(note, note.id)
+     
     });
   }
 
@@ -141,13 +142,14 @@ export class NotelistComponent implements OnInit {
 
     }, (error) => console.log(error));
   }
-
+/**Label Dialog Box */
   public onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
       width: '550px',
       data: products
     });
     dialogRef.afterClosed().subscribe(result => {
+      this.readAll();
     });
   }
 
@@ -158,6 +160,7 @@ export class NotelistComponent implements OnInit {
       });
     }, (error) => console.log(error));
     this.labelService.removeLabelNote(label, note)
+    this.readAll()
   }
 
   public getUser() {
@@ -216,8 +219,10 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  public childStatusChanged($event) {
-    this.readAll()
+  childStatusChanged(finished: boolean) {
+    if (finished){
+      this.readAll();
+    }
   }
 
   public removeReminder(note) {

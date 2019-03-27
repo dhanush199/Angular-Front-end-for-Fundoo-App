@@ -11,6 +11,11 @@
         <input matInput placeholder="Description" value="{{products.discription}}" [formControl]="discription">
       </mat-card-content>
       <mat-chip-list #chipList class="chipList">
+          <mat-chip *ngIf="products.reminder" [removable]="removable" (removed)="removeReminder(products)">
+              <mat-icon>timer</mat-icon>  
+              {{products.reminder | date:'short'}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+              </mat-chip>
         <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
           (removed)="removeLabel(label,products)">
           {{label.labelName}}

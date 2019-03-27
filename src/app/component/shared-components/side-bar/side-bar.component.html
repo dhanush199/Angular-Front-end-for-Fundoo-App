@@ -17,13 +17,13 @@
           <i class="fa fa-edit" style="font-size:20px"></i>Edit</button>
       </div>
       <div *ngFor="let labels of labels">
-       <button id="button"> <mat-icon>label_outline</mat-icon>
-        {{labels.labelName}}</button><br>
+       <button id="button"> <mat-icon>label_outline</mat-icon> {{labels.labelName}}</button>
+       <br>
         <mat-divider></mat-divider>
       </div>
       <a mat-list-item (click)="archive()"><i class="material-icons icon"
-          style="font-size:30px">archive</i><span class="description">Archive</span> </a>
-      <a mat-list-item (click)="trash()"><i class="fa fa-trash" style="font-size:30px"></i><span
+          style="font-size:25px">archive</i><span class="description">Archive</span> </a>
+      <a mat-list-item (click)="trash()"><i class="fa fa-trash" style="font-size:25px"></i><span
           class="description">Trash</span> </a>
       <br>
       <br>

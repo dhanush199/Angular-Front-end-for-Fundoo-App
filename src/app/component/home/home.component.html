@@ -168,7 +168,16 @@
                 <img class="image" [src]="picture?.imageSrc" alt="./assets/images/profile.png">
             </button>
             <mat-menu #user="matMenu" class="topButtons">
-                <img class="imageonClick" [src]="picture?.imageSrc" alt="./assets/images/profile.png">
+
+
+                <div class="container">
+                    <img class="imageonClick" [src]="picture?.imageSrc" alt="./assets/images/profile.png ">
+                    <div class="text-block">
+                        <h4>{{userName}}</h4>
+                    </div>
+                </div>
+
+
                 <button (click)="logout()" class="topButtons" mat-menu-item>
                     <mat-icon>logout</mat-icon>
                     <a mat-button>
@@ -182,6 +191,23 @@
                         <span>Change Image</span>
                     </a>
                 </button>
+
+
+
+                <!-- <img class="imageonClick" [src]="picture?.imageSrc" alt="./assets/images/profile.png">
+                <button (click)="logout()" class="topButtons" mat-menu-item>
+                    <mat-icon>logout</mat-icon>
+                    <a mat-button>
+                        <span>Logout</span>
+                    </a>
+                </button>
+
+                <button class="topButtons" mat-menu-item>
+                    <a mat-button routerLink="/upload-photo">
+                        <mat-icon>photo</mat-icon>
+                        <span>Change Image</span>
+                    </a>
+                </button> -->
 
 
             </mat-menu>

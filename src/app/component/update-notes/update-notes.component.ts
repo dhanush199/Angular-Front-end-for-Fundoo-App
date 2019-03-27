@@ -12,6 +12,7 @@ import { User } from 'src/app/core/model/user';
 import { UserService } from 'src/app/core/services/UserService/user.service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DialogData } from '../archive/archive.component';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 
 @Component({
@@ -110,6 +111,7 @@ export class UpdateNoteComponent {
     this.snackBar.open("Moved to trash", "Ok", {
       duration: 2000,
     });
+    this. readAll()
   }
 
   public readAll() {
@@ -158,6 +160,7 @@ export class UpdateNoteComponent {
       });
     }, (error) => console.log(error));
     this.labelService.removeLabelNote(label, note)
+    this.readAll();
   }
 
   public getUser() {

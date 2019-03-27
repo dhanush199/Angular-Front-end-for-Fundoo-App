@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
 import { MatSnackBar } from '@angular/material';
 
