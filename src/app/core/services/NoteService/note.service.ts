@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttputilService } from 'src/app/httputil.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +12,7 @@ export class NoteService {
   titl: null
   discriptio: null
   public API = '//localhost:8081/user';
-  constructor(private http: HttpClient, private router: Router, private httpUtil: HttputilService) {
+  constructor( private httpUtil: HttputilService) {
   }
 
   public getHeader() {
@@ -53,12 +52,12 @@ export class NoteService {
   }
 
   public doCollab(collabUser){
-    var token=localStorage.getItem('token')
+    var token=localStorage.getItem('token');
     return this.httpUtil.put(this.API +'/add-collabarator/'+token,collabUser,{})
   }
 
   public removeCollab(collabUser){
-    var token=localStorage.getItem('token')
+    var token=localStorage.getItem('token');
     return this.httpUtil.put(this.API +'/remove-collabarator/'+token,collabUser,{})
   }
 

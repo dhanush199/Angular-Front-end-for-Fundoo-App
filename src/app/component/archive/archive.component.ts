@@ -1,12 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Note } from 'src/app/core/model/note';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
 import { LabelService } from 'src/app/core/services/LabelService/label.service';
-import { HttputilService } from 'src/app/httputil.service';
 import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
 import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
@@ -26,25 +24,24 @@ export interface DialogData {
 
 export class ArchiveComponent implements OnInit {
   @Input() products: Note;
-  pinnedIcon = true
-  public colors: string[] = ColorPalets
+  pinnedIcon = true;
+  public colors: string[] = ColorPalets;
   label;
   fillTheColor;
-  removable = true
-  pinnedColor = false
+  removable = true;
+  pinnedColor = false;
   noteForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
 
-  constructor(private httpUtil: HttputilService, private labelService: LabelService,
-    private router: Router, private service: NoteService, private dialog: MatDialog,
+  constructor(private labelService: LabelService,
+     private service: NoteService, private dialog: MatDialog,
     private snackBar: MatSnackBar) { }
 
   public ngOnInit() {
     this.readAll();
     this.labelService.getLabels().subscribe((resp: any) => {
       this.label = resp;
-      console.log(resp)
     }, (error) => console.log(error));
 
   }
@@ -71,10 +68,7 @@ export class ArchiveComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result)
       this.onCloseUpdateNote(note)
-
     });
   }
 
@@ -86,7 +80,6 @@ export class ArchiveComponent implements OnInit {
   public onUnArchive(products) {
     products.archive = false
     this.service.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
       this.snackBar.open("UnArchived", "Ok", {
         duration: 2000,
       });

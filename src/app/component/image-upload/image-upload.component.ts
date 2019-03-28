@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/core/model/user';
 import { HttputilService } from 'src/app/httputil.service';
-import { UserService } from 'src/app/core/services/UserService/user.service';
 
 @Component({
   selector: 'app-image-upload',
@@ -11,19 +10,19 @@ import { UserService } from 'src/app/core/services/UserService/user.service';
 })
 export class ImageUploadComponent {
   constructor(public router: Router, public httpUtil: HttputilService, 
-    private userService: UserService) { }
-  selectedFile: File
-  user: User
-  fileToUpload: File
+    ) { }
+  selectedFile: File;
+  user: User;
+  fileToUpload: File;
 
   public onFileChanged(event) {
-    this.selectedFile = event.target.files[0]
+    this.selectedFile = event.target.files[0];
   }
 
   public onUpload() {
     this.pushFileToStorage(this.selectedFile).subscribe(resp => {
       console.log(resp), (error) => {
-        console.log(error)
+        console.log(error);
       }
     })
     this.router.navigate(['/home'])

@@ -12,7 +12,7 @@ export class NoteCreateComponent implements OnInit {
   public createNoteForm: FormGroup;
   public submitted = false;
   public panelOpenState = false;
-   private temp: any
+   private temp: any;
   constructor(private noteService: NoteService,private snackBar: MatSnackBar,
     private formBuilder: FormBuilder) { }
 
@@ -27,22 +27,22 @@ export class NoteCreateComponent implements OnInit {
 
   public onSubmit(note) {
     this.submitted = true;
-    console.log(this.createNoteForm.value)
     if (this.createNoteForm.invalid) {
       return;
     }
     this.temp = !note.discription;
     this.noteService.save(note).subscribe(resp=>{
-      console.log(resp)
+      console.log(resp);
       this.snackBar.open("Successfully created", "Ok", {
         duration: 2000,
       });
     },(error)=>{
-      console.log(error)
+      console.log(error);
     })
   }
   public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
+      console.log(resp);
     }, (error) => console.log(error));
   }
 }

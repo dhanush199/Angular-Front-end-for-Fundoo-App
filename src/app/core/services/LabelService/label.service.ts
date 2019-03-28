@@ -11,12 +11,12 @@ export class LabelService {
   constructor(private http: HttputilService) { }
 
   public getLabels() {
-    var header = this.getHeader()
+    var header = this.getHeader();
     return this.http.get(this.API + '/retrievelabel', header);
   }
 
   public getHeader() {
-    var token = localStorage.getItem('token')
+    var token = localStorage.getItem('token');
     const httpheaders = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -27,9 +27,8 @@ export class LabelService {
   }
 
   public deleteLabel(label) {
-    var token = localStorage.getItem('token')
-    console.log(label.labelName)
-    var labelName = label.labelName
+    var token = localStorage.getItem('token');
+    var labelName = label.labelName;
     return this.http.deleteWithParams(this.API + '/deletelabel/' + token, {
       params: {
         labelName: labelName
@@ -38,12 +37,12 @@ export class LabelService {
   }
 
   public updateLabel(label) {
-    var header = this.getHeader()
+    var header = this.getHeader();
     return this.http.put(this.API + '/editlabel', label, header);
   }
 
   public createLabel(label){
-    var header = this.getHeader()
+    var header = this.getHeader();
     return this.http.postWithBody(this.API + '/createlabel', label, header);
   }
 
@@ -54,9 +53,9 @@ export class LabelService {
   }
 
   public removeLabelNote(label,note){
-    var noteId= note.id
-    var labelId=label.id
-    var header = this.getHeader()
+    var noteId= note.id;
+    var labelId=label.id;
+    var header = this.getHeader();
     return this.http.delete(this.API + '/removenote&label/'+noteId+'/'+labelId, header);
   }
 }

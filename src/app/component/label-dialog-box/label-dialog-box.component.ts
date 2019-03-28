@@ -2,7 +2,6 @@ import { Component, OnInit, Inject, Input } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { LabelService } from 'src/app/core/services/LabelService/label.service';
 import { DialogData } from '../notelist/notelist.component';
-import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 @Component({
   selector: 'app-label-dialog-box',
@@ -11,16 +10,16 @@ import { NoteService } from 'src/app/core/services/NoteService/note.service';
 })
 export class LabelDialogBoxComponent implements OnInit {
   @Input()
-  labels: []
+  labels: [];
   constructor(public dialog: MatDialog,
-    public dialogRef: MatDialogRef<LabelDialogBoxComponent>,private noteService:NoteService,
+    public dialogRef: MatDialogRef<LabelDialogBoxComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private labelService: LabelService,
     private snackBar: MatSnackBar) { }
 
   public ngOnInit() {
     this.labelService.getLabels().subscribe((resp: any) => {
-      this.labels = resp
-      console.log(resp)
+      this.labels = resp;
+      console.log(resp);
     }, (error) => console.log(error));
   }
 
@@ -31,15 +30,14 @@ export class LabelDialogBoxComponent implements OnInit {
 
   public onAddLabel(label) {
     this.labelService.mapLabelTONote(label, this.data).subscribe((resp: any) => {
-      console.log(resp)
+      console.log(resp);
       this.snackBar.open("label has been added", "ok", {
         duration: 2000,
       });
     })
       , (error) => {
-        console.log(error)
+        console.log(error);
       }
-      // this.noteService.getAll()
   }
   
 }

@@ -1,7 +1,6 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { MatDialogRef } from '@angular/material/dialog';
-// import { DialogData } from '../component/notelist/notelist.component';
 import { LabelService } from 'src/app/core/services/LabelService/label.service';
 
 export interface DialogData {
@@ -36,6 +35,7 @@ export class EditLabelComponent implements OnInit {
 
   public onUpdateLabel(label) {
     this.labelservice.updateLabel(label).subscribe((resp: any) => {
+      console.log(resp);
     }, (error) => console.log(error));
   }
 
@@ -45,7 +45,7 @@ export class EditLabelComponent implements OnInit {
         "labelName": labelName,
       }
       this.labelService.createLabel(label).subscribe((resp: any) => {
-        console.log(resp)
+        console.log(resp);
       }, (error) => console.log(error));
     }
   }

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, Input, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material';
-import { Label } from 'src/app/core/model/label';
 import { LabelService } from 'src/app/core/services/LabelService/label.service';
 import { EditLabelComponent } from '../../edit-label/edit-label.component';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
@@ -19,9 +18,8 @@ export interface DialogData {
 })
 export class SideBarComponent implements OnInit, OnDestroy {
   @ViewChild('drawer') public drawer;
-  labels: []
-  notelist: Note[]
-  // @Input() products: Label;
+  labels: [];
+  notelist: Note[];
   @Input() public toggleSidebar: Subject<any>;
   constructor(public dialog: MatDialog, private noteService: NoteService, private router: Router, private labelservice: LabelService) { }
 
@@ -32,7 +30,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
       }
     });
     this.labelservice.getLabels().subscribe((resp: any) => {
-      this.labels = resp
+      this.labels = resp;
     }, (error) => console.log());
   }
   public notes() {
@@ -58,7 +56,7 @@ export class SideBarComponent implements OnInit, OnDestroy {
   }
   public remainder() {
     this.noteService.getAll().subscribe(resp => {
-      this.notelist = resp
+      this.notelist = resp;
       const result = this.notelist.filter(note => note.reminder!=null);
       this.router.navigate(['home/pinned'], { state: { notes: result } });
     })

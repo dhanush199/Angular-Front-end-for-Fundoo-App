@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { Note } from 'src/app/core/model/note';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { DialogData } from '../shared-components/side-bar/side-bar.component';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
 
 @Component({
@@ -22,7 +21,9 @@ export class RemainderComponentComponent implements OnInit {
     this.note = this.data;
     this.note.reminder = remainder.selected;
     this.noteService.updateNote(this.note, this.note.id).subscribe(resp => {
-      console.log(resp)
+      this.snackBar.open("Remainder has been Set", "Ok", {
+        duration: 2000,
+      });
     }, (error) => { console.log(error) });
   }
 }

@@ -21,13 +21,13 @@ import { RemainderComponentComponent } from '../remainder-component/remainder-co
 export class NoteSearchComponent implements OnInit {
   @Input() search;
   @Input() view: boolean;
-  notes = []
+  notes = [];
   colorMenu = false;
   fillTheColor;
   removable=true;
   @Input() products: Note;
   togle = false;
-  colors :string[]=ColorPalets
+  colors :string[]=ColorPalets;
   constructor(public dialog: MatDialog, private snackBar: MatSnackBar, public dialogRef: MatDialogRef<NoteSearchComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private labelService: LabelService, private noteService: NoteService, private dataService: DataServiceService, 
@@ -36,7 +36,7 @@ export class NoteSearchComponent implements OnInit {
   public ngOnInit() {
     this.dataService.currentMessage.subscribe(message => this.view = message)
     this.dataService.currentDataSearch.subscribe((search: any) => {
-      this.search = search
+      this.search = search;
     })
     this.readAll();
   }
@@ -51,7 +51,7 @@ export class NoteSearchComponent implements OnInit {
   }
   public colorChange() {
     if (this.colorMenu)
-      this.colorMenu = false
+      this.colorMenu = false;
     else
       this.colorMenu = true;
   }
@@ -60,27 +60,27 @@ export class NoteSearchComponent implements OnInit {
     this.fillTheColor = color;
     products.colore = color;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
-    this.readAll()
+    this.readAll();
   }
 
 
   public changeColor(products) {
     var icon = document.getElementById(products.title);
-    this.togle = !this.togle
+    this.togle = !this.togle;
     if (this.togle) {
-      icon.style.background = "black"
-      products.pinned = true
-      console.log(products)
+      icon.style.background = "black";
+      products.pinned = true;
+      console.log(products);
       this.snackBar.open("Pinned", "Ok", {
         duration: 2000,
       });
     }
     else {
-      products.pinned = false
+      products.pinned = false;
       icon.style.background = "white"
       this.snackBar.open("Unpinned", "Ok", {
         duration: 2000,
@@ -108,7 +108,7 @@ export class NoteSearchComponent implements OnInit {
         duration: 2000,
       });
     }, (error) => console.log(error));
-    this.labelService.removeLabelNote(label, note)
+    this.labelService.removeLabelNote(label, note);
     this.readAll();
   }
   public openDialog(note): void {
@@ -117,16 +117,16 @@ export class NoteSearchComponent implements OnInit {
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.noteService.updateNote(note, note.id)
+      this.noteService.updateNote(note, note.id);
     });
   }
   public onArchive(products) {
     console.log(products)
-    products.archive = true
+    products.archive = true;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
     this.snackBar.open("Archived", "Ok", {
       duration: 2000,
@@ -134,11 +134,11 @@ export class NoteSearchComponent implements OnInit {
   }
 
   public onTrash(products) {
-    products.inTrash = true
+    products.inTrash = true;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
     this.snackBar.open("Moved to trash", "Ok", {
       duration: 2000,
@@ -157,9 +157,9 @@ export class NoteSearchComponent implements OnInit {
   public removeReminder(note) {
     note.reminder = null;
     this.service.updateNote(note, note.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
   }
 }

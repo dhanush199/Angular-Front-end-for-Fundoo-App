@@ -19,13 +19,11 @@ import { RemainderComponentComponent } from '../remainder-component/remainder-co
 })
 export class PinnedNotesComponent implements OnInit {
   @Input() products: Note;
-  @Input() view: boolean
-  // @Output() refreshEvent = new EventEmitter();
+  @Input() view: boolean;
   @Output() refreshEvent = new EventEmitter<boolean>();
 
-  grid = false
-
-  togle = true
+  grid = false;
+  togle = true;
   pinnedForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
@@ -33,14 +31,14 @@ export class PinnedNotesComponent implements OnInit {
   fillTheColor;
   public colors: string[] = ColorPalets;
 
-  constructor(private router: Router, private service: NoteService,
+  constructor(private service: NoteService,
     private dialog: MatDialog, private snackBar: MatSnackBar, private data: DataServiceService,
     private labelService: LabelService, ) {
   }
 
   public ngOnInit() {
     this.data.currentMessage.subscribe((message: any) => {
-      this.view = message
+      this.view = message;
     })
 
     this.data.getTheme().subscribe((resp) =>
@@ -61,7 +59,7 @@ export class PinnedNotesComponent implements OnInit {
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.onCloseUpdateNote(note)
+      this.onCloseUpdateNote(note);
     });
   }
 
@@ -72,46 +70,47 @@ export class PinnedNotesComponent implements OnInit {
 
   public changeColor(products) {
     var icon = document.getElementById(products.title);
-    console.log(products)
     if (this.togle) {
-      icon.style.background = "black"
-      products.pinned = true
+      icon.style.background = "black";
+      products.pinned = true;
       this.snackBar.open("Pinned", "Ok", {
         duration: 2000,
       });
     }
     else {
-      products.pinned = false
-      icon.style.background = "white"
+      products.pinned = false;
+      icon.style.background = "white";
       this.snackBar.open("Unpinned", "Ok", {
         duration: 2000,
       });
     }
-    this.togle = !this.togle
+    this.togle = !this.togle;
     this.service.updateNote(products, products.id).subscribe(resp => {
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
   }
 
   public onTrash(note) {
-    note.inTrash = true
+    note.inTrash = true;
     this.service.updateNote(note, note.id).subscribe(resp => {
       this.snackBar.open("Moved to trash", "Ok", {
         duration: 2000,
       });
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
-    this.readAll()
+    this.readAll();
 
   }
 
   public onArchive(products) {
-    products.archive = true
+    products.archive = true;
     this.service.updateNote(products, products.id).subscribe(resp => {
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
     this.snackBar.open("Archived", "Ok", {
       duration: 2000,
@@ -137,7 +136,7 @@ export class PinnedNotesComponent implements OnInit {
         duration: 2000,
       });
     }, (error) => console.log(error));
-    this.readAll()
+    this.readAll();
   }
 
   public colorChange(products) {
@@ -150,12 +149,12 @@ export class PinnedNotesComponent implements OnInit {
     console.log(color);
     console.log(products);
     this.service.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
     products.colorMenu = 0;
-    this.readAll()
+    this.readAll();
   }
 
   public readAll() {
@@ -167,7 +166,7 @@ export class PinnedNotesComponent implements OnInit {
 
   /*collaborater dialog Box*/
   public onClickDialogBox(products): void {
-    console.log(products)
+    console.log(products);
     const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
       width: '550px',
       data: products
@@ -184,14 +183,15 @@ export class PinnedNotesComponent implements OnInit {
       data: products
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
   public removeReminder(note) {
     note.reminder = null;
     this.service.updateNote(note, note.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
   }
 

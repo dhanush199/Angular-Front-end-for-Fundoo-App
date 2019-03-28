@@ -30,19 +30,19 @@ export interface DialogData {
 export class NotelistComponent implements OnInit {
   @Input() products: Note;
   @Input() public viewChanged = false;
-  @Input() search
+  @Input() search;
   noteForm: FormGroup;
   removable = true;
-  togle = true
-  notes: Note
-  coNotes: any
-  noteArray: any
-  user: User
-  picture: any
-  colorMenu = false
+  togle = true;
+  notes: Note;
+  coNotes: any;
+  noteArray: any;
+  user: User;
+  picture: any;
+  colorMenu = false;
   fillTheColor;
   grid = false;
-  colors: string[] = ColorPalets
+  colors: string[] = ColorPalets;
   panelOpenState: boolean = false;
   submitted = false;
 
@@ -53,11 +53,11 @@ export class NotelistComponent implements OnInit {
     private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
 
   public ngOnInit() {
-    this.readAll()
+    this.readAll();
     this.dataService.getTheme().subscribe((resp) =>
       this.grid = resp
     );
-    this.getUser()
+    this.getUser();
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
@@ -72,29 +72,29 @@ export class NotelistComponent implements OnInit {
       data: note
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.noteService.updateNote(note, note.id)
+      this.noteService.updateNote(note, note.id);
      
     });
   }
 
   public onCloseUpdateNote(note) {
     this.noteService.updateNote(note, note.id).subscribe(resp => {
-      this.noteArray = resp
+      this.noteArray = resp;
       this.snackBar.open("note updated", "Ok", {
         duration: 2000,
       });
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
   }
 
   public onArchive(products) {
-    console.log(products)
-    products.archive = true
+    console.log(products);
+    products.archive = true;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
     this.snackBar.open("Archived", "Ok", {
       duration: 2000,
@@ -102,11 +102,11 @@ export class NotelistComponent implements OnInit {
   }
 
   public onTrash(products) {
-    products.inTrash = true
+    products.inTrash = true;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
     this.snackBar.open("Moved to trash", "Ok", {
       duration: 2000,
@@ -121,18 +121,18 @@ export class NotelistComponent implements OnInit {
 
   public changeColor(products) {
     var icon = document.getElementById(products.title);
-    this.togle = !this.togle
+    this.togle = !this.togle;
     if (this.togle) {
-      icon.style.background = "black"
-      products.pinned = true
-      console.log(products)
+      icon.style.background = "black";
+      products.pinned = true;
+      console.log(products);
       this.snackBar.open("Pinned", "Ok", {
         duration: 2000,
       });
     }
     else {
-      products.pinned = false
-      icon.style.background = "white"
+      products.pinned = false;
+      icon.style.background = "white";
       this.snackBar.open("Unpinned", "Ok", {
         duration: 2000,
       });
@@ -160,7 +160,7 @@ export class NotelistComponent implements OnInit {
       });
     }, (error) => console.log(error));
     this.labelService.removeLabelNote(label, note)
-    this.readAll()
+    this.readAll();
   }
 
   public getUser() {
@@ -174,15 +174,15 @@ export class NotelistComponent implements OnInit {
       this.picture = {
         imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
       }
-      console.log(this.picture)
+      console.log(this.picture);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
   }
 
   /*collaborator*/
   public onClickDialogBox(products): void {
-    console.log(products)
+    console.log(products);
     const dialogRef = this.dialog.open(CollaboratorDialogBoxComponent, {
       width: '550px',
       data: products
@@ -200,13 +200,10 @@ export class NotelistComponent implements OnInit {
     this.fillTheColor = color;
     products.colore = color;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
-      console.log(resp)
-    }
-    
-    , (error) => {
-      console.log(error)
-    }
-    )
+      console.log(resp);
+    },(error) => {
+      console.log(error);
+    })
     products.colorMenu=0;
   }
   /*remainder dialog box*/
@@ -228,12 +225,11 @@ export class NotelistComponent implements OnInit {
   public removeReminder(note) {
     note.reminder = null;
     this.noteService.updateNote(note, note.id).subscribe(resp => {
-      console.log(resp)
+      console.log(resp);
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
   }
-
 }
 
 

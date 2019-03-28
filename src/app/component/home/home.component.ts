@@ -22,13 +22,12 @@ export class HomeComponent implements OnInit {
   @Output() toggle = new EventEmitter();
   public toggleNav: Subject<any> = new Subject();
   public btnClick: Subject<any> = new Subject();
-  notes: Note[]
+  notes: Note[];
   user: User;
   picture: any;
-  userName:string
-  view=false
+  userName:string;
+  view=false;
   
-
   searchData = {
     data: ''
   };
@@ -53,7 +52,7 @@ export class HomeComponent implements OnInit {
   }
 
   logout(){
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
     this.router.navigate(['login']);
   }
 
@@ -82,15 +81,13 @@ export class HomeComponent implements OnInit {
       this.user = {
         ...resp,
         image: `data:image/text;base64, ${resp.image}`,
-        // pic: `data:image/text;base64, ${resp.pic}`
       };
       const url = `data:${resp.contentType};base64,${resp.image}`;
       this.picture = {
         imageSrc: this.sanitizer.bypassSecurityTrustUrl(url)
       }
-      console.log(this.picture)
     }, (error) => {
-      console.log(error)
+      console.log(error);
     })
   }
 

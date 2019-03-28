@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform, ɵConsole } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 import { Note } from '../model/note';
 
 @Pipe({

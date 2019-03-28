@@ -6,11 +6,6 @@ import { Note } from '../model/note';
 })
 export class NoteFilterPipe implements PipeTransform {
 
-  // transform(notes: any[], filterQuery: any): any[] {
-  //   if (!filterQuery) return notes;
-  //   return notes.filter(item =>(!item.inTrash && !item.pinned && !item.archive));
-  // }
-
   transform(notes: Note[], valid: any): any {
     if (!valid) {
       return notes.filter((item) => {

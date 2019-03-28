@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttputilService } from 'src/app/httputil.service';
 import { environment } from 'src/environments/environment';
-import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
 
@@ -10,7 +9,7 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class UserService {
 
-  constructor(private route: ActivatedRoute, private router: Router, private httpUtil: HttputilService) { }
+  constructor(private httpUtil: HttputilService) { }
 
   public getHeader() {
     let token = localStorage.getItem('token')

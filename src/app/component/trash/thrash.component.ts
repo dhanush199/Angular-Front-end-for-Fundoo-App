@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UpdateNoteComponent } from 'src/app/component/update-notes/update-notes.component';
-import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Note } from 'src/app/core/model/note';
@@ -18,16 +17,16 @@ export interface DialogData {
 })
 export class ThrashComponent implements OnInit {
   @Input() products: Note;
-  pinnedColor = false
+  pinnedColor = false;
   trashForm: FormGroup;
   panelOpenState: boolean = false;
   submitted = false;
-  constructor(private router: Router, private service: NoteService, 
-    private dialog: MatDialog,  private snackBar: MatSnackBar) { }
+  constructor(private service: NoteService,
+    private dialog: MatDialog, private snackBar: MatSnackBar) { }
 
-    public ngOnInit() {
-    console.log(this.products)
-    this.readAll()
+  public ngOnInit() {
+    console.log(this.products);
+    this.readAll();
   }
   discription = new FormControl('', [Validators.required, Validators.minLength(1)]);
   title = new FormControl('', [Validators.required, Validators.minLength(1)]);
@@ -35,7 +34,6 @@ export class ThrashComponent implements OnInit {
   public readAll() {
     this.service.getAll().subscribe((products: any) => {
       this.products = products;
-      console.log(this.products)
     }, (error) => console.log(error));
   }
 
@@ -44,7 +42,7 @@ export class ThrashComponent implements OnInit {
   }
 
   public delete(id) {
-    this.service.delete(id)
+    this.service.delete(id);
   }
 
   public openDialog(note): void {
@@ -55,41 +53,40 @@ export class ThrashComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result)
-      this.onCloseUpdateNote(note)
+      console.log(result);
+      this.onCloseUpdateNote(note);
     });
   }
 
   public onCloseUpdateNote(note) {
-    this.service.updateNote(note, note.id)
+    this.service.updateNote(note, note.id);
   }
 
   public onRestore(products) {
     products.inTrash = false;
-    this.service.updateNote(products, products.id).subscribe(resp=>{
+    this.service.updateNote(products, products.id).subscribe(resp => {
       this.snackBar.open("Successfully restored", "Ok", {
         duration: 2000,
       });
-    },(error)=>{
-      console.log(error)
+    }, (error) => {
+      console.log(error);
     })
-    
+
   }
 
- public deletPermanently(note){
-  this.service.delete(note.id).subscribe(result => {
-    console.log(note.id)
-    this.snackBar.open("Deleted permanently", "Ok", {
-      duration: 2000,
+  public deletPermanently(note) {
+    this.service.delete(note.id).subscribe(result => {
+      console.log(result);
+      this.snackBar.open("Deleted permanently", "Ok", {
+        duration: 2000,
+      });
+    }, (error) => {
+      console.log(error);
     });
-  },(error)=>{
-
-  });
- }
- public childStatusChanged(finished: boolean) {
-  if (finished){
-    this.readAll();
   }
-}
+  public childStatusChanged(finished: boolean) {
+    if (finished) {
+      this.readAll();
+    }
+  }
 }
