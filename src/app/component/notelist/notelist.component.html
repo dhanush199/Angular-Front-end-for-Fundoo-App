@@ -15,18 +15,32 @@
     <mat-card [style.background-color]="products.colore" class="matCard1">
       <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
         style="color: black; background-color: white ; float:right"></i>
+        <mat-card-title>
+
+ <div *ngFor="let item of products.imageList">
+
+            <img [src]="transformImage(item)" height="20%" width="20%" style="float: left;"/>
+    
+          </div>
+
+        </mat-card-title>
       <mat-card-content (click)="openDialog(products)">
+          
         <input matInput placeholder="Title" value={{products.title}} [formControl]="title"> <br><br><br>
         <input matInput placeholder="Description" value="{{products.discription}}" [formControl]="discription">
-      </mat-card-content>
-
+       </mat-card-content>
+      
       <mat-chip-list #chipList class="chipList">
         <mat-chip *ngIf="products.reminder" [removable]="removable" (removed)="removeReminder(products)">
           <mat-icon>timer</mat-icon>
           {{products.reminder | date:'short'}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
+        <!-- <div *ngFor="let item of products.imageList">
 
+            <img [src]="transformImage(item)" height="20%" width="20%" style="float: left;"/>
+    
+          </div> -->
 
         <mat-chip *ngFor="let label of products.labelList" [removable]="removable"
           (removed)="removeLabel(label,products)">
@@ -34,6 +48,7 @@
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
       </mat-chip-list><br>
+      <mat-card-content>
       <div class="bottomButtons" [style.background-color]="products.colore">
         <button class="button" mat-button matTooltip="Remind me">
           <mat-icon (click)="openRemainder(products)" class="icons">add_alert</mat-icon>
@@ -51,9 +66,18 @@
           </button>
         </div>
 
-        <button class="button" mat-icon-button matTooltip="Add image">
+        <!-- <button class="button" mat-icon-button matTooltip="Add image">
           <mat-icon class="icons">image</mat-icon>
-        </button>
+        </button> -->
+
+        <i class="material-icons innerIconDiv" (click)="fileInput.click()">
+          photo
+        </i>
+        <input #fileInput type="file" style="display:none" (change)="onFileSelected($event,products)">
+
+
+
+
         <button mat-button class="button" matTooltip="Archive">
           <mat-icon class="icons" (click)=onArchive(products)>archive</mat-icon>
         </button>
@@ -72,6 +96,7 @@
           <mat-icon class="icons">redo</mat-icon>
         </button>
       </div>
+    </mat-card-content>
     </mat-card><br><br>
   </div>
 </div>

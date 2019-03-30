@@ -12,7 +12,7 @@ export class NoteService {
   titl: null
   discriptio: null
   public API = '//localhost:8081/user';
-  constructor( private httpUtil: HttputilService) {
+  constructor(private httpUtil: HttputilService) {
   }
 
   public getHeader() {
@@ -34,7 +34,7 @@ export class NoteService {
 
   public save(note) {
     var header = this.getHeader();
-   return this.httpUtil.postWithBody(this.API + '/createnote', note, header)
+    return this.httpUtil.postWithBody(this.API + '/createnote', note, header)
   }
 
   public delete(id) {
@@ -48,17 +48,25 @@ export class NoteService {
       params: {
         noteId: noteId,
         token: token
-      }, observe: 'response'})
+      }, observe: 'response'
+    })
   }
 
-  public doCollab(collabUser){
-    var token=localStorage.getItem('token');
-    return this.httpUtil.put(this.API +'/add-collabarator/'+token,collabUser,{})
+  public doCollab(collabUser) {
+    var token = localStorage.getItem('token');
+    return this.httpUtil.put(this.API + '/add-collabarator/' + token, collabUser, {})
   }
 
-  public removeCollab(collabUser){
-    var token=localStorage.getItem('token');
-    return this.httpUtil.put(this.API +'/remove-collabarator/'+token,collabUser,{})
+  public removeCollab(collabUser) {
+    var token = localStorage.getItem('token');
+    return this.httpUtil.put(this.API + '/remove-collabarator/' + token, collabUser, {})
+  }
+
+  public uploadNoteImage(fd, noteId) {
+    return this.httpUtil.put(this.API+'/uploadFile/' + noteId, fd, {
+      reportProgress: true,
+      responseType: 'text'
+    });
   }
 
 }

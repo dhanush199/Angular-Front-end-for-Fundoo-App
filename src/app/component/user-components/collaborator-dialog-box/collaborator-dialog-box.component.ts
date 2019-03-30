@@ -115,7 +115,6 @@ this.getNoteOwner();
     this.userService.getNoteOwner(this.data.userId).subscribe((resp:any)=>{
       console.log(resp)
       this.OwnerEmailId=resp;
-
     },(error)=>{
       console.log(error)
     })

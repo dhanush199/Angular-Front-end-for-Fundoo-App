@@ -1,4 +1,5 @@
 import { Collaborator } from './collaborator';
+import { Image } from './image';
 
 export interface Note {
      discription: string;
@@ -14,4 +15,5 @@ export interface Note {
      reminder:string;
      collaboraters:Collaborator[];
      colorMenu:number;
+     images:Image[]
 }

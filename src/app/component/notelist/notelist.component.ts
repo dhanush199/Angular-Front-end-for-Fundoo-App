@@ -15,6 +15,7 @@ import { DataServiceService } from 'src/app/core/services/Data-service/data.serv
 import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
 import { RemainderComponentComponent } from '../remainder-component/remainder-component.component';
+import { HttputilService } from 'src/app/httputil.service';
 
 export interface DialogData {
   labelName: string;
@@ -34,6 +35,10 @@ export class NotelistComponent implements OnInit {
   noteForm: FormGroup;
   removable = true;
   togle = true;
+  inputImage = false;
+  imagePath;
+  base64;
+  imageSource;
   notes: Note;
   coNotes: any;
   noteArray: any;
@@ -46,10 +51,10 @@ export class NotelistComponent implements OnInit {
   panelOpenState: boolean = false;
   submitted = false;
 
-  constructor(private router: Router, private labelService: LabelService, private noteService: NoteService,
+  constructor(private httpUtil: HttputilService, private router: Router, private labelService: LabelService, private noteService: NoteService,
     public dialog: MatDialog, private snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<NotelistComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private userService: UserService,
+    @Inject(MAT_DIALOG_DATA) public data, private userService: UserService,
     private sanitizer: DomSanitizer, private dataService: DataServiceService) { }
 
   public ngOnInit() {
@@ -73,7 +78,7 @@ export class NotelistComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
       this.noteService.updateNote(note, note.id);
-     
+
     });
   }
 
@@ -116,7 +121,15 @@ export class NotelistComponent implements OnInit {
   public readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp;
+      // this.products.images.forEach(item => {
+      //   this.transformImage(item);
+      // });
     }, (error) => console.log(error));
+  }
+
+  public transformImage(data){
+    const url = `data:${data.contentType};base64,${data.image}`;
+    return this.sanitizer.bypassSecurityTrustUrl(url)
   }
 
   public changeColor(products) {
@@ -142,7 +155,7 @@ export class NotelistComponent implements OnInit {
 
     }, (error) => console.log(error));
   }
-/**Label Dialog Box */
+  /**Label Dialog Box */
   public onClickDialog(products): void {
     const dialogRef = this.dialog.open(LabelDialogBoxComponent, {
       width: '550px',
@@ -193,7 +206,7 @@ export class NotelistComponent implements OnInit {
   }
 
   public colorChange(products) {
-      products.colorMenu=100;
+    products.colorMenu = 100;
   }
 
   public addColor(color, products) {
@@ -201,10 +214,10 @@ export class NotelistComponent implements OnInit {
     products.colore = color;
     this.noteService.updateNote(products, products.id).subscribe(resp => {
       console.log(resp);
-    },(error) => {
+    }, (error) => {
       console.log(error);
     })
-    products.colorMenu=0;
+    products.colorMenu = 0;
   }
   /*remainder dialog box*/
   public openRemainder(products): void {
@@ -217,7 +230,7 @@ export class NotelistComponent implements OnInit {
   }
 
   childStatusChanged(finished: boolean) {
-    if (finished){
+    if (finished) {
       this.readAll();
     }
   }
@@ -230,6 +243,49 @@ export class NotelistComponent implements OnInit {
       console.log(error);
     })
   }
+
+
+
+  addImage() {
+    this.inputImage = !this.inputImage;
+    // this.onFileSelected(event);
+  }
+
+  onFileSelected(event, note) {
+    note.image = event.target.files[0];
+    this.imagePath = this.data.image;
+    var fd = new FormData();
+    fd.append('file', event.target.files[0])
+    this.inputImage = true;
+    this.noteService.uploadNoteImage(fd,note.id).subscribe(resp=>{
+      console.log(resp)
+    },(error)=>{
+      console.log(error)
+    })
+   
+
+
+    // const formdata: FormData = new FormData();
+    // formdata.append('file', file);
+    // var token = localStorage.getItem('token')
+    // return this.httpUtil.put('http://localhost:8080/user/uploadFile/' + token, formdata, {
+    //   reportProgress: true,
+    //   responseType: 'text'
+    // });
+    // this.noteService.postRequest(fd, 'upload').subscribe((data:any) => {
+    //   console.log(data);
+    //   this.base64 = data[0].b64;
+    //   console.log(this.base64);
+    //   this.imagePath = 'data:image/png;base64,';
+    //   console.log(this.imagePath);
+    //   this.imageSource = this.imagePath + this.base64;
+    //   console.log(this.imageSource);
+    //   this.data.image = this.imageSource;
+    //   this.update();
+    // })
+    // this.update();
+  
+}
 }
 
 
