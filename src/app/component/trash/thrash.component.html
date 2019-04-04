@@ -6,6 +6,15 @@
     <mat-card-header>
       <mat-card-title></mat-card-title>
     </mat-card-header>
+    <mat-card-title>
+
+      <div *ngFor="let item of products.imageList">
+
+        <img [src]="transformImage(item)" height="20%" width="20%" style="float: left;" />
+
+      </div>
+
+    </mat-card-title>
     <mat-card-content (click)=openDialog(products)>
       <div class="inputs">
         <mat-form-field>

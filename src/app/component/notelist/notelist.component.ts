@@ -118,16 +118,13 @@ export class NotelistComponent implements OnInit {
     });
   }
 
-  public readAll() {
+  public  readAll() {
     this.noteService.getAll().subscribe((resp: any) => {
       this.products = resp;
-      // this.products.images.forEach(item => {
-      //   this.transformImage(item);
-      // });
     }, (error) => console.log(error));
   }
 
-  public transformImage(data){
+  public transformImage(data) {
     const url = `data:${data.contentType};base64,${data.image}`;
     return this.sanitizer.bypassSecurityTrustUrl(url)
   }
@@ -248,7 +245,6 @@ export class NotelistComponent implements OnInit {
 
   addImage() {
     this.inputImage = !this.inputImage;
-    // this.onFileSelected(event);
   }
 
   onFileSelected(event, note) {
@@ -257,35 +253,14 @@ export class NotelistComponent implements OnInit {
     var fd = new FormData();
     fd.append('file', event.target.files[0])
     this.inputImage = true;
-    this.noteService.uploadNoteImage(fd,note.id).subscribe(resp=>{
+    this.noteService.uploadNoteImage(fd, note.id).subscribe(resp => {
       console.log(resp)
-    },(error)=>{
+    }, (error) => {
       console.log(error)
     })
-   
+    this.readAll()
+  }
 
-
-    // const formdata: FormData = new FormData();
-    // formdata.append('file', file);
-    // var token = localStorage.getItem('token')
-    // return this.httpUtil.put('http://localhost:8080/user/uploadFile/' + token, formdata, {
-    //   reportProgress: true,
-    //   responseType: 'text'
-    // });
-    // this.noteService.postRequest(fd, 'upload').subscribe((data:any) => {
-    //   console.log(data);
-    //   this.base64 = data[0].b64;
-    //   console.log(this.base64);
-    //   this.imagePath = 'data:image/png;base64,';
-    //   console.log(this.imagePath);
-    //   this.imageSource = this.imagePath + this.base64;
-    //   console.log(this.imageSource);
-    //   this.data.image = this.imageSource;
-    //   this.update();
-    // })
-    // this.update();
-  
-}
 }
 
 

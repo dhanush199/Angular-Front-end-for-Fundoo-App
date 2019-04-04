@@ -11,6 +11,7 @@ import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
 import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 import { RemainderComponentComponent } from '../remainder-component/remainder-component.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pinned-notes',
@@ -22,6 +23,10 @@ export class PinnedNotesComponent implements OnInit {
   @Input() view: boolean;
   @Output() refreshEvent = new EventEmitter<boolean>();
 
+  inputImage = false;
+  imagePath;
+  base64;
+  imageSource;
   grid = false;
   togle = true;
   pinnedForm: FormGroup;
@@ -33,7 +38,7 @@ export class PinnedNotesComponent implements OnInit {
 
   constructor(private service: NoteService,
     private dialog: MatDialog, private snackBar: MatSnackBar, private data: DataServiceService,
-    private labelService: LabelService, ) {
+    private labelService: LabelService, private sanitizer: DomSanitizer) {
   }
 
   public ngOnInit() {
@@ -200,4 +205,27 @@ export class PinnedNotesComponent implements OnInit {
       this.readAll();
     }
   }
+
+  public addImage() {
+    this.inputImage = !this.inputImage;
+  }
+
+  public onFileSelected(event, note) {
+    note.image = event.target.files[0];
+    // this.imagePath = this.data.image;
+    var fd = new FormData();
+    fd.append('file', event.target.files[0])
+    this.inputImage = true;
+    this.service.uploadNoteImage(fd, note.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
+  }
+
+  public transformImage(data) {
+    const url = `data:${data.contentType};base64,${data.image}`;
+    return this.sanitizer.bypassSecurityTrustUrl(url)
+  }
+
 }

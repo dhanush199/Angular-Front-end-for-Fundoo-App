@@ -4,6 +4,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Note } from 'src/app/core/model/note';
 import { NoteService } from 'src/app/core/services/NoteService/note.service';
+import { DomSanitizer } from '@angular/platform-browser';
 
 export interface DialogData {
   noteName: string;
@@ -22,7 +23,7 @@ export class ThrashComponent implements OnInit {
   panelOpenState: boolean = false;
   submitted = false;
   constructor(private service: NoteService,
-    private dialog: MatDialog, private snackBar: MatSnackBar) { }
+    private dialog: MatDialog, private snackBar: MatSnackBar, private sanitizer: DomSanitizer) { }
 
   public ngOnInit() {
     console.log(this.products);
@@ -88,5 +89,10 @@ export class ThrashComponent implements OnInit {
     if (finished) {
       this.readAll();
     }
+  }
+
+  public transformImage(data) {
+    const url = `data:${data.contentType};base64,${data.image}`;
+    return this.sanitizer.bypassSecurityTrustUrl(url)
   }
 }

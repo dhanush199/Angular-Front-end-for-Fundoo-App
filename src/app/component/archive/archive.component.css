@@ -40,7 +40,7 @@
     align-content: center;
     align-items: center;
     width: 400px; 
-    height: 200px;
+    /* height: 200px; */
     box-shadow: 0 14px 28px rgba(110, 108, 108, 0.22), 0 10px 10px rgba(110, 108, 108, 0.22);
 
 }

@@ -7,6 +7,17 @@
     <mat-card  [style.background-color]="products.colore">
       <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
         style="color: black; background-color: blue; ; float:right"></i>
+
+        <mat-card-title>
+
+          <div *ngFor="let item of products.imageList">
+  
+            <img [src]="transformImage(item)" height="20%" width="20%" style="float: left;" />
+  
+          </div>
+  
+        </mat-card-title>
+
       <mat-card-content class="cardContent" (click)="openDialog(products)" (onStatusChange)="childStatusChanged($event)">
         <input matInput placeholder="Title" value={{products.title}} [formControl]="title"> <br><br><br>
         <input matInput placeholder="Description" value="{{products.discription}}" [formControl]="discription">
@@ -41,9 +52,15 @@
           </button>
         </div>
 
-        <button class="button" mat-button matTooltip="Add image">
+        <!-- <button class="button" mat-button matTooltip="Add image">
           <mat-icon class="icons">image</mat-icon>
-        </button>
+        </button> -->
+
+        <i class="material-icons innerIconDiv" (click)="fileInput.click()">
+          photo
+        </i>
+        <input #fileInput type="file" style="display:none" (change)="onFileSelected($event,products)">
+        
         <button class="button" mat-button matTooltip="Archive">
           <mat-icon class="icons" (click)=onArchive(products) (onStatusChange)="childStatusChanged($event)">archive</mat-icon>
         </button>

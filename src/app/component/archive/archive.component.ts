@@ -9,6 +9,7 @@ import { ColorPalets } from 'src/app/data-config';
 import { LabelDialogBoxComponent } from '../label-dialog-box/label-dialog-box.component';
 import { CollaboratorDialogBoxComponent } from '../user-components/collaborator-dialog-box/collaborator-dialog-box.component';
 import { RemainderComponentComponent } from '../remainder-component/remainder-component.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 
 export interface DialogData {
@@ -27,6 +28,10 @@ export class ArchiveComponent implements OnInit {
   pinnedIcon = true;
   public colors: string[] = ColorPalets;
   label;
+  inputImage = false;
+  imagePath;
+  base64;
+  imageSource;
   fillTheColor;
   removable = true;
   pinnedColor = false;
@@ -35,7 +40,7 @@ export class ArchiveComponent implements OnInit {
   submitted = false;
 
   constructor(private labelService: LabelService,
-     private service: NoteService, private dialog: MatDialog,
+     private service: NoteService, private dialog: MatDialog,private sanitizer: DomSanitizer,
     private snackBar: MatSnackBar) { }
 
   public ngOnInit() {
@@ -190,4 +195,25 @@ export class ArchiveComponent implements OnInit {
       console.log(error)
     })
   }
+  addImage() {
+    this.inputImage = !this.inputImage;
+  }
+
+  onFileSelected(event, note) {
+    note.image = event.target.files[0];
+    // this.imagePath = this.note.image;
+    var fd = new FormData();
+    fd.append('file', event.target.files[0])
+    this.inputImage = true;
+    this.service.uploadNoteImage(fd, note.id).subscribe(resp => {
+      console.log(resp)
+    }, (error) => {
+      console.log(error)
+    })
+  }
+  public transformImage(data) {
+    const url = `data:${data.contentType};base64,${data.image}`;
+    return this.sanitizer.bypassSecurityTrustUrl(url)
+  }
+
 }

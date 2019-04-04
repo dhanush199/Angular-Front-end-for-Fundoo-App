@@ -10,26 +10,26 @@
   <i>Other Notes are</i>
 </div>
 
-<div fxLayout="column" fxLayoutAlign="stretch" align="center">
+<div fxLayout="column" fxLayoutAlign="center center">
   <div *ngFor="let products of products| noteFilter">
     <mat-card [style.background-color]="products.colore" class="matCard1">
       <i class="fa fa-eyedropper" (click)="changeColor(products)" id="{{products.title}}"
         style="color: black; background-color: white ; float:right"></i>
-        <mat-card-title>
+      <mat-card-title>
 
- <div *ngFor="let item of products.imageList">
+        <div *ngFor="let item of products.imageList">
 
-            <img [src]="transformImage(item)" height="20%" width="20%" style="float: left;"/>
-    
-          </div>
+          <img [src]="transformImage(item)" height="20%" width="20%" style="float: left;" />
 
-        </mat-card-title>
+        </div>
+
+      </mat-card-title>
       <mat-card-content (click)="openDialog(products)">
-          
+
         <input matInput placeholder="Title" value={{products.title}} [formControl]="title"> <br><br><br>
         <input matInput placeholder="Description" value="{{products.discription}}" [formControl]="discription">
-       </mat-card-content>
-      
+      </mat-card-content>
+
       <mat-chip-list #chipList class="chipList">
         <mat-chip *ngIf="products.reminder" [removable]="removable" (removed)="removeReminder(products)">
           <mat-icon>timer</mat-icon>
@@ -47,9 +47,9 @@
           {{label.labelName}}
           <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
         </mat-chip>
-      </mat-chip-list><br>
-      <mat-card-content>
-      <div class="bottomButtons" [style.background-color]="products.colore">
+      </mat-chip-list>
+      <!-- <mat-card-content> -->
+      <div class="bottomButtons" >
         <button class="button" mat-button matTooltip="Remind me">
           <mat-icon (click)="openRemainder(products)" class="icons">add_alert</mat-icon>
         </button>
@@ -74,10 +74,6 @@
           photo
         </i>
         <input #fileInput type="file" style="display:none" (change)="onFileSelected($event,products)">
-
-
-
-
         <button mat-button class="button" matTooltip="Archive">
           <mat-icon class="icons" (click)=onArchive(products)>archive</mat-icon>
         </button>
@@ -96,7 +92,7 @@
           <mat-icon class="icons">redo</mat-icon>
         </button>
       </div>
-    </mat-card-content>
+      <!-- </mat-card-content> -->
     </mat-card><br><br>
   </div>
 </div>
